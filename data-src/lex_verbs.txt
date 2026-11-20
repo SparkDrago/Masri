@@ -1,0 +1,221 @@
+# arabic|roman|kyrgyz|pos|present (arabic~roman)
+كتب|katab|жаз-|v|يكتب~yiktib
+قرا|2ara|оку-|v|يقرا~yi2ra
+درس|daras|оку- (сабак), изилде-|v|يدرس~yidris
+ذاكر|zaakir|сабак даярда-, оку-|v|يذاكر~yizaakir
+فهم|fihim|түшүн-|v|يفهم~yifham
+فهّم|fahhim|түшүндүр-|v|يفهم~yifahhim
+عرف|3irif|бил-, тааны-|v|يعرف~yi3raf
+اتعلم|it3allim|үйрөн-|v|يتعلم~yit3allim
+علّم|3allim|үйрөт-|v|يعلم~yi3allim
+نسي|nisi|унут-|v|ينسى~yinsa
+افتكر|iftakar|эсте-, ойло-|v|يفتكر~yiftikir
+فكّر|fakkar|ойло-|v|يفكر~yifakkar
+قال|2aal|айт-|v|يقول~yi2uul
+اتكلم|itkallim|сүйлө-|v|يتكلم~yitkallim
+كلّم|kallim|(бирөө менен) сүйлөш-, чал-|v|يكلم~yikallim
+سأل|sa2al|сура-|v|يسأل~yis2al
+جاوب|gaawib|жооп бер-|v|يجاوب~yigaawib
+ردّ|radd|жооп бер-, кайтар-|v|يرد~yirudd
+حكى|7aka|айтып бер-|v|يحكي~yi7ki
+سمع|simi3|ук-|v|يسمع~yisma3
+شاف|shaaf|көр-|v|يشوف~yishuuf
+بصّ|baSS|кара-|v|يبص~yibuSS
+اتفرج|itfarrag|көр- (кино, шоу)|v|يتفرج~yitfarrag
+لاحظ|laa7iZ|байка-|v|يلاحظ~yilaa7iZ
+كل|kal|же-|v|ياكل~yaakul
+شرب|shirib|ич-|v|يشرب~yishrab
+طبخ|Tabax|тамак бышыр-|v|يطبخ~yuTbux
+فطر|fiTir|эртең мененки тамакты ич-; ооз ач-|v|يفطر~yifTar
+اتغدى|itghadda|түшкү тамак ич-|v|يتغدى~yitghadda
+اتعشى|it3ashsha|кечки тамак ич-|v|يتعشى~yit3ashsha
+جاع|gaa3|ачка бол-|v|يجوع~yiguu3
+شبع|shibi3|той-|v|يشبع~yishba3
+نام|naam|укта-|v|ينام~yinaam
+صحي|Si7i|ойгон-|v|يصحى~yiS7a
+صحّى|Sa77a|ойгот-|v|يصحي~yiSa77i
+قعد|2a3ad|отур-; кал-|v|يقعد~yu23ud
+وقف|wi2if|тур-, токто-|v|يقف~yu2af
+قام|2aam|ордунан тур-|v|يقوم~yi2uum
+مشي|mishi|бас-, кет-|v|يمشي~yimshi
+جري|giri|чурка-|v|يجري~yigri
+راح|raa7|бар-|v|يروح~yiruu7
+جه|ga|кел-|v|ييجي~yiigi
+رجع|rigi3|кайт-|v|يرجع~yirga3
+وصل|wiSil|жет-, кел-|v|يوصل~yiwSal
+دخل|daxal|кир-|v|يدخل~yudxul
+خرج|xarag|чык-|v|يخرج~yuxrug
+نزل|nizil|түш-, чык- (үйдөн)|v|ينزل~yinzil
+طلع|Tili3|чык- (жогору), көтөрүл-|v|يطلع~yiTla3
+ركب|rikib|мин-, отур- (унаага)|v|يركب~yirkab
+سافر|saafir|сапарга чык-|v|يسافر~yisaafir
+ساق|saa2|айда- (машина)|v|يسوق~yisuu2
+طار|Taar|уч-|v|يطير~yiTiir
+عام|3aam|сүз-|v|يعوم~yi3uum
+لف|laff|айлан-; ора-|v|يلف~yiliff
+عدّى|3adda|өт-|v|يعدي~yi3addi
+اتأخر|it2axxar|кечик-|v|يتأخر~yit2axxar
+استنى|istanna|күт-|v|يستنى~yistanna
+فتح|fata7|ач-|v|يفتح~yifta7
+قفل|2afal|жап-|v|يقفل~yi2fil
+حط|7aTT|кой-|v|يحط~yi7oTT
+شال|shaal|көтөр-, алып сал-|v|يشيل~yishiil
+خد|xad|ал-|v|ياخد~yaaxud
+ادّى|idda|бер-|v|يدي~yiddi
+جاب|gaab|алып кел-|v|يجيب~yigiib
+بعت|ba3at|жөнөт-|v|يبعت~yib3at
+مسك|misik|карма-|v|يمسك~yimsik
+رمى|rama|ыргыт-|v|يرمي~yirmi
+كسر|kasar|сындыр-|v|يكسر~yiksar
+انكسر|inkasar|сын-|v|ينكسر~yinkisir
+صلّح|Salla7|оңдо-|v|يصلح~yiSalla7
+عمل|3amal|кыл-, жаса-|v|يعمل~yi3mil
+خلّص|xallaS|бүтүр-|v|يخلص~yixallaS
+خلص|xiliS|бүт-|v|يخلص~yixlaS
+بدأ|bada2|башта-|v|يبدأ~yibda2
+ابتدى|ibtada|башта-|v|يبتدي~yibtidi
+كمّل|kammil|улант-|v|يكمل~yikammil
+وقّف|wa22af|токтот-|v|يوقف~yiwa22af
+حاول|7aawil|аракет кыл-|v|يحاول~yi7aawil
+قدر|2idir|кыла ал-|v|يقدر~yi2dar
+عاز|3aaz|каала-|v|يعوز~yi3uuz
+حب|7abb|сүй-, жакшы көр-|v|يحب~yi7ibb
+كره|kirih|жек көр-|v|يكره~yikrah
+فضّل|faDDal|артык көр-|v|يفضل~yifaDDal
+عجب|3agab|жак-|v|يعجب~yi3gib
+اتمنى|itmanna|тиле-|v|يتمنى~yitmanna
+خاف|xaaf|корк-|v|يخاف~yixaaf
+زعل|zi3il|капа бол-, таарын-|v|يزعل~yiz3al
+فرح|firi7|кубан-|v|يفرح~yifra7
+ضحك|Di7ik|күл-|v|يضحك~yiD7ak
+عيّط|3ayyaT|ыйла-|v|يعيط~yi3ayyaT
+تعب|ti3ib|чарча-|v|يتعب~yit3ab
+ارتاح|irtaa7|эс ал-|v|يرتاح~yirtaa7
+اشتغل|ishtaghal|иште-|v|يشتغل~yishtaghal
+اشترى|ishtara|сатып ал-|v|يشتري~yishtiri
+باع|baa3|сат-|v|يبيع~yibii3
+دفع|dafa3|төлө-|v|يدفع~yidfa3
+كسب|kisib|тап- (акча), утуп ал-|v|يكسب~yiksab
+خسر|xisir|утулуп кал-, жогот-|v|يخسر~yixsar
+صرف|Saraf|сарпта-; майдала-|v|يصرف~yiSrif
+وفّر|waffar|үнөмдө-|v|يوفر~yiwaffar
+استلف|istilif|карызга ал-|v|يستلف~yistilif
+سلّف|sallif|карызга бер-|v|يسلف~yisallif
+ساعد|saa3id|жардам бер-|v|يساعد~yisaa3id
+استعمل|ista3mil|колдон-|v|يستعمل~yista3mil
+احتاج|i7taag|муктаж бол-|v|يحتاج~yi7taag
+لقى|la2a|тап-|v|يلاقي~yilaa2i
+دوّر|dawwar|изде-|v|يدور~yidawwar
+ضاع|Daa3|жогол-|v|يضيع~yiDii3
+ضيّع|Dayya3|жогот-|v|يضيع~yiDayya3
+غسل|ghasal|жуу-|v|يغسل~yighsil
+استحمى|isti7amma|жуун-|v|يستحمى~yisti7amma
+لبس|libis|кий-|v|يلبس~yilbis
+قلع|2ala3|чеч-|v|يقلع~yi2la3
+نضّف|naDDaf|тазала-|v|ينضف~yinaDDaf
+رتّب|rattib|иретте-|v|يرتب~yirattib
+كوى|kawa|үтүктө-|v|يكوي~yikwi
+زرع|zara3|отургуз-, эк-|v|يزرع~yizra3
+سقى|sa2a|сугар-|v|يسقي~yis2i
+ربّى|rabba|тарбияла-, бак-|v|يربي~yirabbi
+اتولد|itwalad|төрөл-|v|يتولد~yitwilid
+مات|maat|өл-|v|يموت~yimuut
+عاش|3aash|жаша-|v|يعيش~yi3iish
+سكن|sakan|жаша- (бир жерде)|v|يسكن~yuskun
+اتجوز|itgawwiz|үйлөн-, турмушка чык-|v|يتجوز~yitgawwiz
+اطلّق|iTalla2|ажыраш-|v|يطلق~yiTalla2
+زار|zaar|зыярат кыл-|v|يزور~yizuur
+عزم|3azam|конокко чакыр-|v|يعزم~yi3zim
+قابل|2aabil|жолук-|v|يقابل~yi2aabil
+اتقابل|it2aabil|жолугуш-|v|يتقابل~yit2aabil
+عرّف|3arraf|тааныштыр-|v|يعرف~yi3arraf
+لعب|li3ib|ойно-|v|يلعب~yil3ab
+رقص|ra2aS|бийле-|v|يرقص~yur2uS
+غنّى|ghanna|ырда-|v|يغني~yighanni
+رسم|rasam|сүрөт тарт-|v|يرسم~yirsim
+صوّر|Sawwar|сүрөткө тарт-|v|يصور~yiSawwar
+كسّر|kassar|талкала-|v|يكسر~yikassar
+خبط|xabaT|тыкылдат-, ур-|v|يخبط~yixbaT
+ضرب|Darab|ур-|v|يضرب~yiDrab
+اتخانق|itxaani2|уруш-|v|يتخانق~yitxaani2
+صالح|Saali7|элдеш-|v|يصالح~yiSaali7
+اعتذر|i3tazar|кечирим сура-|v|يعتذر~yi3tizir
+سامح|saami7|кечир-|v|يسامح~yisaami7
+شكر|shakar|ыраазычылык билдир-|v|يشكر~yushkur
+وعد|wa3ad|убада бер-|v|يوعد~yiw3id
+صدّق|Sadda2|ишен-|v|يصدق~yiSadda2
+كدب|kidib|калп айт-|v|يكدب~yikdib
+اختار|ixtaar|танда-|v|يختار~yixtaar
+قرر|2arrar|чеч-, чечим кабыл ал-|v|يقرر~yi2arrar
+وافق|waafi2|макул бол-|v|يوافق~yiwaafi2
+رفض|rafaD|баш тарт-|v|يرفض~yirfuD
+سمح|sama7|уруксат бер-|v|يسمح~yisma7
+منع|mana3|тый-|v|يمنع~yimna3
+استأذن|ista2zin|уруксат сура-|v|يستأذن~yista2zin
+طلب|Talab|сура-, буйрутма бер-|v|يطلب~yuTlub
+حجز|7agaz|брондо-|v|يحجز~yi7giz
+اتصل|ittaSal|чал- (телефон)|v|يتصل~yittiSil
+كتب رسالة|katab risaala|кат жаз-|phr|
+نزّل|nazzil|түшүр-; жүктө-|v|ينزل~yinazzil
+شحن|sha7an|кубатта-|v|يشحن~yish7in
+مسح|masa7|өчүр-, сүрт-|v|يمسح~yimsa7
+حفظ|7afaZ|жатта-; сакта-|v|يحفظ~yi7faZ
+ترجم|targim|котор-|v|يترجم~yitargim
+شرح|shara7|түшүндүр-|v|يشرح~yishra7
+نجح|nigi7|ийгиликке жет-, сынактан өт-|v|ينجح~yinga7
+سقط|si2iT|кулап кал- (сынакта)|v|يسقط~yus2uT
+كبر|kibir|чоңой-|v|يكبر~yikbar
+صغّر|Sagghar|кичирейт-|v|يصغر~yiSaghghar
+زاد|zaad|көбөй-, өс-|v|يزيد~yiziid
+قلّ|2all|азай-|v|يقل~yi2ill
+غلي|ghili|кайна-; кымбатта-|v|يغلى~yighla
+برد|birid|музда-, сууп кал-|v|يبرد~yibrad
+سخّن|saxxan|ысыт-|v|يسخن~yisaxxan
+ولّع|walla3|күйгүз-, жак-|v|يولع~yiwalla3
+طفى|Tafa|өчүр- (жарык, от)|v|يطفي~yiTfi
+حس|7ass|сез-|v|يحس~yi7iss
+وجع|wigi3|ооруу (дене)|v|يوجع~yiwga3
+عيي|3iyi|ооруп кал-|v|يعيا~yi3ya
+خف|xaff|айык-; жеңилде-|v|يخف~yixiff
+بقى|ba2a|бол-, болуп кал-|v|يبقى~yib2a
+فضل|fiDil|кал-; …а бер-|v|يفضل~yifDal
+حصل|7aSal|бол- (окуя)|v|يحصل~yi7Sal
+كان|kaan|бол- (эле)|v|يكون~yikuun
+استغرب|istaghrab|таң кал-|v|يستغرب~yistaghrab
+اتعوّد|it3awwid|көн-|v|يتعود~yit3awwid
+اتعرف|it3arraf|тааныш-|v|يتعرف~yit3arraf
+اتمشى|itmashsha|сейилде-|v|يتمشى~yitmashsha
+سهر|sihir|түнү бою отур-|v|يسهر~yishar
+صام|Saam|орозо карма-|v|يصوم~yiSuum
+صلّى|Salla|намаз оку-|v|يصلي~yiSalli
+احتفل|i7tafal|майрамда-|v|يحتفل~yi7tifil
+هزّر|hazzar|тамашала-|v|يهزر~yihazzar
+زهق|zihi2|зерик-|v|يزهق~yizha2
+اتضايق|itDaayi2|ачуулан-, тынчы кет-|v|يتضايق~yitDaayi2
+قلق|2ili2|тынчсызда-|v|يقلق~yi2la2
+اتكسف|itkasaf|уял-|v|يتكسف~yitkisif
+اتجنن|itgannin|жинди бол-|v|يتجنن~yitgannin
+غاب|ghaab|жок бол-, келбей кал-|v|يغيب~yighiib
+حضر|7aDar|катыш-|v|يحضر~yi7Dar
+وزّع|wazza3|тарат-|v|يوزع~yiwazza3
+جمع|gama3|чогулт-|v|يجمع~yigma3
+اجتمع|igtama3|чогул-|v|يجتمع~yigtimi3
+قسم|2asam|бөл-|v|يقسم~yi2sim
+عدّ|3add|сана-|v|يعد~yi3idd
+وزن|wazan|тараз-, салмакта-|v|يوزن~yiwzin
+قاس|2aas|өлчө-|v|يقيس~yi2iis
+جرّب|garrab|сына-, байкап көр-|v|يجرب~yigarrab
+نوى|nawa|ниет кыл-|v|ينوي~yinwi
+خطط|xaTTaT|планда-|v|يخطط~yixaTTaT
+اتفق|ittafa2|макулдаш-|v|يتفق~yittifi2
+اختلف|ixtalaf|айырмалан-; пикир келишпе-|v|يختلف~yixtilif
+ناقش|naa2ish|талкуула-|v|يناقش~yinaa2ish
+انتخب|intaxab|шайла-|v|ينتخب~yintixib
+بنى|bana|кур-|v|يبني~yibni
+هدّ|hadd|буз-, кулат-|v|يهد~yihidd
+سرق|sara2|уурда-|v|يسرق~yisra2
+مسك|misik|карма-|v|يمسك~yimsik
+حرق|7ara2|өрттө-|v|يحرق~yi7ra2
+غرق|ghiri2|чөк-|v|يغرق~yighra2
+عرض|3araD|көрсөт-, сун-|v|يعرض~yi3riD
+شارك|shaarik|катыш-, бөлүш-|v|يشارك~yishaarik

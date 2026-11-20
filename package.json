@@ -1,0 +1,7 @@
+{
+  "name": "masri",
+  "private": true,
+  "description": "Learn Egyptian Arabic (for Kyrgyz speakers) from zero to B2 — static app + zero-dependency Vercel functions",
+  "scripts": { "dev": "node dev-server.js" },
+  "engines": { "node": "22.x" }
+}

@@ -1,0 +1,251 @@
+# arabic|roman|kyrgyz|pos
+كبير|kibiir|чоң; улуу|adj
+صغير|Sughayyar|кичине; жаш|adj
+طويل|Tawiil|узун; бийик|adj
+قصير|2uSayyar|кыска; жапыз|adj
+عريض|3ariiD|кең|adj
+ضيق|Dayya2|тар|adj
+تقيل|ti2iil|оор; кызыксыз (адам)|adj
+خفيف|xafiif|жеңил|adj
+جديد|gidiid|жаңы|adj
+قديم|2adiim|эски|adj
+حلو|7ilw|сонун; сулуу; таттуу|adj
+وحش|wi7ish|жаман; жийиркеничтүү|adj
+كويس|kwayyis|жакшы|adj
+جميل|gamiil|сулуу, кооз|adj
+وحشة|wi7sha|жаман (аял)|adj
+نضيف|niDiif|таза|adj
+وسخ|wisix|кир|adj
+سخن|suxn|ысык|adj
+حر|7arr|ысык (аба)|adj
+ساقع|saa2i3|муздак|adj
+برد|bard|суук|adj
+دافي|daafi|жылуу|adj
+ناشف|naashif|кургак; катуу|adj
+مبلول|mabluul|нымдуу|adj
+سريع|saree3|тез|adj
+بطيء|baTii2|жай|adj
+قريب|2urayyib|жакын|adj
+بعيد|bi3iid|алыс|adj
+غالي|ghaali|кымбат; кымбаттуу (жакын)|adj
+رخيص|rixiiS|арзан|adj
+غني|ghani|бай|adj
+فقير|fa2iir|кедей|adj
+سهل|sahl|оңой|adj
+صعب|Sa3b|кыйын|adj
+مهم|muhimm|маанилүү|adj
+مشهور|mashhuur|белгилүү|adj
+عادي|3aadi|кадимки|adj
+غريب|ghariib|таңгалыштуу; бөтөн|adj
+مختلف|mixtilif|башкача|adj
+زي|zayy|сыяктуу|prep
+نفس|nafs|ошол эле|adj
+تاني|taani|башка; экинчи; кайра|adj
+كتير|kitiir|көп|adj
+قليل|2aliil|аз|adj
+مليان|malyaan|толук|adj
+فاضي|faaDi|бош|adj
+جاهز|gaahiz|даяр|adj
+مشغول|mashghuul|бош эмес|adj
+تعبان|ta3baan|чарчаган; ооруп турган|adj
+عيان|3ayyaan|оорукчан|adj
+مبسوط|mabsuuT|кубанычтуу, ыраазы|adj
+زعلان|za3laan|капа|adj
+فرحان|far7aan|шаттанган|adj
+جعان|ga3aan|ачка|adj
+عطشان|3aTshaan|суусаган|adj
+شبعان|shab3aan|ток|adj
+نعسان|na3saan|уйкусу келген|adj
+خايف|xaayif|корккон|adj
+متأكد|mit2akkid|ишенимдүү|adj
+متجوز|mitgawwiz|үйлөнгөн|adj
+لطيف|laTiif|жагымдуу|adj
+طيب|Tayyib|боорукер; макул|adj
+ذكي|zaki|акылдуу|adj
+شاطر|shaaTir|чебер|adj
+غبي|ghabi|акылсыз|adj
+كسلان|kaslaan|жалкоо|adj
+مؤدب|mu2addab|тарбиялуу|adj
+قليل الأدب|2aliil il-adab|тарбиясыз|adj
+صادق|Saadi2|чынчыл|adj
+كداب|kaddaab|калпычы|adj
+شجاع|shugaa3|баатыр|adj
+جبان|gabaan|коркок|adj
+هادي|haadi|тынч|adj
+عصبي|3aSabi|ачуулуу, нервдүү|adj
+مضحك|muD7ik|күлкүлүү|adj
+حزين|7aziin|кайгылуу|adj
+مريح|murii7|ыңгайлуу|adj
+خطير|xaTiir|коркунучтуу; олуттуу|adj
+آمن|aamin|коопсуз|adj
+صح|Sa7|туура|adj
+غلط|ghalaT|туура эмес; ката|adj
+ممكن|mumkin|мүмкүн|adj
+مستحيل|musta7iil|мүмкүн эмес|adj
+لازم|laazim|керек|adj
+مفتوح|maftuu7|ачык|adj
+مقفول|ma2fuul|жабык|adj
+أحمر|a7mar|кызыл|adj
+أزرق|azra2|көк|adj
+أخضر|axDar|жашыл|adj
+أصفر|aSfar|сары|adj
+أسود|iswid|кара|adj
+أبيض|abyaD|ак|adj
+مصري|maSri|египеттик|adj
+عربي|3arabi|араб; арабча|adj
+قرغيزي|2irghiizi|кыргыз; кыргызча|adj
+روسي|ruusi|орус; орусча|adj
+إنجليزي|ingiliizi|англис; англисче|adj
+أجنبي|agnabi|чет элдик|adj
+دلوقتي|dilwa2ti|азыр|adv
+النهارده|innaharda|бүгүн|adv
+بكرة|bukra|эртең|adv
+امبارح|imbaari7|кечээ|adv
+بعدين|ba3deen|кийин, анан|adv
+قبل كده|2abl kida|мурун, буга чейин|adv
+دايماً|daayman|дайыма|adv
+أحياناً|a7yaanan|кээде|adv
+ساعات|saa3aat|кээде (сөзмө-сөз «сааттар»)|adv
+أبداً|abadan|эч качан|adv
+عمري ما|3umri ma|өмүрүмдө эч качан|adv
+بدري|badri|эрте|adv
+متأخر|mit2axxar|кеч|adv
+لسه|lissa|дагы эле; жаңы эле|adv
+خلاص|xalaaS|болду, бүттү|adv
+حالاً|7aalan|азыр эле|adv
+بسرعة|bisur3a|тез|adv
+بالراحة|bir-raa7a|акырын|adv
+هنا|hina|бул жерде|adv
+هناك|hinaak|тиги жерде|adv
+جوه|guwwa|ичинде|adv
+بره|barra|сыртта|adv
+فوق|foo2|жогоруда|adv
+تحت|ta7t|астында|adv
+قدام|2uddaam|алдында|adv
+ورا|wara|артында|adv
+جنب|ganb|жанында|prep
+بين|been|арасында|prep
+حوالين|7awaleen|айланасында|prep
+أوي|awi|абдан|adv
+جداً|giddan|абдан|adv
+شوية|shwayya|бир аз|adv
+كمان|kamaan|дагы, да|adv
+برضه|barDu|деле|adv
+بس|bass|гана; бирок; болду|adv
+كده|kida|ушундай|adv
+كدا|kida|ушундай|adv
+مع بعض|ma3a ba3D|бирге|adv
+لوحده|lwa7du|жалгыз, өзү|adv
+تقريباً|ta2riiban|болжол менен|adv
+بالظبط|biZ-ZabT|так|adv
+طبعاً|Tab3an|албетте|adv
+يمكن|yimkin|балким|adv
+أكيد|akiid|сөзсүз|adv
+خالص|xaaliS|такыр; абдан|adv
+في|fi|-да, ичинде|prep
+من|min|-дан|prep
+لـ|li|-га, үчүн|prep
+على|3ala|үстүндө; -га|prep
+مع|ma3a|менен|prep
+عند|3and|-да, жанында|prep
+بـ|bi|менен (курал)|prep
+عن|3an|жөнүндө; -дан|prep
+لحد|li7add|чейин|prep
+من غير|min gheer|-сыз|prep
+بعد|ba3d|кийин|prep
+قبل|2abl|мурун|prep
+و|w|жана|conj
+أو|aw|же|conj
+ولا|walla|же (суроодо); да эмес|conj
+لكن|laakin|бирок|conj
+عشان|3ashaan|үчүн; анткени|conj
+لأن|la2inn|анткени|conj
+لما|lamma|…ганда|conj
+لو|law|эгер|conj
+إن|inn|… деп, … экенин|conj
+مع إن|ma3a inn|…ганына карабастан|conj
+يعني|ya3ni|демек, башкача айтканда|part
+بقى|ba2a|эми, анда|part
+طب|Tab|анда, макул|part
+يا|ya|эй, … (кайрылуу)|part
+مش|mish|эмес|part
+ما|ma|тануу бөлүкчөсү|part
+أيوه|aywa|ооба|part
+لأ|la2|жок|part
+آه|aah|ооба (бейрасмий); аа|part
+ده|da|бул (эр.)|pron
+دي|di|бул (аял)|pron
+دول|dool|булар|pron
+أنا|ana|мен|pron
+إنت|inta|сен (эр.)|pron
+إنتي|inti|сен (аял)|pron
+هو|huwwa|ал (эр.)|pron
+هي|hiyya|ал (аял)|pron
+إحنا|i7na|биз|pron
+إنتو|intu|силер|pron
+هما|humma|алар|pron
+مين|miin|ким|q
+إيه|eeh|эмне|q
+فين|feen|кайда|q
+منين|minein|кайдан|q
+إمتى|imta|качан|q
+ليه|leeh|эмне үчүн|q
+إزاي|izzaay|кантип|q
+كام|kaam|канча|q
+أنهي|anhi|кайсы|q
+قد إيه|2add eeh|канчалык|q
+حد|7add|бирөө|pron
+محدش|ma7addish|эч ким|pron
+حاجة|7aaga|бир нерсе|n
+كل|kull|ар бир; бардык|pron
+بعض|ba3D|бири-бири; кээ бир|pron
+أهلاً|ahlan|салам|intj
+مرحبا|mar7aba|салам|intj
+شكراً|shukran|рахмат|intj
+متشكر|mutashakkir|рахмат (эр.)|intj
+العفو|il-3afw|эч нерсе эмес|intj
+آسف|aasif|кечиресиз (эр.)|intj
+معلش|ma3lesh|эч нерсе эмес; кечир|intj
+لو سمحت|law sama7t|кечиресиз, сураныч|phr
+من فضلك|min faDlak|сураныч|phr
+اتفضل|itfaDDal|буюруңуз|intj
+تمام|tamaam|жакшы, баары жайында|intj
+ماشي|maashi|макул|intj
+حاضر|7aaDir|макул, азыр|intj
+يلا|yalla|кеттик|intj
+والله|walla|чын эле|intj
+يا سلام|ya salaam|ий-и, кандай сонун|intj
+يا خبر|ya xabar|ой кудай|intj
+إن شاء الله|in shaa2 allaah|Кудай буюрса|phr
+الحمد لله|il-7amdu lillaah|Кудайга шүгүр|phr
+ما شاء الله|ma shaa2 allaah|машаалла|phr
+الله يخليك|allaah yxalliik|Кудай сактасын (рахмат катары)|phr
+مبروك|mabruuk|куттуктайм|intj
+ألف سلامة|alf salaama|тез айыгып кет|phr
+بالهنا والشفا|bil-hana wish-shifa|тамагыңыз таттуу болсун|phr
+تسلم إيدك|tislam iidak|колуң дарт көрбөсүн|phr
+نورت|nawwart|кош келдиң|phr
+كل سنة وإنت طيب|kull sana w inta Tayyib|майрамыңыз менен|phr
+تصبح على خير|tiSba7 3ala xeer|жакшы жатыңыз|phr
+صباح الخير|Sabaa7 il-xeer|кутман таң|phr
+مساء الخير|masaa2 il-xeer|кутман кеч|phr
+مع السلامة|ma3a s-salaama|жакшы барыңыз|phr
+إزيك|izzayyak|кандайсың (эр.)|phr
+عامل إيه|3aamil eeh|кандайсың (эр.)|phr
+مش فاهم|mish faahim|түшүнгөн жокмун (эр.)|phr
+ممكن تعيد؟|mumkin ti3iid?|кайталап коёсузбу?|phr
+بتتكلم إنجليزي؟|bititkallim ingiliizi?|англисче сүйлөйсүзбү?|phr
+الحمام فين؟|il-7ammaam feen?|даараткана кайда?|phr
+بكام ده؟|bikaam da?|бул канча турат?|phr
+الحساب لو سمحت|il-7isaab law sama7t|эсепти бериңизчи|phr
+أنا تايه|ana taayih|мен адашып калдым|phr
+الحقني|il7a2ni|жардам бер!|phr
+حرام عليك|7araam 3aleek|уят болсун|phr
+مش مشكلة|mish mushkila|көйгөй эмес|phr
+ولا يهمك|wala yhimmak|эч кабатыр болбо|phr
+على فكرة|3ala fikra|баса, айтмакчы|phr
+في الحقيقة|fil-7a2ii2a|чынында|phr
+مثلاً|masalan|мисалы|adv
+خلّي بالك|xalli baalak|абайла|phr
+براحتك|bi-raa7tak|өзүң бил, кааласаң|phr
+وحشتني|wa7ashtini|сени сагындым|phr

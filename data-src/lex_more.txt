@@ -1,0 +1,369 @@
+# arabic|roman|kyrgyz|pos|present
+اسم|ism|ат, ысым|n
+لقب|la2ab|фамилия; лакап|n
+سن|sinn|жаш (курак)|n
+ميلاد|miilaad|туулган күн, төрөлүү|n
+جنسية|ginsiyya|жарандык|n
+بطاقة|biTaa2a|карта, күбөлүк|n
+رخصة|ruxSa|уруксат кагазы; айдоочулук күбөлүк|n
+ورق|wara2|кагаз; документтер|n
+استمارة|istimaara|анкета, бланк|n
+إمضا|imDa|кол тамга|n
+ختم|xitm|мөөр|n
+طابور|Tabuur|кезек|n
+موعد|maw3id|убакыт (белгиленген)|n
+تأشيرة|ta2shiira|виза|n
+جمارك|gamaarik|бажы|n
+شنطة إيد|shanTit iid|кол сумка|n
+إقامة|i2aama|жашоого уруксат|n
+سكن|sakan|турак жай; жатакана|n
+حي|7ayy|район|n
+جيران|giraan|кошуналар|n
+ضوضاء|DawDaa2|ызы-чуу|n
+دوشة|dawsha|ызы-чуу|n
+هدوء|huduu2|тынчтык|n
+زبالة|zibaala|таштанды|n
+صندوق|Sanduu2|куту, сандык|n
+كرتونة|kartoona|картон куту|n
+كهربائي|kahrabaa2i|электрдик|adj
+عطل|3uTl|бузулуу|n
+بايظ|baayiZ|бузук|adj
+شغال|shaghghaal|иштеп жаткан|adj
+تصليح|taSlii7|оңдоо|n
+فاتورة كهربا|fatuurit kahraba|электр эсеби|n
+عداد|3addaad|эсептегич|n
+مواسير|mawasiir|түтүктөр|n
+حنفية|7anafiyya|кран|n
+دش|dushsh|душ|n
+بانيو|banyo|ванна|n
+تواليت|twalitt|унитаз|n
+مخدة|maxadda|жаздык|n
+ملاية|milaaya|шейшеп|n
+بطانية|baTTaniyya|жууркан|n
+كنبة|kanaba|диван|n
+فوتيه|fuutee|кресло|n
+رف|raff|текче|n
+درج|durg|суурма|n
+شماعة|shammaa3a|илгич|n
+مكنسة|maknasa|шыпыргы; чаң соргуч|n
+جردل|gardal|чака|n
+خلاط|xallaaT|блендер|n
+فرن|furn|духовка|n
+ميكروويف|mikroweev|микротолкундуу меш|n
+غلاية|ghallaaya|электр чайнек|n
+صينية|Siniyya|табак, поднос|n
+كوباية|kubbaaya|стакан|n
+مج|magg|кружка|n
+فرشة سنان|furshit sinaan|тиш щёткасы|n
+شامبو|shambu|шампунь|n
+برفان|barfaan|атыр|n
+مكياج|mikyaaj|макияж|n
+خاتم|xaatim|шакек|n
+حلق|7ala2|сөйкө|n
+سلسلة|silsila|чынжыр, мончок|n
+دهب|dahab|алтын|n
+فضة|faDDa|күмүш|n
+حديد|7adiid|темир|n
+خشب|xashab|жыгач|n
+بلاستيك|blastik|пластик|n
+إزاز|izaaz|айнек|n
+قماش|2umaash|кездеме|n
+قطن|2uTn|пахта|n
+صوف|Suuf|жүн|n
+جلد|gild|тери; булгаары|n
+لبس|libs|кийим|n
+هدوم|huduum|кийимдер|n
+بدلة|badla|костюм|n
+كرافتة|karavatta|галстук|n
+بلوزة|biluuza|блузка|n
+بالطو|balTu|пальто|n
+كوتشي|kotshi|кроссовка|n
+صندل|Sandal|сандал|n
+مقاس|ma2aas|өлчөм (кийим)|n
+لون|loon|түс|n
+موضة|mooDa|мода|n
+أكل بيتي|akl beeti|үй тамагы|n
+وجبة|wagba|тамак (бир жолку)|n
+طبق|Taba2|тамак (блюдо); тарелка|n
+منيو|menyu|меню|n
+جرسون|garsoon|официант|n
+بقشيش|ba2shiish|чайпул|n
+حجز|7agz|брондоо|n
+طلب|Talab|буйрутма; өтүнүч|n
+مشروب|mashruub|суусундук|n
+مكسرات|mikassaraat|жаңгактар|n
+لوز|looz|бадам|n
+فستق|fuzdu2|мисте|n
+زيتون|zatuun|зайтун|n
+بلح|bala7|курма|n
+تمر|tamr|курма (кургатылган)|n
+مربى|mirabba|кыям|n
+عيش فينو|3eesh fiinu|батон (нан)|n
+عيش بلدي|3eesh baladi|жергиликтүү нан|n
+سجق|sugu2|колбаса|n
+كبدة|kibda|боор (тамак)|n
+لحمة مفرومة|la7ma mafruuma|тартылган эт|n
+بيض مسلوق|beeD masluu2|бышкан жумуртка|n
+مقلي|ma2li|куурулган|adj
+مشوي|mashwi|кууралган (отто)|adj
+مسلوق|masluu2|бышырылган (сууда)|adj
+نيّ|nayy|чийки|adj
+مستوي|mistiwi|бышып калган|adj
+حراق|7araa2|ачуу|adj
+مالح|maali7|туздуу|adj
+حامض|7aamiD|кычкыл|adj
+مر|murr|ачуу (даам)|adj
+طعم|Ta3m|даам|n
+ريحة|ree7a|жыт|n
+جوع|guu3|ачкалык|n
+عطش|3aTash|суусоо|n
+شغل|shughl|жумуш|n
+وظيفة|waZiifa|кызмат орун|n
+مقابلة|mu2abla|интервью; жолугушуу|n
+خبرة|xibra|тажрыйба|n
+شهادة|shahaada|диплом; күбөлүк|n
+مؤهل|mu2ahhil|квалификация|n
+اجتماع|igtimaa3|жыйналыш|n
+مشروع|mashruu3|долбоор|n
+عقد|3a2d|келишим|n
+زميل|zimiil|кесиптеш|n
+زباين|zabaayin|кардарлар|n
+زبون|zibuun|кардар|n
+مكسب|maksab|киреше|n
+خسارة|xusaara|чыгым; өкүнүч|n
+فلوس كاش|fuluus kaash|накталай акча|n
+حساب بنكي|7isaab banki|банк эсеби|n
+تحويل|ta7wiil|которуу (акча)|n
+قرض|2arD|кредит|n
+دين|deen|карыз|n
+ميزانية|mizaniyya|бюджет|n
+تمن|taman|баа|n
+خصم|xaSm|арзандатуу|n
+عرض|3arD|сунуш; акция|n
+إعلان|i3laan|жарнама|n
+سياحة|siyaa7a|туризм|n
+آثار|asaar|байыркы эстеликтер|n
+معبد|ma3bad|ибадаткана|n
+قلعة|2al3a|чеп|n
+تمثال|timsaal|айкел|n
+لوحة|loo7a|сүрөт (картина)|n
+معرض|ma3raD|көргөзмө|n
+حفلة|7afla|кече, концерт|n
+فرح|fara7|үйлөнүү тою|n
+خطوبة|xuTuuba|кудалык|n
+جنازة|ganaaza|жаназа|n
+عزا|3aza|көңүл айтуу|n
+ذكرى|zikra|эскерүү|n
+تقليد|ta2liid|салт|n
+عادات|3aadaat|үрп-адаттар|n
+ثقافة|sa2aafa|маданият|n
+حضارة|7aDaara|цивилизация|n
+تاريخ|taariix|тарых|n
+مستقبل|musta2bal|келечек|n
+حاضر|7aaDir|учур (азыркы)|n
+تطور|taTawwur|өнүгүү|n
+تكنولوجيا|teknolojya|технология|n
+علم|3ilm|илим|n
+بحث|ba7s|изилдөө|n
+تجربة|tagruba|тажрыйба; сыноо|n
+نظرية|naZariyya|теория|n
+دليل|daliil|далил; колдонмо|n
+معلومة|ma3luuma|маалымат|n
+خبر|xabar|кабар|n
+إشاعة|ishaa3a|ушак|n
+حقيقة|7a2ii2a|чындык|n
+كدبة|kidba|калп|n
+سر|sirr|сыр|n
+فضول|fuDuul|кызыгуу|n
+صبر|Sabr|сабыр|n
+شجاعة|shagaa3a|баатырдык|n
+ذكاء|zakaa2|акыл-эс|n
+غباء|ghabaa2|акылсыздык|n
+كرم|karam|жоомарттык|n
+بخل|buxl|сараңдык|n
+أدب|adab|адеп, тарбия|n
+احترام|i7tiraam|урмат|n
+ثقة|si2a|ишеним|n
+غيرة|gheera|кызганыч|n
+وحدة|wa7da|жалгыздык|n
+صحاب|Su7aab|достор|n
+علاقة|3ilaa2a|мамиле|n
+مشاعر|mashaa3ir|сезимдер|n
+إحساس|i7saas|сезим|n
+نصيحة|naSii7a|кеңеш|n
+مساعدة|musa3da|жардам|n
+خدمة|xidma|кызмат; жакшылык|n
+شكوى|shakwa|арыз, нааразычылык|n
+مشكلة|mushkila|көйгөй|n
+خناقة|xinaa2a|уруш|n
+صلح|Sul7|элдешүү|n
+سلامة|salaama|аман-эсендик|n
+أمان|amaan|коопсуздук|n
+خطر|xaTar|коркунуч|n
+حادثة|7adsa|кырсык|n
+حريقة|7arii2a|өрт|n
+زلزال|zilzaal|жер титирөө|n
+فيضان|fayaDaan|ташкын|n
+جفاف|gafaaf|кургакчылык|n
+بيئة|bii2a|айлана-чөйрө|n
+تلوث|talawwus|булгануу|n
+طاقة|Taa2a|энергия|n
+مناخ|manaax|климат|n
+درجة حرارة|daragit 7araara|температура|n
+رطوبة|ruTuuba|нымдуулук|n
+شتا|shita|кыш; жаан|n
+صيف|Seef|жай|n
+ربيع|rabii3|жаз|n
+خريف|xariif|күз|n
+فصل|faSl|мезгил; класс|n
+جزيرة|gaziira|арал|n
+شط|shaTT|жээк|n
+وادي|waadi|өрөөн|n
+تل|tall|дөбө|n
+غيط|gheeT|талаа (эгин)|n
+مزرعة|mazra3a|ферма|n
+قمح|2am7|буудай|n
+قطن|2uTn|пахта|n
+عشب|3ushb|чөп|n
+ورق شجر|wara2 shagar|жалбырак|n
+فرع|far3|бутак; филиал|n
+جذر|gizr|тамыр (өсүмдүк)|n
+بذرة|bizra|үрөн|n
+ثمرة|tamara|жемиш|n
+حشرة|7ashara|курт-кумурска|n
+فراشة|faraasha|көпөлөк|n
+عنكبوت|3ankabuut|жөргөмүш|n
+ديك|diik|короз|n
+وزة|wizza|каз|n
+حمامة|7amaama|көгүчкөн|n
+بومة|buuma|үкү|n
+خفاش|xuffaash|жарганат|n
+ثعلب|ta3lab|түлкү|n
+ديب|diib|карышкыр|n
+جمل|gamal|төө|n
+حصان|7iSaan|ат|n
+عجل|3igl|музоо|n
+خروف|xaruuf|кой|n
+كتكوت|katkuut|балапан|n
+بقرة|ba2ara|уй|n
+صحيح|Sa7ii7|туура; дени сак|adj
+ضعيف|Da3iif|алсыз|adj
+قوي|2awi|күчтүү; абдан|adj
+سليم|saliim|соо|adj
+مريض|mariiD|оорулуу|adj
+حامل|7aamil|кош бойлуу|adj
+عجوز|3aguuz|кары|adj
+شاب|shaabb|жаш|adj
+حلوة|7ilwa|сулуу (аял)|adj
+وسيم|wasiim|келбеттүү|adj
+أصلع|aSla3|таз|adj
+أعمى|a3ma|сокур|adj
+أطرش|aTrash|дүлөй|adj
+أخرس|axras|дудук|adj
+مبسوط|mabsuuT|ыраазы|adj
+محظوظ|ma7Zuuz|бактылуу (ийгиликтүү)|adj
+مسكين|miskiin|байкуш|adj
+وحيد|wa7iid|жалгыз|adj
+حر|7urr|эркин|adj
+مشهور|mashhuur|атактуу|adj
+ممتاز|mumtaaz|мыкты|adj
+رائع|raa2i3|укмуш|adj
+فظيع|faZii3|коркунучтуу; укмуш|adj
+تحفة|tu7fa|керемет (сүйлөшүү)|adj
+عظيم|3aZiim|улуу; сонун|adj
+بسيط|basiiT|жөнөкөй|adj
+معقد|mu3a22ad|татаал|adj
+واضح|waaDi7|айкын|adj
+مفيد|mufiid|пайдалуу|adj
+مضر|muDirr|зыяндуу|adj
+ضروري|Daruuri|зарыл|adj
+مناسب|munaasib|ылайыктуу|adj
+طبيعي|Tabii3i|табигый|adj
+رسمي|rasmi|расмий|adj
+خاص|xaaSS|жеке, атайын|adj
+عام|3aamm|жалпы; коомдук|adj
+حكومي|7ukuumi|мамлекеттик|adj
+دولي|duwali|эл аралык|adj
+محلي|ma7alli|жергиликтүү|adj
+حديث|7adiis|заманбап|adj
+تقليدي|ta2liidi|салттуу|adj
+دقيق|da2ii2|так|adj
+فاضي|faaDi|бош (убакыт)|adj
+زحمة|za7ma|адам көп, тыгын|adj
+هادي|haadi|тынч|adj
+مزدحم|muzda7im|адамга толо|adj
+بعيد|bi3iid|алыс|adj
+أول|awwil|биринчи|adj
+آخر|aaxir|акыркы|adj
+وسط|wisT|орто|adj
+كامل|kaamil|толук|adj
+ناقص|naa2iS|кем, жетишпеген|adj
+زيادة|ziyaada|ашыкча|adj
+متاح|mutaa7|жеткиликтүү|adj
+مسموح|masmuu7|уруксат берилген|adj
+ممنوع|mamnuu3|тыюу салынган|adj
+مجاني|maggaani|акысыз|adj
+مستعمل|musta3mal|колдонулган|adj
+أصلي|aSli|чыныгы, оригинал|adj
+تقليد|ta2liid|жасалма (копия)|adj
+اتجه|ittagah|багыт ал-|v|يتجه~yittigih
+اتحرك|it7arrak|кыймылда-|v|يتحرك~yit7arrak
+وقع|wi2i3|кула-|v|يقع~yu2a3
+وقّع|wa22a3|кулат-; кол кой-|v|يوقع~yiwa22a3
+شدّ|shadd|тарт-|v|يشد~yishidd
+زقّ|za22|түрт-|v|يزق~yizu22
+رفع|rafa3|көтөр-|v|يرفع~yirfa3
+نقل|na2al|көчүр-; көч-|v|ينقل~yin2il
+عزّل|3azzil|көч- (үйдөн)|v|يعزل~yi3azzil
+أجّر|aggar|ижарага ал-/бер-|v|يأجر~yi2aggar
+طبع|Taba3|басып чыгар-|v|يطبع~yiTba3
+صوّت|Sawwat|добуш бер-|v|يصوت~yiSawwat
+اشتكى|ishtaka|арызда-|v|يشتكي~yishtiki
+سلّم|sallim|саламдаш-; тапшыр-|v|يسلم~yisallim
+ودّع|wadda3|коштош-|v|يودع~yiwadda3
+بارك|baarik|куттукта-|v|يبارك~yibaarik
+عزّى|3azza|көңүл айт-|v|يعزي~yi3azzi
+ضيّف|Dayyif|конок кыл-|v|يضيف~yiDayyif
+جهّز|gahhiz|даярда-|v|يجهز~yigahhiz
+نضّم|naZZam|уюштур-|v|ينظم~yinaZZam
+اتعامل|it3aamil|мамиле кыл-|v|يتعامل~yit3aamil
+اتأكد|it2akkid|ишен-, текшер-|v|يتأكد~yit2akkid
+اتمرن|itmarran|машык-|v|يتمرن~yitmarran
+اتخرج|itxarrag|окууну бүтүр-|v|يتخرج~yitxarrag
+اتجرح|itgara7|жаралан-|v|يتجرح~yitgiri7
+اتعالج|it3aalig|дарылан-|v|يتعالج~yit3aalig
+اتنفس|itnaffis|дем ал-|v|يتنفس~yitnaffis
+اتعشم|it3ashsham|үмүттөн-|v|يتعشم~yit3ashsham
+استمتع|istamta3|ырахат ал-|v|يستمتع~yistamta3
+استفاد|istafaad|пайдалан-|v|يستفيد~yistafiid
+استقبل|ista2bil|тосуп ал-|v|يستقبل~yista2bil
+استخدم|istaxdim|колдон-|v|يستخدم~yistaxdim
+استحمل|ista7mil|чыда-|v|يستحمل~yista7mil
+استسلم|istaslim|багын-|v|يستسلم~yistaslim
+انبسط|inbasaT|кубан-, ырахаттан-|v|ينبسط~yinbisiT
+انتقل|inta2al|көч-|v|ينتقل~yinti2il
+انتهى|intaha|бүт-|v|ينتهي~yintihi
+اتولى|itwalla|кызматка кир-|v|يتولى~yitwalla
+اترمى|itrama|ыргытыл-|v|يترمي~yitrimi
+اتشهر|itshahar|атагы чык-|v|يتشهر~yitshihir
+كبّر|kabbar|чоңойт-|v|يكبر~yikabbar
+نوّر|nawwar|жарык кыл-|v|ينور~yinawwar
+غيّر|ghayyar|өзгөрт-|v|يغير~yighayyar
+اتغير|itghayyar|өзгөр-|v|يتغير~yitghayyar
+فرّق|farra2|айырмала-|v|يفرق~yifarra2
+قارن|2aarin|салыштыр-|v|يقارن~yi2aarin
+وصف|waSaf|сүрөттө-|v|يوصف~yiwSif
+لخّص|laxxaS|кыскача айт-|v|يلخص~yilaxxaS
+عبّر|3abbar|билдир-|v|يعبر~yi3abbar
+اقترح|i2tara7|сунушта-|v|يقترح~yi2tiri7
+نصح|naSa7|кеңеш бер-|v|ينصح~yinSa7
+هدد|haddid|коркут-|v|يهدد~yihaddid
+حمى|7ama|корго-|v|يحمي~yi7mi
+دافع|daafi3|корго- (пикир)|v|يدافع~yidaafi3
+هاجم|haagim|кол сал-|v|يهاجم~yihaagim
+كسب|kisib|жең-|v|يكسب~yiksab
+اتغلب|itghalab|жеңил-|v|يتغلب~yitghilib
+فاز|faaz|жең-, утуп ал-|v|يفوز~yifuuz
+شجّع|shagga3|колдо-, күйөрман бол-|v|يشجع~yishagga3
+سجّل|saggil|катта-; гол киргиз-|v|يسجل~yisaggil
+اشترك|ishtarak|жазыл-, катыш-|v|يشترك~yishtirik

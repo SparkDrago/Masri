@@ -1,0 +1,260 @@
+# arabic|roman|kyrgyz|pos|present
+خاتم|xaatim|шакек|n
+مسمار|musmaar|мык|n
+شاكوش|shakuush|балка|n
+مفك|mifakk|бурагыч|n
+سلك|silk|зым|n
+حبل|7abl|аркан|n
+شريط|shiriiT|тасма|n
+بطارية|baTTariyya|батарея|n
+شاحن|shaa7in|кубаттагыч|n
+سماعة|sammaa3a|кулакчын; трубка|n
+شاشة|shaasha|экран|n
+كيبورد|kiibord|клавиатура|n
+ماوس|maws|чычкан (компьютер)|n
+طابعة|Tab3a|принтер|n
+ملف|malaff|файл; папка|n
+باسورد|basswurd|сырсөз|n
+حساب|7isaab|эсеп; аккаунт|n
+موقع|maw2i3|сайт; орун|n
+تطبيق|taTbii2|тиркеме|n
+رسالة صوتية|risaala Sawtiyya|үн билдирүү|n
+مكالمة|mukalma|телефон чалуу|n
+رنة|ranna|чалуу үнү|n
+شبكة|shabaka|тармак|n
+واي فاي|waay faay|вай-фай (зымсыз интернет)|n
+بوست|boost|пост|n
+لايك|layk|лайк|n
+متابع|mutaabi3|жазылуучу|n
+قناة|2anaah|канал|n
+فيديو|vidyu|видео|n
+صوت|Soot|үн; добуш|n
+كاميرا|kamira|камера|n
+ألبوم|album|альбом|n
+مزيكا|maziika|музыка|n
+غنوة|ghinwa|ыр|n
+عود|3uud|уд (аспап)|n
+طبلة|Tabla|барабан|n
+رقص|ra2S|бий|n
+مسرحية|masra7iyya|спектакль|n
+رواية|riwaaya|роман|n
+شعر|shi3r|поэзия|n
+فنان|fannaan|артист|n
+نجم|nigm|жылдыз (атактуу адам)|n
+جمهور|gumhuur|көрүүчүлөр; эл|n
+ماتش|maatsh|беттеш|n
+فريق|farii2|команда|n
+لاعب|laa3ib|оюнчу|n
+مدرب|mudarrib|машыктыруучу|n
+جون|goon|гол|n
+كاس|kaas|кубок; стакан|n
+بطولة|buTuula|чемпионат|n
+جيم|jiim|спорт зал|n
+تمرين|tamriin|көнүгүү, машыгуу|n
+سباحة|sibaa7a|сүзүү|n
+ركوب الخيل|rukuub il-xeel|ат минүү|n
+مشي|mashy|жөө басуу|n
+رحلة بحرية|ri7la ba7riyya|деңиз саякаты|n
+غطس|ghaTs|сууга чөмүлүү (дайвинг)|n
+صيد|Seed|аңчылык; балык уулоо|n
+كامب|kamb|лагерь|n
+خيمة|xeema|чатыр|n
+شنطة ضهر|shanTit Dahr|рюкзак|n
+بوصلة|buSla|компас|n
+جبل|gabal|тоо|n
+قمة|2imma|чоку|n
+كهف|kahf|үңкүр|n
+بركان|burkaan|вулкан|n
+بير|biir|кудук|n
+ينبوع|yanbuu3|булак|n
+شلال|shallaal|шаркыратма|n
+ميه معدنية|mayya ma3daniyya|минералдык суу|n
+تلج|talg|муз; кар|n
+سحابة|sa7aaba|булут|n
+ضباب|Dabaab|туман|n
+غبار|ghubaar|чаң|n
+شروق|shuruu2|күн чыгыш|n
+غروب|ghuruub|күн батыш|n
+ضل|Dill|көлөкө|n
+نور الشمس|nuur ish-shams|күн нуру|n
+حرارة|7araara|ысык; температура|n
+برودة|buruuda|суук|n
+فلك|falak|астрономия; асман|n
+كوكب|kawkab|планета|n
+فضا|faDa|космос|n
+قمر صناعي|2amar Sinaa3i|спутник|n
+صاروخ|Saaruux|ракета|n
+بلد|balad|өлкө|n
+عاصمة|3aaSima|борбор шаар|n
+حدود|7uduud|чек ара|n
+محافظة|mu7afZa|облус (губерния)|n
+مركز|markaz|борбор; район|n
+شارع رئيسي|shaari3 ra2iisi|башкы көчө|n
+زقاق|zu2aa2|тар көчө|n
+مكان|makaan|орун|n
+ناحية|naa7ya|тарап|n
+جهة|giha|тарап; мекеме|n
+مسافة|masaafa|аралык|n
+كيلومتر|kilumitr|километр|n
+متر|mitr|метр|n
+سنتي|santi|сантиметр|n
+لتر|litr|литр|n
+جرام|graam|грамм|n
+نص كيلو|nuSS kiilu|жарым кило|n
+ربع كيلو|rub3 kiilu|чейрек кило|n
+دستة|dasta|дюжина|n
+حتة|7itta|бир бөлүк|n
+شوية|shwayya|бир аз|n
+كمية|kammiyya|сан, көлөм|n
+نوع|noo3|түр|n
+حاجات|7agaat|нерселер|n
+جهاز|gihaaz|аппарат; сеп|n
+آلة|aala|машина, аспап|n
+عربية نقل|3arabiyyit na2l|жүк ташуучу машина|n
+بنزين|banziin|бензин|n
+بنزينة|banziina|май куюучу станция|n
+جراج|garaaj|гараж|n
+ركنة|rakna|токтотмо жай|n
+كاوتش|kawitsh|дөңгөлөк|n
+فرامل|faraamil|тормоз|n
+حادثة|7adsa|кырсык|n
+مخالفة|muxalfa|айып пул|n
+رخصة سواقة|ruxSit siwaa2a|айдоочулук күбөлүк|n
+تذكرة رايح جاي|tazkara raayi7 gaay|баруу-келүү билети|n
+رصيف القطر|raSiif il-2aTr|перрон|n
+عربية النوم|3arabiyyit in-noom|уктоочу вагон|n
+كابينة|kabiina|каюта; кабина|n
+شنط|shunaT|сумкалар, жүк|n
+وزن زيادة|wazn ziyaada|ашыкча жүк|n
+إقلاع|i2laa3|учуп чыгуу|n
+هبوط|hubuuT|конуу|n
+طيار|Tayyaar|учкуч|n
+مضيفة|muDiifa|стюардесса|n
+بوابة|bawwaaba|дарбаза; гейт|n
+حزام|7izaam|кур|n
+جوازات|gawazaat|паспорт текшерүү|n
+عملة|3umla|валюта|n
+صرافة|Sarraafa|акча алмаштыруу|n
+مكتب سياحة|maktab siyaa7a|туристтик агенттик|n
+برنامج الرحلة|barnaamig ir-ri7la|саякат программасы|n
+مرشد|murshid|гид|n
+منظر|manZar|көрүнүш|n
+صورة تذكارية|Suura tizkariyya|эстелик сүрөт|n
+هدية تذكارية|hidiyya tizkariyya|сувенир|n
+سوق شعبي|suu2 sha3bi|элдик базар|n
+فصال|fiSaal|соодалашуу|n
+بياع|bayyaa3|сатуучу|n
+شاري|shaari|сатып алуучу|n
+بضاعة|baDaa3a|товар|n
+جملة|gumla|дүң (соода)|n
+قطاعي|2iTaa3i|чекене|n
+كيلو|kiilu|кило|n
+ميزان|miizaan|тараза|n
+عدد|3adad|сан|n
+رقم تليفون|ra2am tilifoon|телефон номери|n
+صفر|Sifr|нөл|num
+واحد|waa7id|бир|num
+اتنين|itneen|эки|num
+تلاتة|talaata|үч|num
+أربعة|arba3a|төрт|num
+خمسة|xamsa|беш|num
+ستة|sitta|алты|num
+سبعة|sab3a|жети|num
+تمانية|tamanya|сегиз|num
+تسعة|tis3a|тогуз|num
+عشرة|3ashara|он|num
+حداشر|7idaashar|он бир|num
+اتناشر|itnaashar|он эки|num
+تلاتاشر|talattaashar|он үч|num
+أربعتاشر|arba3taashar|он төрт|num
+خمستاشر|xamastaashar|он беш|num
+ستاشر|sittaashar|он алты|num
+سبعتاشر|saba3taashar|он жети|num
+تمنتاشر|tamantaashar|он сегиз|num
+تسعتاشر|tisa3taashar|он тогуз|num
+عشرين|3ishriin|жыйырма|num
+تلاتين|talatiin|отуз|num
+أربعين|arbi3iin|кырк|num
+خمسين|xamsiin|элүү|num
+ستين|sittiin|алтымыш|num
+سبعين|sab3iin|жетимиш|num
+تمانين|tamaniin|сексен|num
+تسعين|tis3iin|токсон|num
+مية|miyya|жүз|num
+ميتين|miteen|эки жүз|num
+ألف|alf|миң|num
+ألفين|alfeen|эки миң|num
+مليون|milyoon|миллион|num
+مليار|milyaar|миллиард|num
+أول|awwil|биринчи|num
+تاني|taani|экинчи|num
+تالت|taalit|үчүнчү|num
+رابع|raabi3|төртүнчү|num
+خامس|xaamis|бешинчи|num
+نص|nuSS|жарым|num
+ربع|rub3|чейрек|num
+مرتين|marriteen|эки жолу|adv
+تلات مرات|talat marraat|үч жолу|adv
+كل مرة|kull marra|ар бир жолу|adv
+مرة تانية|marra tanya|дагы бир жолу|adv
+من زمان|min zamaan|илгертеден|adv
+قريب|2urayyib|жакында|adv
+على طول|3ala Tuul|дароо; түз|adv
+فجأة|fag2a|күтүлбөгөн жерден|adv
+للأسف|lil-asaf|тилекке каршы|adv
+لحسن الحظ|li-7usn il-7aZZ|бактыга жараша|adv
+عموماً|3umuuman|жалпысынан|adv
+خصوصاً|xuSuuSan|өзгөчө|adv
+أصلاً|aSlan|негизи|adv
+فعلاً|fi3lan|чындап эле|adv
+بجد|bi-gadd|чын эле|adv
+غالباً|ghaaliban|көбүнчө|adv
+ساعتها|sa3it-ha|ошол учурда|adv
+بعد كده|ba3d kida|андан кийин|adv
+الأول|il-awwil|адегенде|adv
+في الآخر|fil-aaxir|акырында|adv
+مع بعض|ma3a ba3D|бирге|adv
+لبعض|li-ba3D|бири-бирине|adv
+وراء بعض|wara ba3D|удаа|adv
+كفاية|kifaaya|жетиштүү; жетет|adv
+بالعكس|bil-3aks|тескерисинче|adv
+بالذات|biz-zaat|дал ушул|adv
+تحديداً|ta7diidan|тактап айтканда|adv
+يا دوب|ya doob|араң|adv
+إلا|illa|…дан башка; калды (саатта)|prep
+غير|gheer|башка; …дан тышкары|prep
+زي ما|zayy ma|кандай болсо, ошондой|conj
+علشان|3alashaan|үчүн|conj
+بدل|badal|ордуна|prep
+حسب|7asab|боюнча|prep
+بسبب|bi-sabab|себептүү|prep
+ضد|Didd|каршы|prep
+حوالي|7awaali|болжол менен|prep
+تقريباً|ta2riiban|болжол менен|adv
+كأن|ka2inn|…гансып|conj
+حتى|7atta|ал тургай; чейин|conj
+يا ريت|ya reet|кана эми|part
+ياه|yaah|ой! (таң калуу)|intj
+أوف|uff|уф (чарчоо)|intj
+بس كده|bass kida|болду, ушул гана|phr
+ولا حاجة|wala 7aaga|эч нерсе|phr
+مفيش حاجة|ma fiish 7aaga|эч нерсе жок|phr
+على مهلك|3ala mahlak|шашпа|phr
+خد بالك|xud baalak|абайла|phr
+ولا يهمك|wala yhimmak|кабатыр болбо|phr
+مش عارف|mish 3aarif|билбейм (эр.)|phr
+مش فارقة|mish far2a|баары бир|phr
+زي ما تحب|zayy ma t7ibb|каалагандай|phr
+حظ سعيد|7aZZ sa3iid|ийгилик|phr
+بالتوفيق|bit-tawfii2|ийгилик каалайм|phr
+سلامتك|salamtak|тез айыгып кет|phr
+عقبال عندك|3u2baal 3andak|сага да буюрсун|phr
+وحشتيني|wa7ashtiini|сени сагындым (аялга)|phr
+أنا آسف|ana aasif|кечиресиз (эр.)|phr
+أنا آسفة|ana asfa|кечиресиз (аял)|phr
+مش قصدي|mish 2aSdi|атайын кылган жокмун|phr
+فين المشكلة|feen il-mushkila|көйгөй эмнеде?|phr
+إيه الأخبار|eeh il-axbaar|кандай жаңылыктар?|phr
+فاكرني|faakirni|мени эстейсиңби?|phr
+يا ترى|ya tara|кызык, …бекен|phr
+ولا إيه|walla eeh|туурабы? ээ?|phr
