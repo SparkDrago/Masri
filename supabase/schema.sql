@@ -320,10 +320,63 @@ create or replace function mz_board(p jsonb) returns jsonb language sql as $$
         where x.week = p->>'week' order by x.xp desc limit least(coalesce((p->>'limit')::int, 25), 100)) x
 $$;
 
+-- ------------------------------ Recordings ---------------------------------
+-- The recording studio uploads each take through /api/rec. The audio goes to the public
+-- storage bucket "audio" (path <id>/<time>.<ext>); this table says which file is current.
+create table if not exists mz_audio (
+  id          text primary key check (id ~ '^[0-9a-f]{16}$'),
+  voice       text not null check (voice in ('f', 'm')),
+  key         text not null,
+  path        text not null,
+  bytes       int,
+  updated_at  timestamptz not null default now()
+);
+create table if not exists mz_rec_flags (
+  key         text primary key,
+  fix         text not null default '',
+  created_at  timestamptz not null default now()
+);
+do $$ declare t text; begin
+  foreach t in array array['mz_audio','mz_rec_flags'] loop
+    execute format('alter table %I enable row level security', t);
+    execute format('revoke all on %I from public', t);
+    if exists (select 1 from pg_roles where rolname = 'anon') then execute format('revoke all on %I from anon', t); end if;
+    if exists (select 1 from pg_roles where rolname = 'authenticated') then execute format('revoke all on %I from authenticated', t); end if;
+    if exists (select 1 from pg_roles where rolname = 'service_role') then execute format('grant all on %I to service_role', t); end if;
+  end loop;
+end $$;
+
+create or replace function mz_audio_put(p jsonb) returns jsonb language plpgsql as $$
+declare old text;
+begin
+  select path into old from mz_audio where id = p->>'id';
+  insert into mz_audio as a (id, voice, key, path, bytes) values (p->>'id', p->>'voice', p->>'key', p->>'path', (p->>'bytes')::int)
+  on conflict (id) do update set voice = excluded.voice, key = excluded.key, path = excluded.path, bytes = excluded.bytes, updated_at = now();
+  return jsonb_build_object('ok', true, 'old', old);
+end $$;
+
+-- "id/time.ext id/time.ext …" — one string keeps the list small
+create or replace function mz_audio_list(p jsonb) returns jsonb language sql as $$
+  select jsonb_build_object('files', coalesce(string_agg(path, ' ' order by id), ''), 'count', count(*)) from mz_audio
+$$;
+
+create or replace function mz_rec_flag(p jsonb) returns jsonb language plpgsql as $$
+begin
+  if coalesce((p->>'off')::boolean, false) then delete from mz_rec_flags where key = p->>'key';
+  else insert into mz_rec_flags as f (key, fix) values (p->>'key', coalesce(p->>'fix', ''))
+       on conflict (key) do update set fix = excluded.fix, created_at = now();
+  end if;
+  return jsonb_build_object('ok', true);
+end $$;
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('audio', 'audio', true, 5242880, array['audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/webm', 'audio/ogg', 'audio/mpeg', 'audio/wav'])
+on conflict (id) do update set public = true, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
+
 -- Only the server may call these functions.
 do $$ declare f record; begin
   for f in select p.oid::regprocedure as sig from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-           where n.nspname = 'public' and p.proname like 'kg\_%' loop
+           where n.nspname = 'public' and p.proname like 'mz\_%' loop
     execute format('alter function %s set search_path = public, pg_temp', f.sig);
     execute format('revoke all on function %s from public', f.sig);
     if exists (select 1 from pg_roles where rolname = 'anon') then execute format('revoke all on function %s from anon', f.sig); end if;

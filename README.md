@@ -75,17 +75,14 @@ Go to Project → **Settings → Environment Variables** and add `SESSION_SECRET
 ### 5. Record the audio
 The site plays **only real recordings** of an Egyptian speaker; synthesized voices are switched off (`js/config.js`). Until a sentence is recorded, learners see its transcription and no play button, so nothing wrong is ever heard.
 
-1. Open `https://your-site/#record` (the recording studio) on a computer or phone with a decent microphone, in a quiet room.
-2. Pick your voice (female/male) and a set. Sets follow the course order: lessons first, then stories, word drops and the dictionary. Read each sentence the way you'd say it in Cairo and press **Space** to start and stop. With **Auto-next** on, the next sentence appears right away. **⏭ Next unrecorded** jumps to the first gap anywhere in the course. Recording a sentence again replaces it. If a sentence is written wrongly, press **⚑** and type the correction.
-3. Press **⬇ Export new** regularly (for example after every session). Recordings live only in that browser until exported, so don't clear its site data. Each export contains only what's new since the last one.
-4. On your computer, in the `masri` folder:
-   ```bash
-   node data-src/build_audio.js --add ~/Downloads/masri-recordings-2026-11-21.zip
-   ```
-   This trims the silence, evens out the loudness and converts to small MP3s that play on every phone (install ffmpeg first: `brew install ffmpeg` on a Mac, `winget install ffmpeg` on Windows; without it the files are copied as they are). Your original recordings are kept in `recordings-original/` (not uploaded). Any flagged sentences are printed and saved to `data-src/text-corrections.tsv`.
-5. Upload the new files in `audio/` and the updated `js/data/audio-manifest.js` to GitHub (or `git push`); Vercel redeploys by itself. Play buttons appear for every recorded sentence.
+1. **Switch on uploading (once).** In Vercel → Project → **Settings → Environment Variables**, add `RECORDER_KEY` with a long random value (for example `openssl rand -base64 24`), for Production and Preview, then **Redeploy**. If your Supabase project was set up before November 2026, also run the latest `supabase/schema.sql` in Supabase → SQL Editor (it adds the `audio` storage bucket and the `mz_audio` table).
+2. Open `https://your-site/#record` (the recording studio) on a computer or phone with a decent microphone, in a quiet room, and paste the key into **☁ Recorder key** once. The browser remembers it.
+3. Pick your voice (female/male) and a set. Sets follow the course order: lessons first, then stories, word drops and the dictionary. Read each sentence the way you'd say it in Cairo and press **Space** to start and stop. With **Auto-next** on, the next sentence appears right away. **⏭ Next unrecorded** jumps to the first gap anywhere in the course. Recording a sentence again replaces it. If a sentence is written wrongly, press **⚑** and type the correction; flags are sent to the site owner too (table `mz_rec_flags`).
+4. That's it: each take is cleaned up in the browser (silence trimmed, loudness evened out), uploaded in the background to Supabase Storage, and plays on the site for everyone within about a minute. The line next to the key shows what's waiting. If you're offline, takes wait on the device and upload when you're back.
 
-`node data-src/build_audio.js` shows how much is recorded (the whole course is about 4,000 sentences, about 1,450 of them single dictionary words); `--missing` lists what's left. On the device you record with, new recordings already play on the lesson pages before you export, so you can check them in context.
+Without the key (or as a backup) you can still use the ZIP route: press **⬇ Export new**, then on your computer run `node data-src/build_audio.js --add ~/Downloads/masri-recordings-….zip` (needs ffmpeg) and push `audio/` + `js/data/audio-manifest.js`. Deployed files and uploaded takes work side by side; when both exist for a sentence, the uploaded one (the newer take) plays.
+
+`node data-src/build_audio.js` shows how much is in the deployed files (the whole course is about 3,360 sentences, about 1,450 of them single dictionary words); `--missing` lists what's left. The studio's progress bar counts uploaded takes too.
 
 You can also add a recording by hand: find the sentence in `audio/jobs.tsv` (made by `--export`), save the recording as `audio/<id>.mp3` (or `.m4a`/`.webm`), run `node data-src/build_audio.js --manifest`, and upload.
 

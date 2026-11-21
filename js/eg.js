@@ -433,6 +433,7 @@
     cloud: false,           // /api/tts answered the probe
     egVoice: null, otherVoice: null,
     files: new Map(),       // audio id → file extension (from js/data/audio-manifest.js)
+    remote: new Map(),      // audio id → URL: takes uploaded from the studio since the last deploy (/api/rec)
     BASE_RATE: 0.85,        // generated audio is made at this speed; others are played faster/slower
     _token: 0, _audio: null,
     init() {
@@ -446,6 +447,7 @@
         this.files.set(id, ext);
       });
       this.loadLocal();
+      this.loadRemote(probe, TYPES);
       if (!this.synth) { this.refresh(); return; }
       if ('speechSynthesis' in window) {
         const pick = () => {
@@ -487,11 +489,26 @@
         } catch (e) { /* ignore */ }
       };
     },
+    // Recordings uploaded from the studio play for everyone right away, without a redeploy.
+    loadRemote(probe, TYPES) {
+      if (!window.fetch || !/^https?:$/.test(location.protocol)) return;
+      fetch('/api/rec').then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => {
+        if (!j || !j.base || !j.files) return;
+        String(j.files).split(/\s+/).forEach((path) => {
+          const m = path.match(/^([0-9a-f]{16})\/[0-9a-z]+\.([a-z0-9]+)$/);
+          if (!m || (probe && probe.canPlayType && !probe.canPlayType(TYPES[m[2]] || ''))) return;
+          this.remote.set(m[1], j.base + path);
+        });
+        this.refresh();
+      });
+    },
     addLocal(id, blob) {
       if (this.local.has(id)) URL.revokeObjectURL(this.local.get(id));
       this.local.set(id, URL.createObjectURL(blob));
     },
-    recorded() { return new Set([...this.files.keys(), ...this.local.keys()]).size; },
+    recorded() { return new Set([...this.files.keys(), ...this.remote.keys(), ...this.local.keys()]).size; },
+    // Is there a published recording (deployed file or uploaded take) for this audio id?
+    published(id) { return this.files.has(id) || this.remote.has(id); },
     // Is every piece of this text recorded (in either voice)?
     has(text) {
       const cs = speechChunks(text);
@@ -500,7 +517,7 @@
     setVoice(v) { this.voiceSel = v === 'm' ? 'm' : 'f'; if (this._pick) this._pick(); else this.refresh(); },
     setFusha(on) { this.allowFusha = !!on; this.refresh(); },
     refresh() {
-      const rec = this.files.size + this.local.size > 0;
+      const rec = this.files.size + this.remote.size + this.local.size > 0;
       if (!this.synth) { this.voice = null; this.mode = rec ? 'files' : 'none'; }
       else {
         this.voice = this.egVoice || (this.allowFusha ? this.otherVoice : null);
@@ -526,6 +543,7 @@
       const file = (voice) => {
         const id = audioId(voice, c.key);
         if (this.local.has(id)) return { url: this.local.get(id) };
+        if (this.remote.has(id)) return { url: this.remote.get(id) };   // a newer take than the deployed file
         return this.files.has(id) ? { url: '/audio/' + id + '.' + this.files.get(id) } : null;
       };
       if (file(v)) out.push(file(v));
