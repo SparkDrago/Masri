@@ -354,7 +354,7 @@
     const CYR = /[а-яёөүң]/i;
     const ok = (c) => {
       const ar = c.key.split('~')[0], ro = c.key.split('~')[1] || '';
-      if (/^-|-$/.test(ro) || ar.includes('-') || /…|\.\.\./.test(ar)) return false;
+      if (/^-|-$/.test(ro) || ar.includes('-') || /…|\.\.\.|\s\+\s/.test(ar)) return false;  // placeholders and spelling breakdowns (عند + نا)
       if (lettersOf(ar).length < 2 && ar !== 'و') return false;
       return true;
     };

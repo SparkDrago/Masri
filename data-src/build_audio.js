@@ -8,6 +8,7 @@
      node data-src/build_audio.js            how much of the course is recorded (also: --status)
      node data-src/build_audio.js --missing  list every sentence that has no recording yet
      node data-src/build_audio.js --manifest rebuild js/data/audio-manifest.js from audio/
+     node data-src/build_audio.js --reprocess  rebuild every MP3 in audio/ from recordings-original/
 
    Synthesized voices are off by default (js/config.js). The old generators still work:
      --export   audio/jobs.tsv for data-src/namaa_tts.py      --azure   generate with Azure
@@ -67,8 +68,41 @@ function addZips(files) {
   const ORIG = path.join(ROOT, 'recordings-original');
   fs.mkdirSync(AUDIO, { recursive: true }); fs.mkdirSync(ORIG, { recursive: true });
   if (!ffmpeg) console.log('ffmpeg not found: recordings are copied as they are (no trimming/MP3). Install ffmpeg for smaller files that play on every phone.');
-  // trim silence at both ends, cut rumble, even out loudness; mono 48 kbps MP3 (~6 KB per second)
-  const filter = 'highpass=f=70,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11';
+  // cut rumble, even out loudness; mono 48 kbps MP3 (~6 KB per second). Silence is trimmed by encode() below.
+  const filter = 'highpass=f=70,loudnorm=I=-18:TP=-1.5:LRA=11';
+  // Find where the speech starts and ends, relative to this recording's own loudness (phone mics and
+  // browsers record at very different levels, so a fixed threshold cuts quiet speakers' words off).
+  function speechSpan(file) {
+    const pcm = spawnSync('ffmpeg', ['-v', 'error', '-i', file, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], { maxBuffer: 1 << 28 }).stdout;
+    if (!pcm || pcm.length < 3200) return null;
+    const W = 320, n = Math.floor(pcm.length / 2 / W), db = [];   // 20 ms frames
+    for (let f = 0; f < n; f++) {
+      let e = 0;
+      for (let k = 0; k < W; k++) { const v = pcm.readInt16LE((f * W + k) * 2); e += v * v; }
+      db.push(10 * Math.log10(e / W / 1073741824 + 1e-12));
+    }
+    const sorted = [...db].sort((a, b) => a - b), floor = sorted[Math.floor(n * 0.1)], peak = sorted[n - 1];
+    // speech = louder than the room by a clear margin and within 35 dB of the loudest moment
+    const thr = Math.max(floor + 10, peak - 35);
+    let a = db.findIndex((d) => d > thr), b = n - 1 - [...db].reverse().findIndex((d) => d > thr);
+    if (a < 0 || peak - floor < 12) return null;              // can't tell speech from noise: keep it all
+    return { start: Math.max(0, a * 0.02 - 0.12), end: Math.min(n * 0.02, (b + 1) * 0.02 + 0.18) };
+  }
+  function encode(orig, out) {
+    const span = speechSpan(orig), cut = span ? ['-ss', span.start.toFixed(3), '-to', span.end.toFixed(3)] : [];
+    return spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', orig, ...cut, '-af', filter, '-ac', '1', '-ar', '44100', '-b:a', '48k', out]);
+  }
+  if (args.includes('--reprocess')) {
+    let k = 0;
+    for (const f of fs.readdirSync(ORIG)) {
+      const m = f.match(/^([0-9a-f]{16})\.(m4a|webm|ogg|mp3|wav)$/);
+      if (!m) continue;
+      if (encode(path.join(ORIG, f), path.join(AUDIO, m[1] + '.mp3')).status === 0) k++;
+    }
+    console.log(`Re-processed ${k} recordings from recordings-original/.`);
+    writeManifest();
+    return;
+  }
   let added = 0;
   const fixes = [];
   for (const z of files) {
@@ -82,7 +116,7 @@ function addZips(files) {
       // remove older files for this id, so the new recording is the one that plays
       fs.readdirSync(AUDIO).filter((x) => x.startsWith(m[1] + '.')).forEach((x) => fs.unlinkSync(path.join(AUDIO, x)));
       if (ffmpeg) {
-        const r = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', orig, '-af', filter, '-ac', '1', '-ar', '44100', '-b:a', '48k', path.join(AUDIO, m[1] + '.mp3')]);
+        const r = encode(orig, path.join(AUDIO, m[1] + '.mp3'));
         if (r.status !== 0) { console.log('  ffmpeg failed for', f.name, '— copied as is'); fs.copyFileSync(orig, path.join(AUDIO, f.name)); }
       } else fs.copyFileSync(orig, path.join(AUDIO, f.name));
       added++;
@@ -97,7 +131,8 @@ function addZips(files) {
   writeManifest();
 }
 const addAt = args.indexOf('--add');
-if (addAt >= 0) {
+if (args.includes('--reprocess')) addZips([]);
+else if (addAt >= 0) {
   const zips = args.slice(addAt + 1).filter((a) => !a.startsWith('--'));
   if (!zips.length) { console.error('Usage: node data-src/build_audio.js --add recordings.zip'); process.exit(1); }
   addZips(zips);
