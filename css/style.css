@@ -951,3 +951,34 @@ table td .kg { font-size: 1.2rem; }
 .audio-set { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
 .audio-set label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
 .audio-set input { accent-color: var(--indigo); width: 18px; height: 18px; }
+
+/* Recording studio */
+.rec-help { background: var(--paper, #fff); border: 1px solid var(--line, #e3dccb); border-radius: 14px; padding: 14px 18px; margin-bottom: 18px; font-size: .95rem; }
+.rec-help kbd { border: 1px solid #c9c2b2; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; font-size: .85em; background: #fff; }
+.rec-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 14px; }
+.rec-bar select { max-width: 70vw; padding: 6px 8px; border-radius: 8px; border: 1px solid #c9c2b2; font: inherit; }
+.rec-card { background: #fff; border-radius: 18px; box-shadow: 0 6px 24px rgba(18, 53, 91, .08); padding: 22px; text-align: center; }
+.rec-text { font-family: var(--f-kg); font-size: clamp(1.6rem, 5vw, 2.6rem); line-height: 1.6; margin: 6px 0; }
+.rec-tl { color: #6b6f80; margin-bottom: 14px; min-height: 1.2em; }
+.rec-ctl { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.rec-btn { background: var(--red); color: #fff; border: 0; min-width: 190px; }
+.rec-btn.on { background: #8c1d1d; animation: recpulse 1s infinite; }
+@keyframes recpulse { 50% { box-shadow: 0 0 0 8px rgba(181, 72, 31, .2); } }
+@media (prefers-reduced-motion: reduce) { .rec-btn.on { animation: none; } }
+.rec-flag { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.rec-flag input { width: min(560px, 100%); padding: 8px 10px; border-radius: 8px; border: 1px solid #c9c2b2; font: inherit; font-family: var(--f-kg); }
+.rec-status { min-height: 1.4em; margin-top: 10px; }
+.rec-list { columns: 3 220px; margin: 22px 0 0; padding: 0 1.2em; font-family: var(--f-kg); }
+.rec-list li { cursor: pointer; padding: 2px 4px; border-radius: 6px; break-inside: avoid; }
+.rec-list li.done { color: var(--ok, #2e7d32); }
+.rec-list li.done::marker { content: "✓ "; }
+.rec-list li.flag { background: #fdecc8; }
+.rec-list li.cur { outline: 2px solid var(--gold); }
+
+/* Play buttons for text that isn't recorded yet keep their place but are invisible */
+button[data-say].is-missing { visibility: hidden; pointer-events: none; }
+
+.rec-progress { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; flex-wrap: wrap; }
+.rec-meter { flex: 1 1 200px; height: 10px; background: #e9e3d4; border-radius: 99px; overflow: hidden; }
+.rec-meter span { display: block; height: 100%; width: 0; background: var(--ok, #2e7d32); transition: width .3s; }
+.rec-bar label { display: inline-flex; gap: 6px; align-items: center; }

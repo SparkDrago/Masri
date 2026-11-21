@@ -506,7 +506,7 @@
       <div class="crumbs"><a href="#course">Курс</a> › ${L.stage.n}-баскыч: ${esc(L.stage.title)}</div>
       <h1>${esc(L.num)} ${esc(L.title)}</h1>${L.ar ? `<div class="kgt" lang="ar" dir="rtl">${esc(plain(L.ar))}</div>` : ''}
       ${L.goals ? `<ul class="goals">${L.goals.map((g) => `<li>${esc(g)}</li>`).join('')}</ul>` : ''}
-      <div class="meta-row"><span class="lvl" style="background:var(--gold);color:var(--indigo-ink)">${esc(L.stage.level)}</span><span style="color:#cfd6ee;font-size:.9rem">${L.minutes || 25} мүнөт</span>${score != null ? `<span class="pill ${score >= .8 ? 'ok' : ''}">${score >= .8 ? 'Бүттү' : 'Эң жакшы жыйынтык'} · ${Math.round(score * 100)}%</span>` : ''}</div>
+      <div class="meta-row"><span class="lvl" style="background:var(--gold);color:var(--indigo-ink)">${esc(L.stage.level)}</span><span style="color:#cfd6ee;font-size:.9rem">${L.minutes || 25} мүнөт</span>${L.book ? `<a class="pill" href="#plan" style="text-decoration:none" title="Бул сабак Kallimni ʿArabi Bishweesh китебинин ${L.book}-модулунун темасын камтыйт">Kallimni ʿArabi Bishweesh · ${L.book}-модуль</a>` : ''}${score != null ? `<span class="pill ${score >= .8 ? 'ok' : ''}">${score >= .8 ? 'Бүттү' : 'Эң жакшы жыйынтык'} · ${Math.round(score * 100)}%</span>` : ''}</div>
     </div></header>
     <div class="wrap lesson-grid">
       <aside class="toc"><h4>Бул сабакта</h4><ol>${sections.map((s) => `<li><a href="#lesson-${esc(id)}" data-jump="${s.id}">${esc(cleanKy(s.title))}</a></li>`).join('')}<li><a href="#lesson-${esc(id)}" data-jump="practice">Тест</a></li></ol>
@@ -770,6 +770,19 @@
   }
 
   /* ---------------------------- How to learn ---------------------------- */
+  // Kallimni ʿArabi Bishweesh (book 1): module topics → lessons here (situational lesson first, then grammar)
+  const KALLIMNI = [
+    ['Саламдашуу, кечирим; өзүн тааныштыруу, улуттар', ['cairo-meet', 'hello', 'i-am']],
+    ['Класстагы жана кеңседеги буюмдар; жеке буюмдар', ['cairo-objects', 'questions', 'my-your']],
+    ['Телефон номерлери; саат жана жолугушуу', ['cairo-phone-time', 'numbers', 'time']],
+    ['Акча жана баа; супермаркетте', ['cairo-money-shop', 'numbers', 'plurals']],
+    ['Буюмдардын орду; дарек жана жашаган жер', ['cairo-where-live', 'positions']],
+    ['Жол сурау; жайлар жана мейманкана кызматтары', ['cairo-directions', 'have', 'commands']],
+    ['Адаттар жана күнүмдүк тартип; аптанын күндөрү', ['cairo-routine', 'present', 'dont']],
+    ['Кесиптер; конок тосуу жана меймандостук', ['cairo-jobs-guests', 'phone-hotel-work']],
+    ['Чакыруу, кечирим, шылтоо; белек, жактыруу', ['cairo-invite-gifts', 'want-can-must']],
+    ['Такси жана поезд; ресторанда буйрутма', ['cairo-taxi-train-food', 'real-life']]
+  ];
   function plan() {
     main.innerHTML = rich(`<header class="page-head"><div class="wrap"><h1>Кантип үйрөнөбүз</h1><div class="kgt" lang="ar">إزاي نتعلم</div><p>Нөлдөн B2ге чейинки чынчыл план: канча саат кетет, күн сайын эмне кылуу керек, сүйлөөнү жана угууну кантип машыктыруу керек — сайт өзү жасай албаган бөлүктөр.</p></div></header>
     <div class="wrap" style="padding:40px 0 80px"><div class="prose">
@@ -790,6 +803,9 @@
       <div class="week"><h3>6–10-айлар · 4-баскыч (A2)</h3><p>Өткөн чак, буйрук, каалоо/мүмкүн/керек, сүрөттөө, күнүмдүк кырдаалдар. Азыр сүйлөшүүчү өнөк табыңыз (төмөндү караңыз).</p></div>
       <div class="week"><h3>11–18-айлар · 5-баскыч (B1)</h3><p>Атоочтуктар, «illi», «эгер», «деди», жардамчы этиштер. Телефонуңузду арабчага которуңуз. Египет сериалдарын субтитр менен көрүңүз.</p></div>
       <div class="week"><h3>19–36-айлар · 6-баскыч (B2)</h3><p>Сөз жасоо (тамыр жана калыптар), расмий стиль, макалдар, жаңылыктар. Убактыңыздын көбү чыныгы маалыматка кетет: сериал, подкаст, маек.</p></div>
+      <h2 id="kallimni">Kallimni ʿArabi Bishweesh менен окусаңыз</h2>
+      <p>Бул курс Каирдеги тил мектептеринде колдонулган <i>Kallimni ʿArabi Bishweesh</i> (Samia Louis, AUC Press) китебинин бардык темаларын камтыйт. Китеп менен окусаңыз же сабакка барсаңыз, ар бир модулдан кийин төмөнкү сабактарды өтүңүз. Сайттагы тексттер жана көнүгүүлөр — өзүнчө жазылган, китептен көчүрүлгөн эмес.</p>
+      ${BLOCK.table({ cols: ['Модуль', 'Темалар', 'Ушул сайтта'], rows: KALLIMNI.map((m, i) => [String(i + 1), esc(m[0]), m[1].map((id) => LESSONS.find((l) => l.id === id)).filter(Boolean).map((l) => `<a href="#lesson-${esc(l.id)}">${esc(l.num)} ${esc(l.title)}</a>`).join('<br>')]) })}
       <h2>Тез түшүнүү үчүн</h2>
       <ul>
         <li><b>Тамырды издеңиз.</b> Тааныш эмес сөздөн үч тамгалуу тамырды табууга аракет кылыңыз: [[مكتبة~maktaba]] ичинде ك-ت-ب бар — демек, жазууга же китепке байланыштуу.</li>
@@ -853,7 +869,24 @@
     </div>`;
   }
 
+  const transTable = () => BLOCK.table({ cols: ['Белги', 'Тамга', 'Кантип айтылат'], rows: [['ʼ', '<span lang="ar">ء ق</span>', 'Тамак тыгылуусу: «аʼа» дегенде ортодогу кыска тыным. Египетте ق да ушинтип айтылат.'], ['ʻ', '<span lang="ar">ع</span>', 'Тамактын терең жеринен кысылып чыккан үн — кыргызчада жок. «а» дегенде тамакты кысып айтыңыз.'], ['ҳ', '<span lang="ar">ح</span>', 'Терең, күчтүү «х» — бирок кырылдабайт. Айнекке «ххх» деп дем чыгаргандай.'], ['һ', '<span lang="ar">ه</span>', 'Жеңил «h», англисче hello сыяктуу.'], ['х', '<span lang="ar">خ</span>', 'Кыргызча «х» — кырылдаган.'], ['ғ', '<span lang="ar">غ</span>', 'Кырылдаган «г», француз «r» тамгасына окшош.'], ['с̣ д̣ т̣ з̣', '<span lang="ar">ص ض ط ظ</span>', 'Оор, калың с, д, т, з. Тил артка тартылат.'], ['ў', '<span lang="ar">و</span>', 'Англисче «w».'], ['аа, ии, уу, ээ, оо', '<span lang="ar">ا ي و</span>', 'Узун үндүүлөр — кыргызчадагыдай эки тамга менен жазылат.']] });
+  // Recordings-only mode (the default, see js/config.js)
+  function aboutRecordings() {
+    const sp = KG.speech, n = sp.recorded();
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Аудио жөнүндө</h1><p>Бул курста египеттик адамдын жазылган үнү гана угулат — жасалма (компьютердик) үн жок.</p></div></header>
+    <div class="wrap prose" style="padding:40px 0 80px">
+      <p>${n ? `Азыр <b>${n}</b> сүйлөм жазылган. Жазылган сүйлөмдүн жанында ойнотуу баскычы бар; азырынча жазыла элек сүйлөмдөрдө баскыч жок — алардын транскрипциясын окуңуз.` : 'Аудио азырынча жазыла элек. Ар бир сүйлөмдүн транскрипциясын окуңуз — ал египетче айтылышты так көрсөтөт.'}</p>
+      ${BLOCK.tip({ title: 'Эмне үчүн компьютердик үн жок?', html: 'Компьютердик үндөр египетче сүйлөмдөрдү көп учурда туура эмес окуйт: фусхача, же туура эмес үндүүлөр менен. Туура эмес айтылышты уга берсеңиз, ал эсиңизде калат. Ошондуктан бул жерде ар бир сүйлөмдү каирлик адам окуйт.' })}
+      <p>Ылдамдык: <button class="btn btn-line btn-sm" data-rate="0.65">Жай</button> <button class="btn btn-line btn-sm" data-rate="0.85">Кадимки</button> <button class="btn btn-line btn-sm" data-rate="1">Тез</button></p>
+      <h2>Транскрипция белгилери</h2>
+      ${transTable()}
+      <p>Бир сөздүн чыныгы египеттиктердин айтылышын угуу үчүн <a href="https://forvo.com/languages/arz/">Forvo</a> сайтын колдонуңуз (тил: Egyptian Arabic). Толук сүйлөмдөр үчүн чыныгы сүйлөөчүлөрдү көлөкөдөй кайталаңыз (<a href="#plan">үйрөнүү планын</a> караңыз).</p>
+      <p class="muted" style="font-size:.9em">Сүйлөмдөрдү окуп жазуу: <a href="#record">үн жазуу студиясы</a>.</p>
+    </div>`;
+  }
+
   function aboutAudio() {
+    if (!KG.speech.synth) return aboutRecordings();
     const sp = KG.speech, st = store.d.settings;
     const modeNote = {
       cloud: 'Эң жакшы абал: ар бир сүйлөм Каирдин нейрон үнү менен окулат.',
@@ -867,11 +900,12 @@
       <p>Азыр колдонулуп жаткан үн: <b>${esc(sp.label())}</b>.</p>
       <p>${esc(modeNote)}</p>
       <h2>Үн кайдан келет</h2>
-      <ol><li><b>Сайттагы жазуулар</b> — алдын ала даярдалган же египеттик сүйлөөчү жазган файлдар.</li>
+      <ol><li><b>Сайттагы жазуулар</b> — египеттик сүйлөөчү жазган файлдар (эң так) же NAMAA-Egyptian-TTS моделинен алдын ала жасалган египетче үн.</li>
       <li><b>Египет арабчасынын нейрон үнү</b> (Microsoft Azure, ar-EG: Салма же Шакир) — сайттын ээси Azure ачкычын кошкон болсо, бардык текст үчүн иштейт.</li>
       <li><b>Түзмөктөгү египетче үн (ar-EG)</b>. Microsoft Edge браузеринде «Microsoft Salma Online (Natural)» үнү акысыз бар — эгер сайтта үн жок болсо, Edge’де ачып көрүңүз. Windows’та: Settings › Time & language › Speech › Add voices › Arabic (Egypt).</li>
       <li><b>Фусха үндөрү (ar-SA ж.б.)</b> — демейки боюнча <b>өчүк</b>, анткени алар египетче окубайт.</li></ol>
       ${BLOCK.warn({ title: 'Эмне үчүн фусха үнү өчүк?', html: 'Фусха үнү [[قهوة~2ahwa]] сөзүн «к̣аһўа», [[جميل~gamiil]] сөзүн «жамиил» деп окуйт. Каирде «ʼаһўа» жана «гамиил» дешет. Мындай үндү уга берсеңиз, туура эмес айтылыш эсиңизде калат.' })}
+      <div class="tip"><div class="tag">Египеттик досуңуз барбы?</div><p>Эң так үн — чыныгы адамдын үнү. Египеттик досуңузга <a href="#record">Үн жазуу студиясын</a> ачып бериңиз: ал сүйлөмдөрдү түз эле браузерде окуп жазат, анан ZIP файлды сизге жиберет. Жазуулар сайттагы жасалма үндүн ордуна ойнойт (README’ни караңыз).</p></div>
       <h2>Үн жөндөөлөрү</h2>
       <p class="audio-set"><span>Үн:</span>
         <label><input type="radio" name="voice" value="f" ${sp.voiceSel !== 'm' ? 'checked' : ''}> Салма (аял)</label>
@@ -880,7 +914,8 @@
         ${sp.otherVoice ? '' : '<br><small>Бул түзмөктө фусха үнү да жок.</small>'}</p>
       <p>Ылдамдык: <button class="btn btn-line btn-sm" data-rate="0.65">Жай</button> <button class="btn btn-line btn-sm" data-rate="0.85">Кадимки</button> <button class="btn btn-line btn-sm" data-rate="1">Тез</button> <button class="btn btn-ink btn-sm" data-say="أهلاً! إزيك؟ عامل إيه النهارده؟~ahlan! izzayyak? 3aamil eeh innaharda?">Текшерүү: «أهلاً! إزيك؟»</button></p>
       <h2>Транскрипция белгилери</h2>
-      ${BLOCK.table({ cols: ['Белги', 'Тамга', 'Кантип айтылат'], rows: [['ʼ', '<span lang="ar">ء ق</span>', 'Тамак тыгылуусу: «аʼа» дегенде ортодогу кыска тыным. Египетте ق да ушинтип айтылат.'], ['ʻ', '<span lang="ar">ع</span>', 'Тамактын терең жеринен кысылып чыккан үн — кыргызчада жок. «а» дегенде тамакты кысып айтыңыз.'], ['ҳ', '<span lang="ar">ح</span>', 'Терең, күчтүү «х» — бирок кырылдабайт. Айнекке «ххх» деп дем чыгаргандай.'], ['һ', '<span lang="ar">ه</span>', 'Жеңил «h», англисче hello сыяктуу.'], ['х', '<span lang="ar">خ</span>', 'Кыргызча «х» — кырылдаган.'], ['ғ', '<span lang="ar">غ</span>', 'Кырылдаган «г», француз «r» тамгасына окшош.'], ['с̣ д̣ т̣ з̣', '<span lang="ar">ص ض ط ظ</span>', 'Оор, калың с, д, т, з. Тил артка тартылат.'], ['ў', '<span lang="ar">و</span>', 'Англисче «w».'], ['аа, ии, уу, ээ, оо', '<span lang="ar">ا ي و</span>', 'Узун үндүүлөр — кыргызчадагыдай эки тамга менен жазылат.']] })}
+      ${transTable()}
+      <p class="muted" style="font-size:.9em">Алдын ала жасалган аудио: <a href="https://huggingface.co/NAMAA-Space/NAMAA-Egyptian-TTS">NAMAA-Egyptian-TTS</a> (NAMAA Community, MIT лицензиясы; Resemble AI’дин Chatterbox моделине негизделген).</p>
       <p>Бир сөздүн чыныгы египеттиктердин айтылышын угуу үчүн <a href="https://forvo.com/languages/arz/">Forvo</a> сайтын колдонуңуз (тил: Egyptian Arabic). Толук сүйлөмдөр үчүн чыныгы сүйлөөчүлөрдү көлөкөдөй кайталаңыз (<a href="#plan">үйрөнүү планын</a> караңыз).</p>
     </div>`;
     main.addEventListener('change', (e) => {
@@ -892,11 +927,12 @@
   function notFound() { main.innerHTML = `<div class="narrow empty"><h1>Бет табылган жок</h1><p>Мындай бет жок. <a href="#course">Курска өтүү</a>.</p></div>`; }
 
   /* ------------------------------ Speech -------------------------------- */
-  let warned = false;
+  let warned = 0;
   function say(text) {
     if (!text) return;
     const ok = KG.speech.say(text);
-    if (!ok && !warned && KG.speech.ready) { warned = true; toast(KG.speech.fushaBlocked() ? 'Бул түзмөктө египетче үн жок (фусха үнү атайын өчүк). Транскрипцияны окуңуз же «Аудио жөнүндө» бетин караңыз.' : 'Бул сүйлөм үчүн египетче үн жок. Транскрипцияны окуңуз же «Аудио жөнүндө» бетин караңыз.'); }
+    if (!ok && !KG.speech.synth && Date.now() - warned > 20000) { warned = Date.now(); toast('Бул сүйлөм азырынча жазыла элек — транскрипцияны окуңуз.'); return; }
+    if (!ok && !warned && KG.speech.ready) { warned = 1; toast(KG.speech.fushaBlocked() ? 'Бул түзмөктө египетче үн жок (фусха үнү атайын өчүк). Транскрипцияны окуңуз же «Аудио жөнүндө» бетин караңыз.' : 'Бул сүйлөм үчүн египетче үн жок. Транскрипцияны окуңуз же «Аудио жөнүндө» бетин караңыз.'); }
   }
   function toast(msg) {
     const n = document.querySelectorAll('.toast').length; const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.textContent = msg; t.style.bottom = (22 + n * 58) + 'px'; document.body.appendChild(t);
@@ -972,6 +1008,17 @@
   window.addEventListener('hashchange', route);
   KG.speech.voiceSel = store.d.settings.voice === 'm' ? 'm' : 'f';
   KG.speech.allowFusha = !!store.d.settings.fusha;
+  // Play buttons only for text that can actually be played (recorded, in the default mode)
+  const markSay = (root) => (root || document).querySelectorAll('button[data-say]').forEach((b) => {
+    const missing = !KG.speech.has(b.dataset.say);
+    b.classList.toggle('is-missing', missing);
+    if (missing) { b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; } else { b.removeAttribute('aria-hidden'); b.removeAttribute('tabindex'); }
+  });
+  let markQueued = false;
+  new MutationObserver(() => { if (markQueued) return; markQueued = true; requestAnimationFrame(() => { markQueued = false; markSay(document); }); })
+    .observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('kg-voice', () => markSay(document));
+  API.markSay = markSay;
   KG.speech.init();
   applyTl();
   applyAr();

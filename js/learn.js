@@ -190,7 +190,7 @@
     const opts = (v) => shuffle([v].concat(shuffle(pool.filter((x) => x.k !== v.k && cleanEn(x.en) !== cleanEn(v.en))).slice(0, 3)));
     return items.map((v) => {
       const typable = !/[\/…()]/.test(v.k) && v.k.split(/\s+/).length <= 3;
-      const en = cleanEn(v.en), types = ['mean', 'rev'].concat(typable ? ['type'] : [], KG.speech.available() ? ['listen'] : []);
+      const en = cleanEn(v.en), types = ['mean', 'rev'].concat(typable ? ['type'] : [], KG.speech.has(v.k) ? ['listen'] : []);
       const t = types[Math.floor(Math.random() * types.length)];
       if (t === 'mean') { const o = opts(v); return { t: 'mc', q: `[[${full(v)}]] эмнени билдирет?`, say: v.k, o: [en].concat(o.filter((x) => x !== v).map((x) => cleanEn(x.en))), why: v.ctx ? 'Кездешкен жери: [[' + v.ctx + ']]' : '', _k: v.k }; }
       if (t === 'rev') { const o = opts(v); return { t: 'mc', q: `Кайсы сөз «${esc(en)}» дегенди билдирет?`, o: [`[[${full(v)}]]`].concat(o.filter((x) => x !== v).map((x) => `[[${full(x)}]]`)), _k: v.k }; }

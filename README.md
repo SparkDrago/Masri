@@ -9,7 +9,8 @@ There's no framework and no build step. The front end is plain HTML, CSS and JS.
 ## What's inside
 
 **Course (Busuu-style)**
-- 49 lessons in 7 stages, from the Arabic alphabet to B2. Each lesson has a plain-language explanation, Kyrgyz-vs-Egyptian comparison boxes, colour-coded prefixes and endings, vocabulary and a practice test (446 questions in total).
+- 59 lessons in 7 stages, from the Arabic alphabet to B2. Each lesson has a plain-language explanation, Kyrgyz-vs-Egyptian comparison boxes, colour-coded prefixes and endings, vocabulary and a practice test (546 questions in total).
+- **Cairo situations (Kallimni ʿArabi Bishweesh syllabus):** 10 lessons, one per module of the book's first volume, at the end of stages 2 and 3: meeting people, objects, phone numbers and time, money and shopping, location and addresses, directions and hotels, daily routine, jobs and hosting guests, invitations and gifts, taxi, train and restaurant. Each lesson shows its module number, and the «Кантип үйрөнөбүз» page has a module → lesson table for learners who use the book in class.
 - **Placement test** that finds your starting stage.
 - **Study plan**: pick a level, minutes a day and days a week to get a daily XP goal and a finish date.
 - **Today dashboard**: goal ring, streak, next lesson, due reviews, weekly chart and plan progress.
@@ -24,11 +25,10 @@ There's no framework and no build step. The front end is plain HTML, CSS and JS.
 - Every Arabic item in the data is written `"عربي~roman"`. The roman part is the Cairo pronunciation (2 = ء/ق, 3 = ع, 7 = ح, x = خ, gh = غ, S D T Z = ص ض ط ظ, doubled vowels = long).
 - The pronunciation is shown in **Kyrgyz Cyrillic** (ʻ ʼ ҳ һ ғ ў and с̣ д̣ т̣ з̣), or in scholarly Latin, or hidden. The «Окулушу» button cycles through these.
 - Answers are accepted in Arabic script, in Cyrillic transcription or in Latin transcription. Common spelling variants (ة/ه, ى/ي, hamza seats) are tolerated. There's an on-screen Arabic keyboard.
-- **Speech is Egyptian only.** Sources, best first: a recorded or pre-generated file in `/audio` → `/api/tts` (Microsoft Azure's Cairene neural voices, Salma or Shakir) → an ar-EG voice in the browser (Edge has "Microsoft Salma Online" for free). Fusha voices (ar-SA etc.) are **off by default**, because they say *qahwa* and *jamiil* instead of *2ahwa* and *gamiil*; a learner can switch them on in «Аудио жөнүндө» after a warning.
-- Before text goes to any voice it's prepared from the transcription: vowel marks are added (كتب + *katab* → كَتَبْ, so nothing is guessed and no Fusha case endings appear), ق becomes ء/أ where it's a glottal stop, and ث/ذ become ت/س and د/ز.
+- **Real voices only.** Learners hear only recordings of an Egyptian speaker, made in the built-in recording studio (`/#record`). Text that isn't recorded yet shows its transcription and no play button; listening exercises use only recorded words. Synthesized voices are off by default (see the end of this file).
 - **Word machine** (replaces the suffix machine): possessive endings with the ة→t and vowel-shortening rules, the article with sun/moon letters, dual and plural; full conjugation of 40 verbs (past, bare, bi- present, ha- future, negation, imperative); adjective agreement with kaan/haykuun; Egyptian numbers to 999,999,999.
 
-**Dictionary**: 1,866 Egyptian Arabic words and phrases with Kyrgyz meanings, kept apart when two words share a spelling (كتب *kutub* / *katab*). You can search in Arabic, in Kyrgyz, or by pronunciation in Cyrillic or Latin. If you type a word with prefixes and endings (مابيكتبوش, عربيتها), it finds the stem. Any word can be added to your review deck.
+**Dictionary**: 1,891 Egyptian Arabic words and phrases with Kyrgyz meanings, kept apart when two words share a spelling (كتب *kutub* / *katab*). You can search in Arabic, in Kyrgyz, or by pronunciation in Cyrillic or Latin. If you type a word with prefixes and endings (مابيكتبوش, عربيتها), it finds the stem. Any word can be added to your review deck.
 
 **Library (LingQ-style)**
 - 12 graded stories (A1–B2). Every sentence has a pronunciation line and a Kyrgyz translation.
@@ -72,23 +72,22 @@ You need free accounts on **GitHub** and **Vercel**. Vercel creates the Supabase
 ### 4. Add the session secret
 Go to Project → **Settings → Environment Variables** and add `SESSION_SECRET`. Its value should be a long random string of **at least 32 characters** (for example from `openssl rand -base64 48`). Use a different value from Кыргызча's.
 
-### 5. Turn on the Egyptian voice (recommended, free)
-Without this, only learners with an Egyptian voice on their device (e.g. Microsoft Edge) hear audio; everyone else sees the transcription.
-1. Go to [portal.azure.com](https://portal.azure.com) (a free Azure account works) → **Create a resource** → search **Speech** → **Create**.
-2. Pricing tier **Free F0** (500,000 characters a month). Pick any region, e.g. *West Europe*.
-3. When it's created, open it → **Keys and Endpoint**. Copy **KEY 1** and the **Location/Region** (e.g. `westeurope`).
-4. In Vercel → **Settings → Environment Variables**, add `AZURE_SPEECH_KEY` (KEY 1) and `AZURE_SPEECH_REGION` (e.g. `westeurope`).
+### 5. Record the audio
+The site plays **only real recordings** of an Egyptian speaker; synthesized voices are switched off (`js/config.js`). Until a sentence is recorded, learners see its transcription and no play button, so nothing wrong is ever heard.
 
-Each sentence is generated once and then served from Vercel's cache, so the free tier lasts a long time. With the database connected, `/api/tts` also limits each visitor to 300 new sentences an hour and the whole site to 3,000 a day (`TTS_MAX_PER_DAY` changes this). The whole course is about 50,000 characters per voice.
+1. Open `https://your-site/#record` (the recording studio) on a computer or phone with a decent microphone, in a quiet room.
+2. Pick your voice (female/male) and a set. Sets follow the course order: lessons first, then stories, word drops and the dictionary. Read each sentence the way you'd say it in Cairo and press **Space** to start and stop. With **Auto-next** on, the next sentence appears right away. **⏭ Next unrecorded** jumps to the first gap anywhere in the course. Recording a sentence again replaces it. If a sentence is written wrongly, press **⚑** and type the correction.
+3. Press **⬇ Export new** regularly (for example after every session). Recordings live only in that browser until exported, so don't clear its site data. Each export contains only what's new since the last one.
+4. On your computer, in the `masri` folder:
+   ```bash
+   node data-src/build_audio.js --add ~/Downloads/masri-recordings-2026-11-21.zip
+   ```
+   This trims the silence, evens out the loudness and converts to small MP3s that play on every phone (install ffmpeg first: `brew install ffmpeg` on a Mac, `winget install ffmpeg` on Windows; without it the files are copied as they are). Your original recordings are kept in `recordings-original/` (not uploaded). Any flagged sentences are printed and saved to `data-src/text-corrections.tsv`.
+5. Upload the new files in `audio/` and the updated `js/data/audio-manifest.js` to GitHub (or `git push`); Vercel redeploys by itself. Play buttons appear for every recorded sentence.
 
-**Optional: pre-generate all audio.** On your computer, with Node 18+:
-```bash
-AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node data-src/build_audio.js            # Salma
-AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node data-src/build_audio.js --voices f,m  # both voices
-```
-This writes `audio/*.mp3`, `audio/index.tsv` and `js/data/audio-manifest.js`. Commit and push them. The site then plays these files first, even offline from the cache and even if the key is later removed. `--dry` only counts the characters.
+`node data-src/build_audio.js` shows how much is recorded (the whole course is about 4,000 sentences, about 1,450 of them single dictionary words); `--missing` lists what's left. On the device you record with, new recordings already play on the lesson pages before you export, so you can check them in context.
 
-**Real recordings.** To replace a generated sentence with a native speaker's recording, find the sentence in `audio/index.tsv`, save the recording as `audio/<id>.mp3`, run `node data-src/build_audio.js --manifest`, and push.
+You can also add a recording by hand: find the sentence in `audio/jobs.tsv` (made by `--export`), save the recording as `audio/<id>.mp3` (or `.m4a`/`.webm`), run `node data-src/build_audio.js --manifest`, and upload.
 
 ### 6. Redeploy
 Go to **Deployments** → the latest one → **⋯** → **Redeploy**.
@@ -100,7 +99,7 @@ Open your URL → **Кирүү → Аккаунт ачуу**. On a phone, choose
 - «Маалымат базасы туташкан эмес»: the database isn't connected to this project, or you didn't redeploy.
 - «Маалымат базасынын таблицалары жок»: run `supabase/schema.sql` (step 3.3).
 - «SESSION_SECRET жок…»: do step 4, then redeploy.
-- No sound, and «Аудио жөнүндө» says «Египетче үн жок»: check step 5 (both variables, then redeploy). Open `/api/tts?probe=1`: it should say `"ok":true`.
+- No play buttons: nothing is recorded yet, or `js/data/audio-manifest.js` wasn't uploaded with the `audio/` files (step 5).
 
 ---
 
@@ -128,11 +127,13 @@ masri/
 │   ├── learn.js                  dashboard, plan, placement, review, speaking, community, certificates
 │   ├── drops.js                  word drops: picture topics, timed sessions, letter blocks, pairs
 │   ├── dictionary.js             searchable dictionary (Arabic / Kyrgyz / transcription, stem finder)
-│   └── data/                     course-*.js, readers, alphabet, links (cognates), fusha, drops, lexicon, audio-manifest
-├── audio/                        pre-generated / recorded Egyptian audio (empty until you run build_audio.js)
+│   ├── record.js                 recording studio (#record): record, preview, flag, export new/all as ZIP
+│   ├── config.js                 site settings (synthesizedVoices: false)
+│   └── data/                     course-*.js (course-cairo-a/b.js = Kallimni-syllabus lessons), readers, alphabet, links (cognates), fusha, drops, lexicon, audio-manifest
+├── audio/                        the recordings (MP3) — added with build_audio.js --add
 ├── api/                          Vercel serverless functions (Кыргызча's logic, mz_ tables) + tts.js (Azure ar-EG voices)
 ├── supabase/schema.sql           tables + SQL functions, all prefixed mz_
-├── data-src/                     lexicon source lists + build_lexicon.py, build_audio.js (not deployed)
+├── data-src/                     lexicon lists, build_lexicon.py, build_audio.js (recording import/status), namaa_tts.py (not deployed)
 ├── dev-server.js                 local server (not deployed)
 └── vercel.json, package.json
 ```
@@ -146,8 +147,44 @@ Security, sync and moderation work exactly as in Кыргызча: scrypt passwo
 
 ## Known limits
 - There's no email, so there's no "forgot password". The owner can delete the person's row in `mz_users` so they can sign up again.
-- Audio: synthesized voices are good but not perfect. Words written with Fusha spelling but said differently in Cairo (e.g. زيتون *zatuun*, باذنجان *bitingaan*) may still be read from the spelling. For the most important sentences, a native speaker's recording (see step 5) is best. Without an Azure key or an Egyptian device voice, the site stays silent rather than play Fusha.
+- Audio exists only for recorded sentences. Words a learner taps in imported texts, and forms generated by the word machine, have no recording, so they show the transcription only.
 - Egyptian Arabic has no official spelling. The course uses common Cairene spellings and tolerates the usual variants in answers.
-- The dictionary has 1,866 entries (Кыргызча's has about 3,000). It's easy to extend through `data-src/`.
+- The dictionary has 1,891 entries (Кыргызча's has about 3,000). It's easy to extend through `data-src/`.
 
-Content and code are original; the course layout follows Кыргызча. Kallimni ʿArabi Bishweesh (AUC Press) was used only as a reference to spot-check common Cairene forms; nothing from it is reproduced.
+Content and code are original; the course layout follows Кыргызча. The 10 «Cairo situations» lessons follow the topic order (scope and sequence) of *Kallimni ʿArabi Bishweesh* by Samia Louis (AUC Press), so that learners using the book can study alongside it; their dialogues, explanations and exercises are written from scratch, and nothing from the book is reproduced.
+
+## Optional: synthesized voices (off by default)
+They're less accurate for colloquial Egyptian, which is why they're off. To turn them on, set `synthesizedVoices: true` in `js/config.js`; recordings still play first, and the synthesized voice fills the gaps.
+
+**NAMAA-Egyptian-TTS (free).** [NAMAA-Egyptian-TTS](https://huggingface.co/NAMAA-Space/NAMAA-Egyptian-TTS) is an open Egyptian Arabic voice (MIT licence, credit is shown on the «Аудио жөнүндө» page). You run it once on a free GPU and ship the MP3s with the site, so there's no running cost and audio works offline.
+1. On your computer: `node data-src/build_audio.js --export` (add `--voices f,m` if you'll make a second voice). This writes `audio/jobs.tsv`, about 4,100 sentences.
+2. Go to [kaggle.com](https://www.kaggle.com) (free; verify your phone to unlock GPU and internet) → **Create → New Notebook**. In the right panel set **Accelerator: GPU T4** and **Internet: on**. Upload `audio/jobs.tsv` and `data-src/namaa_tts.py` (**Add Input → Upload**), or copy them into `/kaggle/working`.
+3. In a cell, run:
+   ```
+   !pip install -q chatterbox-tts
+   !python namaa_tts.py --jobs jobs.tsv --out audio --sample 15
+   ```
+   Listen to the 15 samples in `audio/`. If you like them, run the whole set (a few hours on a T4; the script prints how long is left, and if the session stops, run it again and it continues):
+   ```
+   !python namaa_tts.py --jobs jobs.tsv --out audio --zip
+   ```
+   (Use the paths Kaggle shows for your uploaded files, e.g. `/kaggle/input/…/jobs.tsv`.) Google Colab works the same way (**Runtime → Change runtime type → T4 GPU**).
+4. Download `audio.zip`, unzip it into the site's `audio/` folder, run `node data-src/build_audio.js --manifest`, and push to GitHub.
+
+Tips: `--ref clip.wav` makes every sentence sound like a 10–20 second clip of a native speaker (with their permission). `--voice m --ref male.wav` makes the male voice. The model's authors note that ق and numbers are sometimes mispronounced; the export already rewrites ق as a glottal stop where Cairenes say one and spells numbers out as words. Listen through the lessons and replace any bad sentence with a real recording (step 5).
+
+**Live Azure voice.** Lower accuracy for colloquial words, but it covers anything not pre-generated (imported texts, tapped words).
+1. Go to [portal.azure.com](https://portal.azure.com) (a free Azure account works) → **Create a resource** → search **Speech** → **Create**.
+2. Pricing tier **Free F0** (500,000 characters a month). Pick any region, e.g. *West Europe*.
+3. When it's created, open it → **Keys and Endpoint**. Copy **KEY 1** and the **Location/Region** (e.g. `westeurope`).
+4. In Vercel → **Settings → Environment Variables**, add `AZURE_SPEECH_KEY` (KEY 1) and `AZURE_SPEECH_REGION` (e.g. `westeurope`).
+
+Each sentence is generated once and then served from Vercel's cache, so the free tier lasts a long time. With the database connected, `/api/tts` also limits each visitor to 300 new sentences an hour and the whole site to 3,000 a day (`TTS_MAX_PER_DAY` changes this). The whole course is about 55,000 characters per voice.
+
+**Optional: pre-generate all audio with Azure instead of NAMAA.** On your computer, with Node 18+:
+```bash
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node data-src/build_audio.js --azure              # Salma
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node data-src/build_audio.js --azure --voices f,m  # both voices
+```
+This writes `audio/*.mp3`, `audio/index.tsv` and `js/data/audio-manifest.js`. Commit and push them. The site then plays these files first, even offline from the cache and even if the key is later removed. `--dry` only counts the characters.
+

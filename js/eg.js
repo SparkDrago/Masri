@@ -241,7 +241,8 @@
             const nx = letters[ii + 1];
             if (v.length === 1) out.push([VMARK[v], jj + 1]);
             if (v.length === 1 && nx && (LONG_OF[nx] || []).includes(v)) out.push([VMARK[v], jj]); // ana, illi, katabu
-            if (nx && HAMZA_L.includes(nx)) out.push(['ْ', jj]);                                  // il-akl: the vowel belongs to أ
+            if (nx && HAMZA_L.includes(nx)) out.push(['ْ', jj]);
+            if (nx === 'ا' && v.length === 1) out.push(['ْ', jj]);                              // il-itneen: ا carries the vowel                                  // il-akl: the vowel belongs to أ
             if (v.length === 2 && nx && (LONG_OF[nx] || []).includes(v)) out.push([v === 'ee' || v === 'oo' ? '' : VMARK[v[0]], jj]);
             if (v.length === 2) out.push([v === 'ee' || v === 'oo' ? '' : VMARK[v[0]], jj + 1]); // spelled short
           } else out.push([ii === letters.length - 1 || jj < t.length ? 'ْ' : '', jj]);
@@ -276,7 +277,7 @@
         if (c === 'ا' && last && ((tok === 'n' && j === t.length - 1) || (tok === 'a' && t[j + 1] === 'n' && j === t.length - 2))) tries.push(['ً', t.length]); // أهلاً
         if (c === 'ة') { if (tok === 't' || (tok === 'h' && last)) tries.push(['', j + 1]); if (last) tries.push(['', j]); }
         if (c === 'ه' && last) tries.push(['', j]);                                         // بيته beetu
-        if (c === 'آ') { if (tok === '2' && t[j + 1] === 'aa') tries.push(['', j + 2]); if (tok === 'aa') tries.push(['', j + 1]); }
+        if (c === 'آ') { if (tok === '2' && t[j + 1] === 'aa') tries.push(['', j + 2]); if (tok === 'aa' || tok === 'a') tries.push(['', j + 1]); } // آسفة asfa
         else if ('أإءؤئ'.includes(c)) consonant(['2'], true);
         else if (CONS[c]) consonant(CONS[c], false);
         for (const [m, nj] of tries) { const r2 = go(i + 1, nj); if (r2) { res = [m].concat(r2); break; } }
@@ -323,6 +324,12 @@
   // Arabic (+ optional roman) → the text a synthesizer should read
   function ttsText(ar, ro) {
     ar = String(ar || '');
+    // digits are read as Egyptian number words (voices tend to read them the Fusha way)
+    if (/[0-9٠-٩]/.test(ar)) {
+      const dig = (d) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(d) >= 0 ? '٠١٢٣٤٥٦٧٨٩'.indexOf(d) : d);
+      ar = ar.replace(/[0-9٠-٩]+/g, (m) => number(+Array.from(m).map(dig).join('')).ar);
+      ro = ''; // the word count changed; pronunciations come from the learned words
+    }
     const words = ar.split(/\s+/).filter(Boolean);
     const rw = String(ro || '').trim() ? String(ro).trim().split(/\s+/) : [];
     const pairs = rw.length ? alignWords(words, rw) : words.map((w) => [w, '']);
@@ -341,6 +348,8 @@
   }
   const audioId = (voice, ar) => hash(voice + '|' + speechKey(ar));
   // Text → spoken pieces (one per line / sentence, at most ~240 characters each)
+  // tts (vowel-marked text for a synthesizer) is computed only when a synthesizer needs it
+  const chunk = (key, ar, ro) => ({ key, get tts() { if (this._t === undefined) this._t = ttsText(ar, ro); return this._t; } });
   function speechChunks(text) {
     const out = [];
     String(text == null ? '' : text).replace(/\[\[|\]\]/g, '').split(/\s*\n\s*/).forEach((line) => {
@@ -349,28 +358,45 @@
       if (!hasAr(ar)) return;
       const r = ro || (romanFor(ar).guess ? '' : romanFor(ar).ro);
       // the transcription is part of the key, so homographs (كتب katab / kutub) get their own audio
-      if (ar.length <= 240) { out.push({ key: r ? ar + '~' + r.replace(/\s+/g, ' ') : ar, tts: ttsText(ar, r) }); return; }
+      if (ar.length <= 240) { out.push(chunk(r ? ar + '~' + r.replace(/\s+/g, ' ') : ar, ar, r)); return; }
       let buf = '';
       ar.split(/(?<=[.!?؟،؛])\s+/).forEach((s) => {
-        if (buf && (buf + ' ' + s).length > 240) { out.push({ key: buf, tts: ttsText(buf) }); buf = ''; }
+        if (buf && (buf + ' ' + s).length > 240) { out.push(chunk(buf, buf, '')); buf = ''; }
         buf = buf ? buf + ' ' + s : s;
       });
-      if (buf) out.push({ key: buf, tts: ttsText(buf) });
+      if (buf) out.push(chunk(buf, buf, ''));
     });
     return out;
   }
 
+  /* By default the site plays ONLY recordings of a real Egyptian speaker (files in /audio, made with
+     the recording studio). Synthesized voices (Azure, the browser's ar-EG voice, Fusha voices) are
+     switched off; the site owner can turn them back on in js/config.js. Text with no recording shows
+     its transcription and no play button. */
+  const CONFIG = window.MASRI_CONFIG || {};
   const speech = {
+    synth: !!CONFIG.synthesizedVoices,
+    local: new Map(),       // audio id → blob URL: recordings still in this browser's studio (not exported yet)
     voice: null, mode: 'none', rate: 0.85, ready: false,
     voiceSel: 'f',          // 'f' = Salma (female), 'm' = Shakir (male)
     allowFusha: false,      // the learner may opt in to non-Egyptian browser voices
     cloud: false,           // /api/tts answered the probe
     egVoice: null, otherVoice: null,
-    files: new Set(),
+    files: new Map(),       // audio id → file extension (from js/data/audio-manifest.js)
     BASE_RATE: 0.85,        // generated audio is made at this speed; others are played faster/slower
     _token: 0, _audio: null,
     init() {
-      String(window.AUDIO_FILES || '').split(/\s+/).forEach((h) => h && this.files.add(h));
+      const probe = typeof Audio === 'function' ? new Audio() : null;
+      const TYPES = { mp3: 'audio/mpeg', m4a: 'audio/mp4', webm: 'audio/webm', ogg: 'audio/ogg', wav: 'audio/wav' };
+      String(window.AUDIO_FILES || '').split(/\s+/).forEach((h) => {
+        if (!h) return;
+        const [id, ext = 'mp3'] = h.split('.');
+        // skip formats this browser can't play (e.g. .webm recordings on older iPhones)
+        if (ext !== 'mp3' && probe && probe.canPlayType && !probe.canPlayType(TYPES[ext] || '')) return;
+        this.files.set(id, ext);
+      });
+      this.loadLocal();
+      if (!this.synth) { this.refresh(); return; }
       if ('speechSynthesis' in window) {
         const pick = () => {
           const vs = window.speechSynthesis.getVoices();
@@ -397,38 +423,71 @@
       }
       this.refresh();
     },
+    // On the device where the studio is used, its not-yet-exported recordings play too (a preview).
+    loadLocal() {
+      let used = false;
+      try { used = localStorage.getItem('masri-rec-used') === '1'; } catch (e) { /* storage blocked */ }
+      if (!used || !window.indexedDB) return;
+      const r = indexedDB.open('masri-rec', 1);
+      r.onupgradeneeded = () => { r.result.createObjectStore('rec', { keyPath: 'id' }); r.result.createObjectStore('flag', { keyPath: 'key' }); };
+      r.onsuccess = () => {
+        try {
+          const q = r.result.transaction('rec', 'readonly').objectStore('rec').getAll();
+          q.onsuccess = () => { (q.result || []).forEach((x) => this.addLocal(x.id, x.blob)); this.refresh(); };
+        } catch (e) { /* ignore */ }
+      };
+    },
+    addLocal(id, blob) {
+      if (this.local.has(id)) URL.revokeObjectURL(this.local.get(id));
+      this.local.set(id, URL.createObjectURL(blob));
+    },
+    recorded() { return new Set([...this.files.keys(), ...this.local.keys()]).size; },
+    // Is every piece of this text recorded (in either voice)?
+    has(text) {
+      const cs = speechChunks(text);
+      return cs.length > 0 && cs.every((c) => this.sources(c).length > 0);
+    },
     setVoice(v) { this.voiceSel = v === 'm' ? 'm' : 'f'; if (this._pick) this._pick(); else this.refresh(); },
     setFusha(on) { this.allowFusha = !!on; this.refresh(); },
     refresh() {
-      this.voice = this.egVoice || (this.allowFusha ? this.otherVoice : null);
-      this.mode = this.cloud ? 'cloud' : this.egVoice ? 'eg' : this.files.size ? 'files' : (this.allowFusha && this.otherVoice) ? 'ar' : 'none';
+      const rec = this.files.size + this.local.size > 0;
+      if (!this.synth) { this.voice = null; this.mode = rec ? 'files' : 'none'; }
+      else {
+        this.voice = this.egVoice || (this.allowFusha ? this.otherVoice : null);
+        this.mode = this.cloud ? 'cloud' : this.egVoice ? 'eg' : rec ? 'files' : (this.allowFusha && this.otherVoice) ? 'ar' : 'none';
+      }
       this.ready = true;
       document.dispatchEvent(new CustomEvent('kg-voice', { detail: this.mode }));
     },
-    fushaBlocked() { return !this.cloud && !this.egVoice && !this.allowFusha && !!this.otherVoice; },
+    fushaBlocked() { return this.synth && !this.cloud && !this.egVoice && !this.allowFusha && !!this.otherVoice; },
     available() { return this.mode !== 'none'; },
     label() {
       return {
         cloud: 'Египет арабчасынын нейрон үнү (Azure ar-EG, ' + (this.voiceSel === 'm' ? 'Шакир' : 'Салма') + ')',
         eg: 'Түзмөгүңүздөгү египетче үн (ar-EG' + (this.egVoice ? ': ' + this.egVoice.name : '') + ')',
-        files: 'Сайттагы египетче аудио файлдар (бардык сөздөр үчүн эмес)',
+        files: this.synth ? 'Сайттагы египетче аудио файлдар (бардык сөздөр үчүн эмес)' : 'Египеттик адамдын жазылган үнү',
         ar: 'Фусха үнү — ЕГИПЕТЧЕ ЭМЕС (сиз өзүңүз күйгүздүңүз)',
-        none: this.fushaBlocked() ? 'Египетче үн жок (түзмөктөгү фусха үнү өчүрүлгөн)' : 'Египетче үн жок'
+        none: !this.synth ? 'Азырынча жазылган аудио жок' : this.fushaBlocked() ? 'Египетче үн жок (түзмөктөгү фусха үнү өчүрүлгөн)' : 'Египетче үн жок'
       }[this.mode];
     },
     // Ordered list of ways to play one chunk
     sources(c) {
       const out = [], v = this.voiceSel, other = v === 'm' ? 'f' : 'm';
-      if (this.files.has(audioId(v, c.key))) out.push({ url: '/audio/' + audioId(v, c.key) + '.mp3' });
-      if (this.cloud) out.push({ url: '/api/tts?v=' + v + '&t=' + encodeURIComponent(c.tts) });
-      if (this.files.has(audioId(other, c.key))) out.push({ url: '/audio/' + audioId(other, c.key) + '.mp3' });
-      if (this.voice && 'speechSynthesis' in window) out.push({ voice: this.voice });
+      const file = (voice) => {
+        const id = audioId(voice, c.key);
+        if (this.local.has(id)) return { url: this.local.get(id) };
+        return this.files.has(id) ? { url: '/audio/' + id + '.' + this.files.get(id) } : null;
+      };
+      if (file(v)) out.push(file(v));
+      if (this.synth && this.cloud) out.push({ url: '/api/tts?v=' + v + '&t=' + encodeURIComponent(c.tts) });
+      if (file(other)) out.push(file(other));
+      if (this.synth && this.voice && 'speechSynthesis' in window) out.push({ voice: this.voice });
       return out;
     },
     stop() {
       this._token++;
       if (this._audio) { try { this._audio.pause(); } catch (e) { /* ignore */ } this._audio = null; }
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (this.synth && 'speechSynthesis' in window) window.speechSynthesis.cancel();
     },
     playOne(c, rate, token) {
       const srcs = this.sources(c);

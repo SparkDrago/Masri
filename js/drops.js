@@ -259,7 +259,7 @@
     }
     function exercise(it) {
       S.last = it; pickWord(it.w);
-      const w = it.w, canListen = KG.speech.available();
+      const w = it.w, canListen = KG.speech.has(w.k);
       if (it.lv <= 0) return pickPic(it, 2);
       if (it.lv === 1) return canListen && Math.random() < 0.4 ? listen(it) : pickKg(it);
       if (SPELL_RE.test(w.k)) return spell(it);

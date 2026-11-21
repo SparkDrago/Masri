@@ -1,0 +1,7 @@
+dev-server.js
+.devdb.json
+*.zip
+supabase/
+data-src/
+recordings-original/
+audio/*.tsv
