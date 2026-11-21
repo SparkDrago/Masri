@@ -52,7 +52,6 @@
 ميكروويف|mikroweev|микротолкундуу меш|n
 غلاية|ghallaaya|электр чайнек|n
 صينية|Siniyya|табак, поднос|n
-كوباية|kubbaaya|стакан|n
 مج|magg|кружка|n
 فرشة سنان|furshit sinaan|тиш щёткасы|n
 شامبو|shambu|шампунь|n
@@ -185,7 +184,7 @@
 احترام|i7tiraam|урмат|n
 ثقة|si2a|ишеним|n
 غيرة|gheera|кызганыч|n
-وحدة|wa7da|жалгыздык|n
+وحدة|wi7da|жалгыздык|n
 صحاب|Su7aab|достор|n
 علاقة|3ilaa2a|мамиле|n
 مشاعر|mashaa3ir|сезимдер|n
@@ -325,7 +324,7 @@
 عزّى|3azza|көңүл айт-|v|يعزي~yi3azzi
 ضيّف|Dayyif|конок кыл-|v|يضيف~yiDayyif
 جهّز|gahhiz|даярда-|v|يجهز~yigahhiz
-نضّم|naZZam|уюштур-|v|ينظم~yinaZZam
+نظّم|naZZam|уюштур-|v|ينظم~yinaZZam
 اتعامل|it3aamil|мамиле кыл-|v|يتعامل~yit3aamil
 اتأكد|it2akkid|ишен-, текшер-|v|يتأكد~yit2akkid
 اتمرن|itmarran|машык-|v|يتمرن~yitmarran

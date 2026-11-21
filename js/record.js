@@ -17,22 +17,9 @@
   function sets() {
     if (SETS) return SETS;
     SETS = [];
-    const CYR = /[а-яёөүң]/i;
     const collect = (root) => {
       const seen = new Set(), out = [];
-      const affix = (k) => /(^|~)-|-$/.test(k) || k.split('~')[0].includes('-'); // ب~bi-, ها~-ha, ك-ت-ب: fragments and spelled letters, not sentences
-      const add = (s) => KG.speechChunks(s).forEach((c) => { if (!seen.has(c.key) && !affix(c.key)) { seen.add(c.key); out.push(c); } });
-      (function walk(o, d) {
-        if (d > 12 || o == null) return;
-        if (typeof o === 'string') {
-          const inner = o.match(/\[\[(.+?)\]\]/g);
-          if (inner) inner.forEach((x) => add(x.slice(2, -2)));
-          else if (KG.hasAr(o) && !CYR.test(KG.arOf(o)) && !/[<>A-Za-z]/.test(KG.arOf(o))) add(o);
-          return;
-        }
-        if (Array.isArray(o)) { o.forEach((x) => walk(x, d + 1)); return; }
-        if (typeof o === 'object') Object.keys(o).forEach((k) => { if (k !== 'stage' && k !== 'fus' && k !== 'fnote') walk(o[k], d + 1); }); // fus = Fusha-only lines
-      })(root, 0);
+      KG.collectSpoken(root, (c) => { if (!seen.has(c.key)) { seen.add(c.key); out.push(c); } });
       return out;
     };
     A.LESSONS.forEach((l) => SETS.push({ id: 'l:' + l.id, name: l.num + ' ' + l.title, items: collect([l.ar, l.blocks, l.quiz]) }));
@@ -107,10 +94,10 @@
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); // ask the browser not to evict recordings
     const ALL_KEYS = [...new Set(S.flatMap((x) => x.items.map((c) => c.key)))];
 
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Үн жазуу студиясы</h1><div class="kgt" lang="ar">استوديو التسجيل</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Үн жазуу студиясы</h1><div class="kgt" lang="ar" translate="no">استوديو التسجيل</div>
       <p>Египеттик досуңуз курстагы сүйлөмдөрдү окуп жазып берсе, окуучулар жасалма эмес, чыныгы каирлик үндү угушат. Бул бет ага арналган (арабча жана англисче).</p></div></header>
       <div class="wrap rec" style="padding:30px 0 80px">
-        <div class="rec-help" lang="ar" dir="rtl">
+        <div class="rec-help" lang="ar" translate="no" dir="rtl">
           <p><b>أهلاً بيك! شكراً إنك بتساعدنا.</b> اقرا كل جملة بالعامية المصرية زي ما بتتكلم عادي، بصوت واضح وهادي، في مكان مافيهوش دوشة. لو الجملة مكتوبة غلط، دوس «⚑» واكتب الصح.</p>
           <p dir="ltr" lang="en" style="text-align:left"><b>Thank you for helping!</b> Read each sentence in everyday Cairene Arabic, the way you'd naturally say it — clearly, at a calm pace, in a quiet room. Keys: <kbd>Space</kbd> record/stop · <kbd>P</kbd> play · <kbd>Enter</kbd> next · <kbd>Backspace</kbd> previous. If the Arabic looks wrong, press ⚑ and type the correction. Recordings stay on this device until you press <b>Export</b> and send the ZIP to the site owner.</p>
         </div>
@@ -129,8 +116,8 @@
         <div class="rec-progress"><div class="rec-meter"><span id="rec-meter"></span></div><span id="rec-total" class="muted"></span></div>
         <div class="rec-card">
           <div class="rec-pos muted" id="rec-pos"></div>
-          <div class="rec-text" lang="ar" dir="rtl" id="rec-text"></div>
-          <div class="rec-tl" id="rec-tl"></div>
+          <div class="rec-text" lang="ar" translate="no" dir="rtl" id="rec-text"></div>
+          <div class="rec-tl" translate="no" id="rec-tl"></div>
           <div class="rec-ctl">
             <button class="btn btn-line" id="rec-prev" title="Backspace">→ السابق</button>
             <button class="btn rec-btn" id="rec-go" title="Space">● تسجيل · Record</button>
@@ -138,7 +125,7 @@
             <button class="btn btn-line" id="rec-next" title="Enter">التالي ←</button>
           </div>
           <div class="rec-flag"><button class="btn btn-line btn-sm" id="rec-flag">⚑ الجملة فيها غلط · Text is wrong</button>
-            <input id="rec-fix" lang="ar" dir="rtl" placeholder="اكتب الجملة الصح هنا · type the correct sentence" hidden></div>
+            <input id="rec-fix" lang="ar" translate="no" dir="rtl" placeholder="اكتب الجملة الصح هنا · type the correct sentence" hidden></div>
           <div class="rec-status muted" id="rec-status" role="status"></div>
         </div>
         <ol class="rec-list" id="rec-list"></ol>
@@ -148,7 +135,7 @@
     const idOf = (c) => KG.audioId(voice, c.key);
 
     function drawList() {
-      $('#rec-list').innerHTML = items().map((c, k) => `<li class="${recs.has(idOf(c)) || KG.speech.files.has(idOf(c)) ? 'done' : ''} ${flags.has(c.key) ? 'flag' : ''} ${k === i ? 'cur' : ''}" data-k="${k}" lang="ar" dir="rtl">${esc(c.key.split('~')[0])}</li>`).join('');
+      $('#rec-list').innerHTML = items().map((c, k) => `<li class="${recs.has(idOf(c)) || KG.speech.files.has(idOf(c)) ? 'done' : ''} ${flags.has(c.key) ? 'flag' : ''} ${k === i ? 'cur' : ''}" data-k="${k}" lang="ar" translate="no" dir="rtl">${esc(c.show || c.key.split('~')[0])}</li>`).join('');
       const doneHere = items().filter((c) => recs.has(idOf(c))).length;
       const doneAll = ALL_KEYS.filter((k) => recs.has(KG.audioId(voice, k)) || KG.speech.files.has(KG.audioId(voice, k))).length;
       const fresh = [...recs.values()].filter((r) => r.date > lastExport).length;
@@ -159,7 +146,7 @@
     function draw() {
       const c = items()[i];
       $('#rec-pos').textContent = `${i + 1} / ${items().length}`;
-      $('#rec-text').textContent = c.key.split('~')[0];
+      $('#rec-text').textContent = c.show || c.key.split('~')[0];
       $('#rec-tl').textContent = KG.roOf(c.key) ? KG.toLat(KG.roOf(c.key)) : '';
       $('#rec-play').disabled = !recs.has(idOf(c)) && !KG.speech.files.has(idOf(c));
       $('#rec-fix').hidden = !flags.has(c.key);
@@ -261,8 +248,18 @@
     };
     document.addEventListener('keydown', onKey);
 
-    Promise.all([all('rec'), all('flag')]).then(([r, f]) => {
-      r.forEach((x) => recs.set(x.id, x)); f.forEach((x) => flags.set(x.key, x));
+    Promise.all([all('rec'), all('flag')]).then(async ([r, f]) => {
+      // Migrate recordings made under older sentence rules (e.g. «X.» and «X» now share one id)
+      for (const x of r) {
+        const key = KG.normKey(x.key), id = KG.audioId(x.voice || 'f', key);
+        if (id !== x.id) {
+          await del('rec', x.id);
+          const prev = r.find((y) => y.id === id) || recs.get(id);
+          if (!prev || prev.date < x.date) { x.id = id; x.key = key; await put('rec', x); } else continue;
+        }
+        if (!recs.has(x.id) || recs.get(x.id).date < x.date) recs.set(x.id, x);
+      }
+      f.forEach((x) => flags.set(x.key, x));
       const first = items().findIndex((c) => !recs.has(idOf(c)) && !KG.speech.files.has(idOf(c))); i = first < 0 ? 0 : first;
       draw();
     }).catch(() => { $('#rec-status').textContent = 'Storage is blocked in this browser (private mode?).'; draw(); });

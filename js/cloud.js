@@ -107,7 +107,7 @@
   const ago = (t) => { if (!t) return 'эч качан'; const s = Math.round((Date.now() - t) / 1000); return s < 60 ? 'жаңы эле' : s < 3600 ? Math.round(s / 60) + ' мүн мурун' : new Date(t).toLocaleString('ru'); };
   A.ROUTES.account = function account() {
     const main = A.main();
-    const head = `<header class="page-head"><div class="wrap"><h1>Аккаунтуңуз</h1><div class="kgt" lang="ar">حسابي</div><p>${cloud.user ? 'Жетишкендиктериңиз аккаунтка автоматтык түрдө сакталат — каалаган телефондон, планшеттен же компьютерден уланта аласыз.' : 'Жетишкендиктериңизди сактап, каалаган түзмөктөн — телефон, планшет же компьютерден — улантуу үчүн кириңиз.'}</p></div></header>`;
+    const head = `<header class="page-head"><div class="wrap"><h1>Аккаунтуңуз</h1><div class="kgt" lang="ar" translate="no">حسابي</div><p>${cloud.user ? 'Жетишкендиктериңиз аккаунтка автоматтык түрдө сакталат — каалаган телефондон, планшеттен же компьютерден уланта аласыз.' : 'Жетишкендиктериңизди сактап, каалаган түзмөктөн — телефон, планшет же компьютерден — улантуу үчүн кириңиз.'}</p></div></header>`;
     if (cloud.available === false) {
       main.innerHTML = head + `<div class="narrow" style="padding:36px 0 80px">${cloud.serverError ? A.BLOCK.warn({ title: 'Серверди жөндөө керек', html: esc(cloud.serverError) }) : ''}${A.BLOCK.tip({ title: 'Конок режими', html: 'Тиркеменин бул нускасы серверсиз иштеп жатат — мисалы, алдын ала көрүү режиминде же файлдан түз ачылган — ошондуктан аккаунттар, шайкештирүү жана коомчулук өчүк. Кылган ишиңиздин баары ушул түзмөктө сакталат.<br><br>Тиркеме Vercel’де маалымат базасы менен жайгаштырылганда (README’ни караңыз), бул бетте аккаунт ача аласыз.' })}${installBlock()}</div>`;
       return;
@@ -117,7 +117,7 @@
       main.innerHTML = `<section class="auth-wrap"><div class="wrap"><div class="auth-split">
         <div class="auth-side">
           ${tunduk}
-          <p class="auth-hello" lang="ar" dir="rtl">أهلاً وسهلاً!</p>
+          <p class="auth-hello" lang="ar" translate="no" dir="rtl">أهلاً وسهلاً!</p>
           <p class="auth-hello-en">Кош келиңиз! Жетишкендиктериңиз сакталып калышы үчүн кириңиз.</p>
           <ul class="auth-perks">
             <li><b>Каалаган түзмөк.</b> Сабакты ноутбукта баштап, телефондо бүтүрүңүз.</li>

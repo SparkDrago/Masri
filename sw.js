@@ -1,5 +1,5 @@
 /* Offline support: cache the app shell; never cache the API or audio (the browser's HTTP cache keeps those). */
-const CACHE = 'masri-v4';
+const CACHE = 'masri-v5';
 const CORE = ['./', 'index.html', 'css/style.css', 'favicon.svg', 'manifest.webmanifest', 'js/config.js', 'js/eg.js', 'js/app.js', 'js/cloud.js', 'js/reader.js', 'js/learn.js', 'js/drops.js', 'js/dictionary.js', 'js/record.js',
   'js/data/alphabet.js', 'js/data/course-0-1.js', 'js/data/course-2.js', 'js/data/course-3.js', 'js/data/course-cairo-a.js', 'js/data/course-cairo-b.js', 'js/data/course-4.js', 'js/data/course-5.js', 'js/data/course-6.js',
   'js/data/readers.js', 'js/data/links.js', 'js/data/fusha.js', 'js/data/drops.js', 'js/data/drops-more.js', 'js/data/lexicon.js', 'js/data/audio-manifest.js', 'icons/icon-192.png', 'icons/icon-512.png'];

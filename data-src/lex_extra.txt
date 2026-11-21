@@ -215,7 +215,7 @@
 في الآخر|fil-aaxir|акырында|adv
 مع بعض|ma3a ba3D|бирге|adv
 لبعض|li-ba3D|бири-бирине|adv
-وراء بعض|wara ba3D|удаа|adv
+ورا بعض|wara ba3D|удаа|adv
 كفاية|kifaaya|жетиштүү; жетет|adv
 بالعكس|bil-3aks|тескерисинче|adv
 بالذات|biz-zaat|дал ушул|adv
@@ -241,7 +241,7 @@
 مفيش حاجة|ma fiish 7aaga|эч нерсе жок|phr
 على مهلك|3ala mahlak|шашпа|phr
 خد بالك|xud baalak|абайла|phr
-ولا يهمك|wala yhimmak|кабатыр болбо|phr
+ولا يهمك|wala yihimmak|кабатыр болбо|phr
 مش عارف|mish 3aarif|билбейм (эр.)|phr
 مش فارقة|mish far2a|баары бир|phr
 زي ما تحب|zayy ma t7ibb|каалагандай|phr

@@ -103,7 +103,7 @@
 امبارح|imbaari7|кечээ|adv
 بعدين|ba3deen|кийин, анан|adv
 قبل كده|2abl kida|мурун, буга чейин|adv
-دايماً|daayman|дайыма|adv
+دايماً|dayman|дайыма|adv
 أحياناً|a7yaanan|кээде|adv
 ساعات|saa3aat|кээде (сөзмө-сөз «сааттар»)|adv
 أبداً|abadan|эч качан|adv
@@ -133,7 +133,7 @@
 برضه|barDu|деле|adv
 بس|bass|гана; бирок; болду|adv
 كده|kida|ушундай|adv
-كدا|kida|ушундай|adv
+كده|kida|ушундай|adv
 مع بعض|ma3a ba3D|бирге|adv
 لوحده|lwa7du|жалгыз, өзү|adv
 تقريباً|ta2riiban|болжол менен|adv
@@ -187,7 +187,7 @@
 مين|miin|ким|q
 إيه|eeh|эмне|q
 فين|feen|кайда|q
-منين|minein|кайдан|q
+منين|mineen|кайдан|q
 إمتى|imta|качан|q
 ليه|leeh|эмне үчүн|q
 إزاي|izzaay|кантип|q
@@ -242,7 +242,7 @@
 الحقني|il7a2ni|жардам бер!|phr
 حرام عليك|7araam 3aleek|уят болсун|phr
 مش مشكلة|mish mushkila|көйгөй эмес|phr
-ولا يهمك|wala yhimmak|эч кабатыр болбо|phr
+ولا يهمك|wala yihimmak|эч кабатыр болбо|phr
 على فكرة|3ala fikra|баса, айтмакчы|phr
 في الحقيقة|fil-7a2ii2a|чынында|phr
 مثلاً|masalan|мисалы|adv

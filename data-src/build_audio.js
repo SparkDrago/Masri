@@ -124,25 +124,13 @@ const COURSE = win.COURSE;
 
 /* ---- collect every text a play button can speak ---- */
 const texts = new Map(); // key → tts text
-const affix = (k) => /(^|~)-|-$/.test(k) || k.split('~')[0].includes('-'); // ب~bi-, ها~-ha, ك-ت-ب: fragments and spelled letters, not sentences
-const add = (s) => KG.speechChunks(s).forEach((c) => { if (!texts.has(c.key) && !affix(c.key)) texts.set(c.key, c.tts); });
-const CYR = /[а-яёөүң]/i;
-(function walk(o, depth) {
-  if (depth > 12 || o == null) return;
-  if (typeof o === 'string') {
-    const inner = o.match(/\[\[(.+?)\]\]/g);
-    if (inner) inner.forEach((x) => add(x.slice(2, -2)));
-    else if (KG.hasAr(o) && !CYR.test(KG.arOf(o)) && !/[<>A-Za-z]/.test(KG.arOf(o)) && KG.arOf(o).length <= 400) add(o);
-    return;
-  }
-  if (Array.isArray(o)) { o.forEach((x) => walk(x, depth + 1)); return; }
-  if (typeof o === 'object') Object.keys(o).forEach((k) => { if (k !== 'stage' && k !== 'fus' && k !== 'fnote') walk(o[k], depth + 1); }); // fus = Fusha-only lines
-})([COURSE.stages, win.READERS, win.DROPS, win.ALPHABET, win.READ_DRILL, win.LINKS, win.LINK_FALSE, win.FUSHA_MAP], 0);
-((win.LEXICON && win.LEXICON.rows) || []).forEach((r) => add(r[1] ? r[0] + '~' + r[1] : r[0]));
+const add = (c) => { if (!texts.has(c.key)) texts.set(c.key, c.tts); };
+KG.collectSpoken([COURSE.stages, win.READERS, win.DROPS, win.ALPHABET, win.READ_DRILL, win.LINKS, win.LINK_FALSE, win.FUSHA_MAP], add);
+KG.collectSpoken(((win.LEXICON && win.LEXICON.rows) || []).map((r) => (r[1] ? r[0] + '~' + r[1] : r[0])), add);
 // Arabic written straight into the page code (e.g. the audio test button)
 fs.readdirSync(path.join(ROOT, 'js')).filter((f) => f.endsWith('.js')).forEach((f) => {
   const src = fs.readFileSync(path.join(ROOT, 'js', f), 'utf8');
-  for (const m of src.matchAll(/data-say="([^"$]+)"/g)) if (KG.hasAr(m[1])) add(m[1]);
+  for (const m of src.matchAll(/data-say="([^"$]+)"/g)) if (KG.hasAr(m[1])) KG.collectSpoken(m[1], add);
 });
 
 const voices = opt('voices', flag('azure') || flag('export') ? 'f' : 'f,m').split(',').filter((v) => v === 'f' || v === 'm');

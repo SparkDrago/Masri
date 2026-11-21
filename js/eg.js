@@ -339,32 +339,82 @@
     }).join(' ');
   }
   // What identifies a spoken text (file names / caches): the Arabic as written in the course (+ its transcription)
-  const speechKey = (ar) => String(ar || '').replace(/[‌‍|[\]]/g, '').replace(/\s+/g, ' ').trim();
+  // A final period/comma doesn't change how a sentence is said, so «X» and «X.» share one recording.
+  const trimEnd = (t) => String(t || '').replace(/[\s.,،–—]+$/, '').replace(/^[\s–—]+/, '');
+  const speechKey = (ar) => trimEnd(String(ar || '').replace(/[‌‍|[\]]/g, '').replace(/\s+/g, ' ').trim());
+  // What identifies a recording: spelling variants that are said the same (vowel marks, أ/إ/آ/ا, ى/ي, ة/ه)
+  // share one id; the transcription in the key keeps real homographs (كتب katab / kutub) apart.
+  const idAr = (ar) => speechKey(ar).replace(HARAKAT, '').replace(/[إأآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
+  // Re-derive a stored key with the current rules (used to migrate recordings made before a rule change)
+  const normKey = (key) => { const i = String(key).indexOf('~'); return i < 0 ? idAr(key) : idAr(key.slice(0, i)) + '~' + trimEnd(key.slice(i + 1).replace(/\s+/g, ' ').trim()); };
+  /* Every text a learner can play, for the recording list (studio) and the build script.
+     Skips: wrong answer choices of multiple-choice questions (only o[0] is correct), Fusha-only lines,
+     grammar fragments (ب~bi-, -ha, ك-ت-ب) and single letters. */
+  function collectSpoken(root, add) {
+    const CYR = /[а-яёөүң]/i;
+    const ok = (c) => {
+      const ar = c.key.split('~')[0], ro = c.key.split('~')[1] || '';
+      if (/^-|-$/.test(ro) || ar.includes('-') || /…|\.\.\./.test(ar)) return false;
+      if (lettersOf(ar).length < 2 && ar !== 'و') return false;
+      return true;
+    };
+    const take = (s) => speechChunks(s).forEach((c) => { if (ok(c)) add(c); });
+    (function walk(o, d) {
+      if (d > 14 || o == null) return;
+      if (typeof o === 'string') {
+        const inner = o.match(/\[\[(.+?)\]\]/g);
+        if (inner) inner.forEach((x) => take(x.slice(2, -2)));
+        else if (hasAr(o) && !CYR.test(arOf(o)) && !/[<>A-Za-z]/.test(arOf(o))) take(o);
+        return;
+      }
+      if (Array.isArray(o)) { o.forEach((x) => walk(x, d + 1)); return; }
+      if (typeof o === 'object') Object.keys(o).forEach((k) => {
+        if (k === 'stage' || k === 'fus' || k === 'fnote') return;
+        if (k === 'o' && o.t === 'mc') { walk(o.o[0], d + 1); return; } // wrong choices are wrong on purpose
+        if (k === 'a' && o.t === 'type' && Array.isArray(o.a)) { walk(o.a[0], d + 1); return; } // other accepted spellings say the same thing
+        walk(o[k], d + 1);
+      });
+    })(root, 0);
+  }
   // FNV-1a + djb2 → 16 hex chars; identical in the browser and in the Node build script
   function hash(s) {
     let h1 = 0x811c9dc5, h2 = 5381;
     for (const ch of String(s)) { const c = ch.codePointAt(0); h1 = Math.imul(h1 ^ c, 0x01000193) >>> 0; h2 = (Math.imul(h2, 33) + c) >>> 0; }
     return h1.toString(16).padStart(8, '0') + h2.toString(16).padStart(8, '0');
   }
-  const audioId = (voice, ar) => hash(voice + '|' + speechKey(ar));
+  // One recording per pronunciation: spellings that differ only in hamza seats, ة/ه or ى/ي
+  // (أيوه / ايوه) share an id; homographs with different transcriptions (كتب katab / kutub) don't.
+  const canonAr = (a) => String(a).replace(HARAKAT, '').replace(/[إأآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/؟/g, '?').replace(/\s+/g, ' ').trim(); // keeps ? apart from .
+  const canonKey = (key) => { const k = normKey(key), i = k.indexOf('~'); return i < 0 ? canonAr(k) : canonAr(k.slice(0, i)) + '~' + k.slice(i + 1); };
+  const audioId = (voice, ar) => hash(voice + '|' + canonKey(ar));
   // Text → spoken pieces (one per line / sentence, at most ~240 characters each)
   // tts (vowel-marked text for a synthesizer) is computed only when a synthesizer needs it
-  const chunk = (key, ar, ro) => ({ key, get tts() { if (this._t === undefined) this._t = ttsText(ar, ro); return this._t; } });
+  const chunk = (key, ar, ro) => ({ key, show: ar, get tts() { if (this._t === undefined) this._t = ttsText(ar, ro); return this._t; } });
   function speechChunks(text) {
     const out = [];
+    const lines = [];
     String(text == null ? '' : text).replace(/\[\[|\]\]/g, '').split(/\s*\n\s*/).forEach((line) => {
+      // A list of words («كاتب – كتاب – مكتب», «ده / دي») is played word by word from their own recordings
+      const LIST = /\s+[–—/→]\s+/, p0 = split(line), aa = p0.ar.split(LIST);
+      if (aa.length > 1) {
+        const rr = p0.ro ? p0.ro.split(LIST) : [];
+        aa.forEach((a, k) => lines.push({ text: rr.length === aa.length ? a + '~' + rr[k] : a, gap: k > 0 }));
+      } else lines.push({ text: line, gap: false });
+    });
+    lines.forEach(({ text: line, gap }) => {
       if (!line) return;
-      const p = split(line), ar = speechKey(p.ar), ro = p.ro.replace(/\|/g, '').trim();
+      const p0 = split(line);
+      const p = p0, ar = speechKey(p.ar), ro = trimEnd(p.ro.replace(/\|/g, '').trim());
       if (!hasAr(ar)) return;
-      const r = ro || (romanFor(ar).guess ? '' : romanFor(ar).ro);
+      const r = ro || (romanFor(ar).guess ? '' : trimEnd(romanFor(ar).ro));
       // the transcription is part of the key, so homographs (كتب katab / kutub) get their own audio
-      if (ar.length <= 240) { out.push(chunk(r ? ar + '~' + r.replace(/\s+/g, ' ') : ar, ar, r)); return; }
+      if (ar.length <= 240) { const c = chunk(r ? idAr(ar) + '~' + r.replace(/\s+/g, ' ') : idAr(ar), ar, r); c.gap = gap; out.push(c); return; }
       let buf = '';
       ar.split(/(?<=[.!?؟،؛])\s+/).forEach((s) => {
-        if (buf && (buf + ' ' + s).length > 240) { out.push(chunk(buf, buf, '')); buf = ''; }
+        if (buf && (buf + ' ' + s).length > 240) { out.push(chunk(idAr(buf), buf, '')); buf = ''; }
         buf = buf ? buf + ' ' + s : s;
       });
-      if (buf) out.push(chunk(buf, buf, ''));
+      if (buf) out.push(chunk(idAr(buf), buf, ''));
     });
     return out;
   }
@@ -433,7 +483,7 @@
       r.onsuccess = () => {
         try {
           const q = r.result.transaction('rec', 'readonly').objectStore('rec').getAll();
-          q.onsuccess = () => { (q.result || []).forEach((x) => this.addLocal(x.id, x.blob)); this.refresh(); };
+          q.onsuccess = () => { (q.result || []).forEach((x) => this.addLocal(x.key ? audioId(x.voice || 'f', normKey(x.key)) : x.id, x.blob)); this.refresh(); };
         } catch (e) { /* ignore */ }
       };
     },
@@ -519,7 +569,8 @@
       if (!chunks.length || !chunks.some((c) => this.sources(c).length)) return false;
       this.stop();
       const token = this._token, r = rate || this.rate;
-      chunks.reduce((p, c) => p.then(() => (token === this._token ? this.playOne(c, r, token) : false)), Promise.resolve());
+      const pause = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      chunks.reduce((p, c) => p.then(() => (token === this._token ? (c.gap ? pause(350) : null) : null)).then(() => (token === this._token ? this.playOne(c, r, token) : false)), Promise.resolve());
       return true;
     }
   };
@@ -800,7 +851,7 @@
   const KBD_SPECIAL = 'حعخغقءصضطظ';
 
   window.KG = {
-    hasAr, split, arOf, roOf, toCyr, toLat, autoRoman, learnRoman, romanFor, pron, ROMAN, norm, normAr, looseAr, romKey, check, speech, vocalize, alignWords, ttsText, egyWord, speechKey, speechChunks, hash, audioId,
+    hasAr, split, arOf, roOf, toCyr, toLat, autoRoman, learnRoman, romanFor, pron, ROMAN, norm, normAr, looseAr, romKey, check, speech, vocalize, alignWords, ttsText, egyWord, speechKey, normKey, canonKey, collectSpoken, speechChunks, hash, audioId,
     PERSONS, PRONOUN, PERSON_KY, POSS, possess, article, dual, SUN, VERBS, verbById, TENSES, conjugate, KAAN, HAYKUUN, agree,
     number, ordinal, easternDigits, KBD, KBD_SPECIAL
   };

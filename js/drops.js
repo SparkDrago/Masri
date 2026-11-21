@@ -119,7 +119,7 @@
   A.ROUTES.drops = function hub() {
     const main = A.main(), q = quickPlan(), all = [...words().values()], p = progress(all);
     const st = store.d.stats || {};
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөз тамчылары</h1><div class="kgt" lang="ar">نقط</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөз тамчылары</h1><div class="kgt" lang="ar" translate="no">نقط</div>
       <p>Бир нече мүнөт, бир ууч сөз, котормонун ордуна сүрөт. Мээ тизмеге караганда сүрөттү тезирээк эстейт, ал эми кыска күнүмдүк сеанстар узундарынан жакшыраак эсте калат.</p></div></header>
       <div class="wrap drops-hub">
         <div class="drops-today">
@@ -140,7 +140,7 @@
         <div class="topic-grid">${list.map((t) => { const tp = progress(topicWords(t)); return `
           <a class="topic" href="#drops-${t.id}" style="--tc:${t.color}">
             <span class="topic-icon" aria-hidden="true">${t.icon}</span>
-            <span class="topic-name">${esc(t.name)}</span><span class="topic-kg" lang="ar" dir="rtl">${esc(KG.arOf(t.ar))}</span>
+            <span class="topic-name">${esc(t.name)}</span><span class="topic-kg" lang="ar" translate="no" dir="rtl">${esc(KG.arOf(t.ar))}</span>
             <span class="topic-bar" aria-hidden="true"><i style="width:${tp.total ? (tp.seen / tp.total) * 100 : 0}%"></i></span>
             <span class="topic-meta">${tp.seen === tp.total ? 'Баары үйрөнүлдү' : `${tp.total} сөздүн ${tp.seen}`}${tp.due ? ` · <b>${tp.due} жаңылоо</b>` : ''}</span>
           </a>`; }).join('')}</div>` : ''; }).join('')}
@@ -167,12 +167,12 @@
     const dots = (n) => `<span class="str s${n}" aria-label="${['жаңы', 'үйрөнүлүүдө', 'жакшы', 'бекем'][n]}"><i></i><i></i><i></i></span>`;
     main.innerHTML = `<header class="topic-head" style="--tc:${t.color}"><div class="wrap">
         <div class="crumbs"><a href="#drops">Сөз тамчылары</a></div>
-        <div class="th-row"><span class="th-icon" aria-hidden="true">${t.icon}</span><div><h1>${esc(t.name)}</h1><div class="kgt" lang="ar" dir="rtl">${esc(KG.arOf(t.ar))}</div></div></div>
+        <div class="th-row"><span class="th-icon" aria-hidden="true">${t.icon}</span><div><h1>${esc(t.name)}</h1><div class="kgt" lang="ar" translate="no" dir="rtl">${esc(KG.arOf(t.ar))}</div></div></div>
         <div class="th-progress"><span class="topic-bar"><i style="width:${tp.total ? (tp.seen / tp.total) * 100 : 0}%"></i></span><span>${tp.total} сөздүн ${tp.seen} үйрөнүлдү · ${tp.strong} бекем${tp.due ? ` · ${tp.due} жаңылоо` : ''}</span></div>
         <div class="dt-row">${lengthPicker()}<button class="btn btn-gold" data-start="topic">${complete ? (tp.due ? 'Теманы жаңылоо' : 'Дагы машыгуу') : tp.seen ? 'Улантуу' : 'Бул теманы баштоо'}</button></div>
       </div></header>
       <div class="wrap"><ul class="wordlist">${list.map((w) => `<li><button type="button" class="wl-say" data-say="${esc(w.k)}" aria-label="Угуу: ${esc(w.k)}">${pic(w, 'sm')}</button>
-        <div class="wl-text"><span class="wl-kg" lang="ar" dir="rtl">${esc(w.k)}</span>${tl(F(w))}<span class="wl-en">${esc(w.en)}</span></div>${dots(strengthOf(w))}</li>`).join('')}</ul></div>`;
+        <div class="wl-text"><span class="wl-kg" lang="ar" translate="no" dir="rtl">${esc(w.k)}</span>${tl(F(w))}<span class="wl-en">${esc(w.en)}</span></div>${dots(strengthOf(w))}</li>`).join('')}</ul></div>`;
     bindLength(main);
     main.addEventListener('click', (e) => { if (e.target.closest('[data-start]')) start({ mode: 'topic', topic: t.id }); });
   }]);
@@ -283,14 +283,14 @@
     function failure(w) {
       blip(false); say(w.k);
       const fb = document.createElement('div'); fb.className = 'drop-fb'; fb.setAttribute('role', 'status');
-      fb.innerHTML = `${pic(w, 'xs')}<div><b lang="ar">${esc(w.k)}</b> ${tl(F(w))}<span>${esc(w.en)}</span></div><button type="button" class="btn btn-ink">Улантуу</button>`;
+      fb.innerHTML = `${pic(w, 'xs')}<div><b lang="ar" translate="no">${esc(w.k)}</b> ${tl(F(w))}<span>${esc(w.en)}</span></div><button type="button" class="btn btn-ink">Улантуу</button>`;
       body.appendChild(fb);
       const go = () => { onEnter = null; next(); };
       $('button', fb).addEventListener('click', go); $('button', fb).focus({ preventScroll: true }); onEnter = go;
     }
     const toTop = () => { if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'instant' }); };
     const render = (html, cls) => { body.innerHTML = `<div class="drop-card ${cls || ''}">${html}</div>`; onEnter = null; toTop(); return $('.drop-card', body); };
-    const optsHtml = (list, mode) => `<div class="dopts n${list.length}">${list.map((o, i) => `<button type="button" class="dopt ${mode}" data-i="${i}"><span class="key" aria-hidden="true">${i + 1}</span>${mode === 'kg' ? `<span class="dopt-kg" lang="ar" dir="rtl">${esc(o.k)}</span>${tl(F(o))}` : `${pic(o, 'md')}<span class="dopt-en">${esc(o.en)}</span>`}</button>`).join('')}</div>`;
+    const optsHtml = (list, mode) => `<div class="dopts n${list.length}">${list.map((o, i) => `<button type="button" class="dopt ${mode}" data-i="${i}"><span class="key" aria-hidden="true">${i + 1}</span>${mode === 'kg' ? `<span class="dopt-kg" lang="ar" translate="no" dir="rtl">${esc(o.k)}</span>${tl(F(o))}` : `${pic(o, 'md')}<span class="dopt-en">${esc(o.en)}</span>`}</button>`).join('')}</div>`;
     function bindOpts(card, list, it, onRight) {
       card.addEventListener('click', (e) => {
         const b = e.target.closest('.dopt'); if (!b || S.busy || card.dataset.done) return;
@@ -308,7 +308,7 @@
       pickWord(w);
       const card = render(`<span class="drop-tag">Жаңы сөз</span>
         <div class="intro-pic">${pic(w, 'xl')}</div>
-        <div class="intro-kg" lang="ar" dir="rtl">${esc(w.k)}</div>${tl(F(w))}
+        <div class="intro-kg" lang="ar" translate="no" dir="rtl">${esc(w.k)}</div>${tl(F(w))}
         <div class="intro-en">${esc(w.en)}</div>${A.arHint(w.k)}
         <button type="button" class="drop-say" data-say="${esc(w.k)}" aria-label="Дагы угуу">${A.ICON_SAY}</button>
         <div class="intro-actions"><button type="button" class="btn btn-line know">Мен муну билем <span aria-hidden="true">↑</span></button><button type="button" class="btn btn-ink got">Түшүндүм</button></div>
@@ -337,7 +337,7 @@
     function pickPic(it, n) {
       const list = shuffle([it.w].concat(distractors(it.w, n - 1, true)));
       const card = render(`<span class="drop-tag">Сүрөттү басыңыз</span>
-        <div class="prompt-kg" lang="ar" dir="rtl">${esc(it.w.k)}</div>${tl(F(it.w))}
+        <div class="prompt-kg" lang="ar" translate="no" dir="rtl">${esc(it.w.k)}</div>${tl(F(it.w))}
         <button type="button" class="drop-say" data-say="${esc(it.w.k)}" aria-label="Угуу">${A.ICON_SAY}</button>
         ${optsHtml(list, 'pic')}`);
       say(it.w.k); bindOpts(card, list, it);
@@ -357,7 +357,7 @@
         <button type="button" class="listen-big" data-say="${esc(it.w.k)}" aria-label="Сөздү дагы ойнотуу">${A.ICON_SAY}</button>
         ${optsHtml(list, 'pic')}`);
       setTimeout(() => say(it.w.k), 150);
-      bindOpts(card, list, it, () => { const r = document.createElement('div'); r.className = 'reveal'; r.innerHTML = `<span lang="ar">${esc(it.w.k)}</span>`; card.insertBefore(r, $('.dopts', card)); });
+      bindOpts(card, list, it, () => { const r = document.createElement('div'); r.className = 'reveal'; r.innerHTML = `<span lang="ar" translate="no">${esc(it.w.k)}</span>`; card.insertBefore(r, $('.dopts', card)); });
     }
     /* ---- 5. build it from letter blocks ---- */
     function chunksOf(word) {
@@ -374,7 +374,7 @@
       const card = render(`<span class="drop-tag">Сөздү куруңуз (оңдон солго)</span>
         <div class="prompt-pic">${pic(w, 'lg')}</div><div class="prompt-en">${esc(w.en)}</div>${tl(F(w))}
         <div class="spell-slot" dir="rtl" aria-live="polite" aria-label="Сиздин жообуңуз"></div>
-        <div class="spell-pool" dir="rtl">${order.map((o, j) => `<button type="button" class="dchunk" data-j="${j}" lang="ar">${esc(o.p)}</button>`).join('')}</div>
+        <div class="spell-pool" dir="rtl">${order.map((o, j) => `<button type="button" class="dchunk" data-j="${j}" lang="ar" translate="no">${esc(o.p)}</button>`).join('')}</div>
         <button type="button" class="linkish spell-skip">Билбейм</button>`, 'spell');
       const slot = $('.spell-slot', card), poolEl = $('.spell-pool', card);
       const check = () => {
@@ -382,7 +382,7 @@
         if ($$('.dchunk', slot).length < parts.length || card.dataset.done) return;
         card.dataset.done = '1'; $$('.dchunk', card).forEach((b) => { b.disabled = true; });
         const ok = got === w.k; slot.classList.add(ok ? 'right' : 'wrong'); answered(it, ok);
-        if (ok) { slot.innerHTML = `<span class="spell-done" lang="ar">${esc(w.k)}</span>`; say(w.k); success(next); } else failure(w);
+        if (ok) { slot.innerHTML = `<span class="spell-done" lang="ar" translate="no">${esc(w.k)}</span>`; say(w.k); success(next); } else failure(w);
       };
       card.addEventListener('click', (e) => {
         const b = e.target.closest('.dchunk'); if (!b || card.dataset.done) return;
@@ -403,7 +403,7 @@
       if (set.length < 3) return next();
       const L = shuffle(set.slice()), R = shuffle(set.slice());
       const card = render(`<span class="drop-tag">Жуптарды табыңыз</span>
-        <div class="pairs"><div class="pcol">${L.map((w) => `<button type="button" class="pcell kg" data-k="${esc(w.k)}" lang="ar">${esc(w.k)}</button>`).join('')}</div>
+        <div class="pairs"><div class="pcol">${L.map((w) => `<button type="button" class="pcell kg" data-k="${esc(w.k)}" lang="ar" translate="no">${esc(w.k)}</button>`).join('')}</div>
         <div class="pcol">${R.map((w) => `<button type="button" class="pcell pc" data-k="${esc(w.k)}" aria-label="${esc(w.en)}">${pic(w, 'md')}</button>`).join('')}</div></div>`, 'pairs-card');
       let sel = null, left = set.length, missed = false;
       card.addEventListener('click', (e) => {
@@ -433,7 +433,7 @@
       store.save();
       const tries = S.right + S.wrong, acc = tries ? Math.round((S.right / tries) * 100) : 100;
       const learned = S.mastered.filter((i) => !i.review), refreshed = S.mastered.filter((i) => i.review);
-      const row = (w, tag) => `<li>${pic(w, 'xs')}<span lang="ar">${esc(w.k)}</span><span class="en">${esc(w.en)}</span>${tag ? `<span class="tag">${tag}</span>` : ''}</li>`;
+      const row = (w, tag) => `<li>${pic(w, 'xs')}<span lang="ar" translate="no">${esc(w.k)}</span><span class="en">${esc(w.en)}</span>${tag ? `<span class="tag">${tag}</span>` : ''}</li>`;
       body.innerHTML = `<div class="drop-card summary">
         <span class="drop-tag">${why === 'done' ? 'Азырынча башка эч нерсе жок' : why === 'time' ? 'Убакыт бүттү' : 'Сеанс бүттү'}</span>
         <h2>${S.mastered.length + S.known.length ? 'برافو! Азаматсыз.' : 'Жакшы башталыш.'}</h2>

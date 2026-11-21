@@ -11,7 +11,7 @@
   const INTERVALS = [0, 1, 3, 7, 16, 35, 90];
   const cleanEn = (s) => String(s || '').replace(/\[\[(.+?)\]\]/g, (m, t) => KG.arOf(t)).replace(/<[^>]+>/g, '').trim();
   const signed = () => A.cloud && A.cloud.user;
-  const page = (title, kgt, lede, crumbs) => `<header class="page-head"><div class="wrap">${crumbs ? `<div class="crumbs">${crumbs}</div>` : ''}<h1>${esc(title)}</h1>${kgt ? `<div class="kgt" lang="ar" dir="rtl">${esc(kgt)}</div>` : ''}${lede ? `<p>${lede}</p>` : ''}</div></header>`;
+  const page = (title, kgt, lede, crumbs) => `<header class="page-head"><div class="wrap">${crumbs ? `<div class="crumbs">${crumbs}</div>` : ''}<h1>${esc(title)}</h1>${kgt ? `<div class="kgt" lang="ar" translate="no" dir="rtl">${esc(kgt)}</div>` : ''}${lede ? `<p>${lede}</p>` : ''}</div></header>`;
   ['goals', 'placement', 'smart', 'mistakes', 'words', 'speak', 'community', 'post', 'league', 'tools', 'certificates', 'cert', 'certtest'].forEach((k) => {
     const g = { goals: 'course', placement: 'course', smart: 'review', mistakes: 'review', words: 'review', speak: 'review', community: 'community', post: 'community', league: 'community', tools: 'tools', certificates: 'tools', cert: 'tools', certtest: 'tools' }[k];
     if (!A.NAV_GROUPS[g].includes(k)) A.NAV_GROUPS[g].push(k);
@@ -62,12 +62,12 @@
     const name = signed() ? A.cloud.user.name : '';
     const R = 34, C = 2 * Math.PI * R;
     const html = `<section class="dash"><div class="wrap">
-      <div class="dash-head"><div><h1>${name ? 'Ахлан, ' + esc(name) + '!' : 'Ахлан!'} <span lang="ar" style="font-family:var(--f-ar)">أهلاً</span></h1><p>${t >= g ? 'Күнүмдүк максат аткарылды. Мындан аркысы — бонус.' : `Бүгүнкү максатка ${g - t} XP калды.`}</p></div>
+      <div class="dash-head"><div><h1>${name ? 'Ахлан, ' + esc(name) + '!' : 'Ахлан!'} <span lang="ar" translate="no" style="font-family:var(--f-ar)">أهلاً</span></h1><p>${t >= g ? 'Күнүмдүк максат аткарылды. Мындан аркысы — бонус.' : `Бүгүнкү максатка ${g - t} XP калды.`}</p></div>
         ${A.cloud && A.cloud.available && !signed() ? '<a class="btn btn-ghost btn-sm" href="#account">Шайкештирүү үчүн кириңиз</a>' : ''}</div>
       <div class="dash-grid">
         <div class="dcard goal"><svg viewBox="0 0 80 80" width="96" height="96" aria-hidden="true"><circle cx="40" cy="40" r="${R}" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="9"/><circle cx="40" cy="40" r="${R}" fill="none" stroke="#e9b949" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - pct)}" transform="rotate(-90 40 40)"/></svg>
           <div><b>${t} / ${g} XP</b><span>бүгүн</span><b>🔥 ${store.d.streak.count || 0}</b><span>катар күн</span></div></div>
-        <a class="dcard next" href="#lesson-${esc(nx.id)}"><span class="lab">Курсту улантуу</span><b>${esc(nx.num)} ${esc(nx.title)}</b><span class="kg" lang="ar">${esc(A.plain(nx.ar || ''))}</span><span class="go">Сабакты баштоо</span></a>
+        <a class="dcard next" href="#lesson-${esc(nx.id)}"><span class="lab">Курсту улантуу</span><b>${esc(nx.num)} ${esc(nx.title)}</b><span class="kg" lang="ar" translate="no">${esc(A.plain(nx.ar || ''))}</span><span class="go">Сабакты баштоо</span></a>
         <a class="dcard" href="#smart"><span class="lab">Акылдуу кайталоо</span><b>${dk.due.length} сөз кезекте</b><span>${dk.fresh.length} жаңы сөз күтүп турат · ${dk.strength.weak} алсыз</span><span class="go">Азыр кайталоо</span></a>
         <a class="dcard" href="#library"><span class="lab">Китепкана</span><b>${ws.known.toLocaleString()} белгилүү сөз</b><span>Бүгүн жаңы бир нерсе окуңуз</span><span class="go">Китепкананы ачуу</span></a>
       </div>
@@ -180,7 +180,7 @@
         <a class="tool" href="#mistakes"><span class="glyph">✗→✓</span><h3>Каталарымды оңдоо</h3><p>${m ? 'Сабактарда туура эмес жооп берген ' + m + ' суроо.' : 'Азырынча эч нерсе жок — сабак тесттериндеги каталар ушул жерге түшөт.'}</p></a>
         <a class="tool" href="#cards"><span class="glyph">▭</span><h3>Карточкалар</h3><p>Классикалык карточкалар: Кайра / Кыйын / Жакшы / Оңой.</p></a>
         <a class="tool" href="#speak"><span class="glyph">🎙</span><h3>Сүйлөө машыгуусу</h3><p>Угуңуз, өзүңүздү жаздырыңыз, салыштырыңыз.</p></a>
-        <a class="tool" href="#words"><span class="glyph" lang="ar">أ</span><h3>Менин сөздөрүм</h3><p>Кездештирген ар бир сөз жана анын бекемдиги.</p></a>
+        <a class="tool" href="#words"><span class="glyph" lang="ar" translate="no">أ</span><h3>Менин сөздөрүм</h3><p>Кездештирген ар бир сөз жана анын бекемдиги.</p></a>
       </div></div>`;
   };
   A.TITLES.review = 'Кайталоо';
@@ -259,7 +259,7 @@
     const card = $('.speak-card', main);
     const draw = (msg) => {
       const it = items[i % items.length];
-      card.innerHTML = `<p class="from">${i % items.length + 1}-сүйлөм, жалпы ${items.length}</p><div class="front" lang="ar" dir="rtl" style="font-size:clamp(1.6rem,4.5vw,2.3rem)">${esc(KG.arOf(it[0]))}</div>${tl(it[0])}<p>${esc(it[1])}</p>
+      card.innerHTML = `<p class="from">${i % items.length + 1}-сүйлөм, жалпы ${items.length}</p><div class="front" lang="ar" translate="no" dir="rtl" style="font-size:clamp(1.6rem,4.5vw,2.3rem)">${esc(KG.arOf(it[0]))}</div>${tl(it[0])}<p>${esc(it[1])}</p>
         <div class="grade"><button class="btn btn-line" data-sp="listen">${A.ICON_SAY.replace('<svg', '<svg width="16" height="16"')} Угуу</button><button class="btn btn-line" data-sp="slow">Жай</button>
         <button class="btn ${rec ? 'btn-gold' : 'btn-ink'}" data-sp="rec">${rec ? '■ Токтотуу' : '● Жаздыруу'}</button>${url ? '<button class="btn btn-line" data-sp="play">▶ Менин жазуум</button>' : ''}${SR ? '<button class="btn btn-line" data-sp="check">Айтылышымды текшерүү</button>' : ''}</div>
         <div class="sp-msg">${msg || ''}</div><div class="grade"><button class="btn btn-gold" data-sp="next">Кийинки сүйлөм</button></div>`;
@@ -290,7 +290,7 @@
             const heard = Array.from(ev.results[0]).map((x) => x.transcript);
             const results = heard.map((h) => KG.check(h, [it[0]]));
             const res = results.includes('right') ? 'right' : results.includes('almost') ? 'almost' : 'wrong';
-            draw(`Мен уктум: <b class="kg" lang="ar" dir="rtl">${esc(heard[0])}</b><br>${res === 'right' ? '✓ Сонун — дал келди!' : res === 'almost' ? '≈ Абдан жакын. Тамак тыбыштарын (ع ح) жана оор тамгаларды текшериңиз.' : 'Туура эмес. Дагы бир угуп, кайра аракет кылыңыз.'}`);
+            draw(`Мен уктум: <b class="kg" lang="ar" translate="no" dir="rtl">${esc(heard[0])}</b><br>${res === 'right' ? '✓ Сонун — дал келди!' : res === 'almost' ? '≈ Абдан жакын. Тамак тыбыштарын (ع ح) жана оор тамгаларды текшериңиз.' : 'Туура эмес. Дагы бир угуп, кайра аракет кылыңыз.'}`);
             if (res !== 'wrong') store.addXP(3, 'speaking');
           };
           r.onerror = (ev) => draw(ev.error === 'language-not-supported' ? 'Бул браузер арабча сүйлөөнү тааный албайт. Жаздырып, кулак менен салыштырыңыз.' : 'Угулган жок (' + esc(ev.error) + '). Микрофонду текшерип, кайра аракет кылыңыз.');
@@ -371,8 +371,8 @@
     });
     function writeForm(p) {
       tab.innerHTML = `<div class="narrow" style="margin:0"><button class="linkish" data-ct="write">← Бардык темалар</button><h2 style="margin-top:12px">${esc(p[2])} <span class="lvl">${esc(p[1])}</span></h2><p>${esc(p[3])}</p>
-        <p class="voice-note">Пайдалуу калыптар: <span class="kg" lang="ar" dir="rtl">${esc(p[4])}</span> · <a href="#lesson-${esc(p[5])}">Сабакты кайталоо</a></p>
-        <textarea class="type-in write-ta" dir="rtl" lang="ar" rows="7" maxlength="2000" placeholder="اكتب هنا… (арабча жазыңыз)"></textarea>${A.keyboard()}
+        <p class="voice-note">Пайдалуу калыптар: <span class="kg" lang="ar" translate="no" dir="rtl">${esc(p[4])}</span> · <a href="#lesson-${esc(p[5])}">Сабакты кайталоо</a></p>
+        <textarea class="type-in write-ta" dir="rtl" lang="ar" translate="no" rows="7" maxlength="2000" placeholder="اكتب هنا… (арабча жазыңыз)"></textarea>${A.keyboard()}
         <div class="form-msg" role="alert"></div><div class="quiz-actions"><button class="btn btn-gold" data-post>Оңдоого жарыялоо</button></div>
         ${signed() ? '' : '<p class="voice-note">Жарыялоо үчүн <a href="#account">кириңиз</a>.</p>'}</div>`;
       const ta = $('.write-ta', tab);
@@ -405,7 +405,7 @@
         <h2 style="margin-top:28px">${corrections.length} оңдоо</h2>
         ${corrections.map((c) => `<div class="panel corr"><div class="pc-top">${who(c)}<span class="voice-note">${when(c.created)}</span>${c.helpful ? '<span class="pill ok">Пайдалуу</span>' : ''}</div>${c.text && c.text !== post.text ? `<p class="kg diff" dir="auto">${diff(post.text, c.text).replace(/\n/g, '<br>')}</p>` : c.text ? '<p class="voice-note">Өзгөртүү жок — баары туура окшойт!</p>' : ''}${c.comment ? `<p dir="auto">${esc(c.comment)}</p>` : ''}${post.mine && !c.helpful ? `<button class="btn btn-line btn-sm" data-pa="helpful" data-c="${esc(c.id)}">Пайдалуу деп белгилөө</button>` : ''}</div>`).join('')}
         ${post.mine ? '' : `<div class="panel"><h3>Бул текстти оңдоо</h3><p class="voice-note">Текстти түздөн-түз өзгөртүңүз — өзгөртүүлөрүңүз автор үчүн белгиленип көрсөтүлөт. Сылык болуңуз жана кыйын жерлерин түшүндүрүңүз.</p>
-          <textarea class="type-in corr-ta" dir="rtl" lang="ar" rows="6" maxlength="2000">${esc(post.text)}</textarea>
+          <textarea class="type-in corr-ta" dir="rtl" lang="ar" translate="no" rows="6" maxlength="2000">${esc(post.text)}</textarea>
           <label class="lbl" for="corr-cm" style="margin-top:12px">Комментарий (милдеттүү эмес)</label><textarea id="corr-cm" class="corr-cm" rows="2" maxlength="600" placeholder="Мисалы: «бинт» аял тектүү, ошондуктан сын атооч -а менен бүтөт: بنت حلوة."></textarea>
           <div class="form-msg" role="alert"></div><div class="quiz-actions"><button class="btn btn-gold" data-pa="correct">Оңдоону жөнөтүү</button></div>${signed() ? '' : '<p class="voice-note">Оңдоо жөнөтүү үчүн <a href="#account">кириңиз</a>.</p>'}</div>`}`;
       box.addEventListener('click', async (e) => {
@@ -474,7 +474,7 @@
         ${LOGO}
         <p class="c-small">Масри · Египет арабчасы курсу</p><h1>Жетишкендик сертификаты</h1><p class="c-small">Бул сертификат төмөнкүнү тастыктайт:</p>
         <p class="c-name">${esc(name) || '________________'}</p>
-        <p>Масри курсунун <b>${label(c)}</b> деңгээл тестин ийгиликтүү тапшырды</p><p class="c-stage">${esc(st.title)} · <span class="kg" lang="ar">${esc(A.plain(st.ar))}</span></p>
+        <p>Масри курсунун <b>${label(c)}</b> деңгээл тестин ийгиликтүү тапшырды</p><p class="c-stage">${esc(st.title)} · <span class="kg" lang="ar" translate="no">${esc(A.plain(st.ar))}</span></p>
         <div class="c-row"><div><b>${Math.round(got.score * 100)}%</b><span>жыйынтык</span></div><div><b>${date(got.date, { day: 'numeric', month: 'long', year: 'numeric' })}</b><span>дата</span></div><div><b>${code}</b><span>сертификаттын ID</span></div></div>
         <p class="c-note">Курсту бүтүргөндүгү тууралуу сертификат · расмий тил экзамени эмес</p></div></div></div>`;
     main.addEventListener('click', (e) => { if (e.target.closest('[data-print]')) { try { window.print(); } catch (err) { toast('Бул жерде басып чыгарууга болбойт — жайгаштырылган тиркемени ачыңыз.'); } } });
@@ -484,7 +484,7 @@
   /* --------------------------------- Tools -------------------------------- */
   A.ROUTES.tools = function tools() {
     const main = A.main();
-    const t = (href, glyph, title, text, ar) => `<a class="tool" href="${href}"><span class="glyph" ${ar ? 'lang="ar"' : ''}>${glyph}</span><h3>${title}</h3><p>${text}</p></a>`;
+    const t = (href, glyph, title, text, ar) => `<a class="tool" href="${href}"><span class="glyph" ${ar ? 'lang="ar" translate="no"' : ''}>${glyph}</span><h3>${title}</h3><p>${text}</p></a>`;
     main.innerHTML = page('Куралдар', 'أدوات', 'Курсту колдогон бардык нерселер.') + `<div class="wrap" style="padding:30px 0 80px"><div class="tools tools-hub">
       ${t('#dictionary', 'قاموس', 'Сөздүк', (A.dictionaryIndex ? A.dictionaryIndex().length.toLocaleString() + ' сөз' : 'Бардык сөздөр') + ', арабча, транскрипция же кыргызча менен издөө.', true)}
       ${t('#alphabet', 'أ ب ت', 'Арип', '28 тамга, тыбыштары, формалары жана окуу машыгуусу.', true)}

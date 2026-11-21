@@ -82,7 +82,7 @@
       const byPres = new Map(all.filter((e) => e.pk).map((e) => [e.pk, e]));
       const stems = an.map((a) => ({ a, e: byPres.get(a.stem) || byKey.get(a.stem.replace(/^ال/, '')) })).filter((x) => x.e);
       if (stems.length) {
-        how = `<b lang="ar">${esc(q)}</b> ${stems.map((x) => `<span lang="ar" dir="rtl">${x.a.pre ? `<span class="m m1">${esc(x.a.pre)}</span>+` : ''}<b>${esc(x.a.tm ? x.a.stem.replace(/ه$/, 'ة') : x.a.stem)}</b>${x.a.rest ? `+<span class="m m2">${esc(x.a.rest)}</span>` : ''}</span>${x.e.k !== x.a.stem ? ` (сөздүк формасы <span lang="ar">${esc(x.e.w)}</span>)` : ''}`).join(' же ')} сөзүнө окшош: «${esc(stems[0].e.en[0] || '')}».`;
+        how = `<b lang="ar" translate="no">${esc(q)}</b> ${stems.map((x) => `<span lang="ar" translate="no" dir="rtl">${x.a.pre ? `<span class="m m1">${esc(x.a.pre)}</span>+` : ''}<b>${esc(x.a.tm ? x.a.stem.replace(/ه$/, 'ة') : x.a.stem)}</b>${x.a.rest ? `+<span class="m m2">${esc(x.a.rest)}</span>` : ''}</span>${x.e.k !== x.a.stem ? ` (сөздүк формасы <span lang="ar" translate="no">${esc(x.e.w)}</span>)` : ''}`).join(' же ')} сөзүнө окшош: «${esc(stems[0].e.en[0] || '')}».`;
         rows = stems.map((x) => x.e).concat(rows.filter((e) => !stems.some((x) => x.e === e)));
       }
     }
@@ -95,8 +95,8 @@
     const srcs = e.src.map((s) => s === 'course' && e.lesson ? `<a class="dsrc course" href="#lesson-${esc(e.lesson.id)}">${esc(e.lesson.num)}-сабак</a>` : `<span class="dsrc ${esc(s)}">${esc(SRC[s] || s)}</span>`).join('');
     return `<li class="dict-row">
       <button type="button" class="say-btn" data-say="${esc(e.w)}" aria-label="Угуу: ${esc(e.w)}">${A.ICON_SAY}</button>
-      <div class="dict-main"><div class="dict-head"><span class="dict-kg" lang="ar" dir="rtl">${esc(e.w)}</span>${tl(F(e))}${e.pos ? `<span class="dict-pos">${esc(POS[e.pos] || e.pos)}</span>` : ''}</div>
-        ${e.pres ? `<div class="voice-note">учур чак: <span lang="ar">${esc(KG.arOf(e.pres))}</span> ${tl(e.pres)}</div>` : ''}
+      <div class="dict-main"><div class="dict-head"><span class="dict-kg" lang="ar" translate="no" dir="rtl">${esc(e.w)}</span>${tl(F(e))}${e.pos ? `<span class="dict-pos">${esc(POS[e.pos] || e.pos)}</span>` : ''}</div>
+        ${e.pres ? `<div class="voice-note">учур чак: <span lang="ar" translate="no">${esc(KG.arOf(e.pres))}</span> ${tl(e.pres)}</div>` : ''}
         <div class="dict-en">${esc(e.en.join('; '))}</div>${A.arHint(e.w)}<div class="dict-srcs">${srcs}</div></div>
       <button type="button" class="dict-add" data-add="${esc(e.k)}" data-ro="${esc(e.ro)}" ${inDeck(e) ? 'disabled' : ''}>${inDeck(e) ? 'Кайталоодо' : '+ Үйрөнүү'}</button>
     </li>`;
@@ -113,14 +113,14 @@
     const counts = { mz: 0, course: 0, drops: 0 };
     all.forEach((e) => e.src.forEach((s) => { if (s in counts) counts[s]++; }));
     const wod = wordOfDay();
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөздүк</h1><div class="kgt" lang="ar">القاموس</div>
-      <p>${all.length.toLocaleString()} египетче сөз жана сөз айкашы. Арабча, кыргызча мааниси же окулушу (кирилл же латын тамгалары) менен издеңиз. Мүчөлөрү бар сөздү, мисалы <span lang="ar">مابيكتبوش</span> же <span lang="ar">عربيتها</span>, жазсаңыз — негизин табат.</p></div></header>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөздүк</h1><div class="kgt" lang="ar" translate="no">القاموس</div>
+      <p>${all.length.toLocaleString()} египетче сөз жана сөз айкашы. Арабча, кыргызча мааниси же окулушу (кирилл же латын тамгалары) менен издеңиз. Мүчөлөрү бар сөздү, мисалы <span lang="ar" translate="no">مابيكتبوش</span> же <span lang="ar" translate="no">عربيتها</span>, жазсаңыз — негизин табат.</p></div></header>
       <div class="wrap dict">
         <div class="dict-search"><label for="dq" class="sr-only">Сөздүктөн издөө</label>
           <input id="dq" class="input" type="search" dir="auto" autocomplete="off" spellcheck="false" placeholder="Издөө: بيت, бээт, үй…">
-          <div class="dict-abc" dir="rtl" role="group" aria-label="Тамга боюнча карап чыгуу">${ABC.map((l) => `<button type="button" data-l="${l}" lang="ar">${l}</button>`).join('')}</div></div>
+          <div class="dict-abc" dir="rtl" role="group" aria-label="Тамга боюнча карап чыгуу">${ABC.map((l) => `<button type="button" data-l="${l}" lang="ar" translate="no">${l}</button>`).join('')}</div></div>
         <div class="dict-out" aria-live="polite"></div>
-        ${wod ? `<aside class="dict-wod"><span class="lab">Күндүн сөзү</span><span class="dict-kg" lang="ar" dir="rtl">${esc(wod.w)}</span>${tl(F(wod))}<span class="dict-en">${esc(wod.en.join('; '))}</span><button type="button" class="say-btn" data-say="${esc(wod.w)}" aria-label="Угуу">${A.ICON_SAY}</button></aside>` : ''}
+        ${wod ? `<aside class="dict-wod"><span class="lab">Күндүн сөзү</span><span class="dict-kg" lang="ar" translate="no" dir="rtl">${esc(wod.w)}</span>${tl(F(wod))}<span class="dict-en">${esc(wod.en.join('; '))}</span><button type="button" class="say-btn" data-say="${esc(wod.w)}" aria-label="Угуу">${A.ICON_SAY}</button></aside>` : ''}
         <p class="dict-credits">Булактар: курстун сабактары (${counts.course.toLocaleString()}), Сөз тамчылары (${counts.drops.toLocaleString()}) жана ушул курс үчүн түзүлгөн египетче-кыргызча сөздүк (${counts.mz.toLocaleString()}). Ката таптыңызбы? Окурманда өз мааниңизди кошуңуз.</p>
       </div>`;
     const out = $('.dict-out', main), q = $('#dq', main);
@@ -143,10 +143,10 @@
         clearTimeout(t); letter = l.dataset.l; q.value = ''; shown = 100;
         $$('.dict-abc button', main).forEach((b) => b.setAttribute('aria-pressed', String(b === l)));
         list = all.filter((x) => x.k.startsWith(KG.normAr(letter)));
-        drawList(list.slice(0, shown), `<p class="dict-count"><b lang="ar">${esc(letter)}</b> тамгасынан башталган ${list.length.toLocaleString()} сөз</p>`, list.length > shown);
+        drawList(list.slice(0, shown), `<p class="dict-count"><b lang="ar" translate="no">${esc(letter)}</b> тамгасынан башталган ${list.length.toLocaleString()} сөз</p>`, list.length > shown);
         return;
       }
-      if (e.target.closest('.dict-more')) { shown += 150; drawList(list.slice(0, shown), `<p class="dict-count"><b lang="ar">${esc(letter)}</b> тамгасынан башталган ${list.length.toLocaleString()} сөз</p>`, list.length > shown); return; }
+      if (e.target.closest('.dict-more')) { shown += 150; drawList(list.slice(0, shown), `<p class="dict-count"><b lang="ar" translate="no">${esc(letter)}</b> тамгасынан башталган ${list.length.toLocaleString()} сөз</p>`, list.length > shown); return; }
       const add = e.target.closest('[data-add]');
       if (add && !add.disabled) {
         const en = all.find((x) => x.k === add.dataset.add && x.ro === add.dataset.ro) || all.find((x) => x.k === add.dataset.add);

@@ -85,12 +85,12 @@
       }).join('') + esc(m[2]);
     }).join('');
   }
-  const kgSpan = (s) => `<span class="kg" lang="ar" dir="rtl" data-say="${esc(sayOf(s))}">${chips(s)}</span>`;
+  const kgSpan = (s) => `<span class="kg" lang="ar" translate="no" dir="rtl" data-say="${esc(sayOf(s))}">${chips(s)}</span>`;
   const sayBtn = (s) => `<button class="say-btn" data-say="${esc(sayOf(s))}" aria-label="Угуу: ${esc(plain(s))}">${ICON_SAY}</button>`;
-  const tl = (s) => { const t = KG.pron(s, store.d.tls); return t ? `<span class="tl" dir="ltr">${esc(t)}</span>` : ''; };
+  const tl = (s) => { const t = KG.pron(s, store.d.tls); return t ? `<span class="tl" translate="no" dir="ltr">${esc(t)}</span>` : ''; };
   function rich(html) {
     if (html == null) return '';
-    return String(html).replace(/\[\[(.+?)\]\]/g, (m, t) => hasAr(t) ? kgSpan(t) + (KG.roOf(t) ? ' ' + tl(t).replace('class="tl"', 'class="tl tli"') : '') : `<b class="ky">${esc(t)}</b>`);
+    return String(html).replace(/\[\[(.+?)\]\]/g, (m, t) => hasAr(t) ? kgSpan(t) + (KG.roOf(t) ? ' ' + tl(t).replace('class="tl" translate="no"', 'class="tl tli" translate="no"') : '') : `<b class="ky">${esc(t)}</b>`);
   }
   /* Kyrgyz words that came from Arabic ("Тектештер" hints) */
   const LK = window.LINKS || {};
@@ -111,7 +111,7 @@
   function arHint(phrase) {
     return linkMatch(phrase).map((e) => `<span class="ar-hint"><span class="badge" aria-hidden="true">К</span>Кыргызчада: <b class="ky">${esc(e.ky)}</b>${e.mean ? ` <span class="voice-note">(${esc(e.mean)})</span>` : ''}${e.hint ? ` <i>— ${esc(e.hint)}</i>` : ''}</span>`).join('');
   }
-  const arWrap = (html) => String(html).replace(/([؀-ۿ][؀-ۿً-ٟ\s«»:،؟/()]*[؀-ۿ؟»]|[؀-ۿ])/g, '<span class="ar-in" lang="ar" dir="rtl">$1</span>');
+  const arWrap = (html) => String(html).replace(/([؀-ۿ][؀-ۿً-ٟ\s«»:،؟/()]*[؀-ۿ؟»]|[؀-ۿ])/g, '<span class="ar-in" lang="ar" translate="no" dir="rtl">$1</span>');
   const FL = window.FUSHA_LOGIC || {};
   const para = (html) => { const h = rich(html); return /^\s*</.test(h) ? h : `<p>${h}</p>`; };
 
@@ -123,7 +123,7 @@
     warn: (b) => `<div class="warn"><div class="tag">${rich(esc(b.title || 'Абайлаңыз'))}</div>${para(b.html)}</div>`,
     list: (b) => `<${b.ordered ? 'ol' : 'ul'}>${b.items.map((i) => `<li>${rich(i)}</li>`).join('')}</${b.ordered ? 'ol' : 'ul'}>`,
     compare: (b) => `<div class="compare"><div class="cols">
-        <div class="col"><div class="lang">Кыргызча</div><div class="en-s">${rich(b.ky)}</div>${b.fus ? `<div class="ar-row"><div class="lang">Адабий араб тили (фусха)</div><span lang="ar" dir="rtl">${esc(plain(b.fus))}</span>${KG.roOf(b.fus) ? `<div class="tl" dir="ltr" style="text-align:left">${esc(KG.pron(b.fus, store.d.tls))}</div>` : ''}</div>` : ''}</div>
+        <div class="col"><div class="lang">Кыргызча</div><div class="en-s">${rich(b.ky)}</div>${b.fus ? `<div class="ar-row"><div class="lang">Адабий араб тили (фусха)</div><span lang="ar" translate="no" dir="rtl">${esc(plain(b.fus))}</span>${KG.roOf(b.fus) ? `<div class="tl" translate="no" dir="ltr" style="text-align:left">${esc(KG.pron(b.fus, store.d.tls))}</div>` : ''}</div>` : ''}</div>
         <div class="col"><div class="lang">Египет арабчасы</div><div class="kg-s">${kgSpan(b.ar)} ${sayBtn(b.ar)}<br>${tl(b.ar)}</div></div></div>
         ${b.gloss || b.note || b.fnote ? `<div class="foot">${b.gloss ? `<b>Сөзмө-сөз:</b> ${rich(esc(b.gloss))}` : ''}${b.gloss && b.note ? '<br>' : ''}${b.note ? rich(b.note) : ''}${b.fnote ? `<div class="ar-note"><span class="badge" aria-hidden="true">ف</span><b>Фусха менен айырмасы:</b> ${arWrap(rich(esc(b.fnote)))}</div>` : ''}</div>` : ''}</div>`,
     table: (b) => {
@@ -145,10 +145,10 @@
     const L = (window.ALPHABET || []).find((x) => x.l === ch);
     if (!L) return '';
     return `<button class="letter ${L.g === 'special' ? 'special' : ''} ${L.g === 'trap' ? 'trap' : ''}" data-say="${esc(sayOf(L.w))}" aria-label="${esc(L.n || L.l)} тамгасы, тыбышы ${esc(L.s)}. Мисал: ${esc(plain(L.w))}">
-      <span class="big" lang="ar">${esc(L.l)}<small>${esc(L.f || '')}</small></span>
+      <span class="big" lang="ar" translate="no">${esc(L.l)}<small>${esc(L.f || '')}</small></span>
       <span class="lname">${esc(L.n || '')}</span>
       <span class="snd">${esc(L.s)}</span><span class="hint">${esc(L.h)}</span>
-      <span class="exw"><span lang="ar" dir="rtl">${esc(plain(L.w))}</span> ${tl(L.w)} <span class="voice-note">${esc(L.m)}</span></span></button>`;
+      <span class="exw"><span lang="ar" translate="no" dir="rtl">${esc(plain(L.w))}</span> ${tl(L.w)} <span class="voice-note">${esc(L.m)}</span></span></button>`;
   }
 
   /* ----------------------------- Word lists ---------------------------- */
@@ -178,7 +178,7 @@
   const WIDGETS = {
     article(el) {
       el.innerHTML = `<div class="panel"><div class="field"><span class="lbl">Сөздү тандаңыз: «il-» (ال) кантип айтылат?</span></div>
-        <div class="seg" style="margin-bottom:12px">${NOUNS.slice(0, 24).map((n, i) => `<button data-i="${i}" lang="ar">${esc(n.ar)}</button>`).join('')}</div>
+        <div class="seg" style="margin-bottom:12px">${NOUNS.slice(0, 24).map((n, i) => `<button data-i="${i}" lang="ar" translate="no">${esc(n.ar)}</button>`).join('')}</div>
         <div class="out" aria-live="polite"></div></div>`;
       const out = $('.out', el);
       const draw = (i) => {
@@ -189,7 +189,7 @@
       draw(20);
     },
     possess(el) {
-      el.innerHTML = `<div class="panel"><div class="field"><span class="lbl">Сөздү тандаңыз</span></div><div class="seg" style="margin-bottom:12px">${NOUNS.slice(0, 16).map((n, i) => `<button data-i="${i}" lang="ar">${esc(n.ar)}</button>`).join('')}</div><div class="out" aria-live="polite"></div></div>`;
+      el.innerHTML = `<div class="panel"><div class="field"><span class="lbl">Сөздү тандаңыз</span></div><div class="seg" style="margin-bottom:12px">${NOUNS.slice(0, 16).map((n, i) => `<button data-i="${i}" lang="ar" translate="no">${esc(n.ar)}</button>`).join('')}</div><div class="out" aria-live="polite"></div></div>`;
       const out = $('.out', el);
       const draw = (i) => {
         const n = NOUNS[i];
@@ -201,7 +201,7 @@
     conj(el) {
       const ids = ['katab', 'shirib', 'shaaf', 'mishi', 'kal', 'itkallim', '7abb', 'raa7'];
       let id = ids[0], t = (el.dataset.t || 'present');
-      el.innerHTML = `<div class="panel"><div class="seg" style="margin-bottom:10px">${ids.map((v) => { const x = KG.verbById(v); return `<button data-v="${v}" lang="ar" aria-pressed="${v === id}">${esc(x.pa[0])}</button>`; }).join('')}</div>
+      el.innerHTML = `<div class="panel"><div class="seg" style="margin-bottom:10px">${ids.map((v) => { const x = KG.verbById(v); return `<button data-v="${v}" lang="ar" translate="no" aria-pressed="${v === id}">${esc(x.pa[0])}</button>`; }).join('')}</div>
         <div class="seg" style="margin-bottom:12px">${Object.keys(KG.TENSES).map((k) => `<button data-t="${k}" aria-pressed="${k === t}">${esc(KG.TENSES[k].name)}</button>`).join('')}</div><div class="out" aria-live="polite"></div></div>`;
       const out = $('.out', el);
       const draw = () => {
@@ -222,7 +222,7 @@
         const n = parseInt(inp.value.replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\D/g, ''), 10);
         if (isNaN(n)) { out.innerHTML = '<p class="voice-note">Сандарды жазыңыз, мисалы 25 же 1991.</p>'; return; }
         const r = KG.number(Math.min(n, 999999999)), w = r.ar + '~' + r.ro, o = n > 0 && n <= 10 ? KG.ordinal(n) : null;
-        out.innerHTML = `<p style="font-size:1.4rem">${kgSpan(w)} ${sayBtn(w)}<br>${tl(w)}</p><p class="voice-note">Араб цифралары менен: <span lang="ar" style="font-size:1.4rem">${esc(KG.easternDigits(n))}</span>${o ? ` · иреттик сан: ${kgSpan(o.ar + '~' + o.ro)} ${tl(o.ar + '~' + o.ro)}` : ''}</p>`;
+        out.innerHTML = `<p style="font-size:1.4rem">${kgSpan(w)} ${sayBtn(w)}<br>${tl(w)}</p><p class="voice-note">Араб цифралары менен: <span lang="ar" translate="no" style="font-size:1.4rem">${esc(KG.easternDigits(n))}</span>${o ? ` · иреттик сан: ${kgSpan(o.ar + '~' + o.ro)} ${tl(o.ar + '~' + o.ro)}` : ''}</p>`;
       };
       inp.addEventListener('input', draw);
       el.addEventListener('click', (e) => { if (e.target.closest('[data-r]')) { inp.value = [7, 15, 23, 48, 99, 120, 365, 1000, 2026, 450, 81][Math.floor(Math.random() * 11)] + Math.floor(Math.random() * 3); draw(); } });
@@ -234,7 +234,7 @@
       const draw = (show) => {
         const w = words[i % words.length];
         el.innerHTML = `<div class="panel" style="text-align:center"><p class="voice-note">Адегенде үн чыгарып окуңуз. Анан текшериңиз.</p>
-          <p lang="ar" dir="rtl" style="font-family:var(--f-kg);font-size:2.8rem;font-weight:600;margin:0">${esc(plain(w[0]))}</p>
+          <p lang="ar" translate="no" dir="rtl" style="font-family:var(--f-kg);font-size:2.8rem;font-weight:600;margin:0">${esc(plain(w[0]))}</p>
           ${show ? `<p style="font-size:1.1rem">${tl(w[0])}<br><b>${esc(w[1])}</b> ${sayBtn(w[0])}</p>` : '<p>&nbsp;</p>'}
           <div class="quiz-actions" style="justify-content:center">${show ? '<button class="btn btn-ink btn-sm" data-n>Кийинки сөз</button>' : '<button class="btn btn-gold btn-sm" data-s>Текшерүү</button>'}</div></div>`;
       };
@@ -245,7 +245,7 @@
   function mountWidgets(root) { $$('[data-widget]', root).forEach((el) => WIDGETS[el.dataset.widget](el)); }
 
   /* ------------------------------ Quiz --------------------------------- */
-  function keyboard() { return `<div class="kbd" dir="rtl" aria-label="Арабча клавиатура">${KG.KBD.map((k) => `<button type="button" data-key="${k}" lang="ar" class="${KG.KBD_SPECIAL.includes(k) ? 'sp' : ''}">${k}</button>`).join('')}<button type="button" class="wide" data-key=" ">боштук</button><button type="button" class="wide" data-key="⌫">⌫ өчүрүү</button></div>`; }
+  function keyboard() { return `<div class="kbd" dir="rtl" aria-label="Арабча клавиатура">${KG.KBD.map((k) => `<button type="button" data-key="${k}" lang="ar" translate="no" class="${KG.KBD_SPECIAL.includes(k) ? 'sp' : ''}">${k}</button>`).join('')}<button type="button" class="wide" data-key=" ">боштук</button><button type="button" class="wide" data-key="⌫">⌫ өчүрүү</button></div>`; }
   const isArOpt = (o) => hasAr(o) && !/[a-zа-яөүң]{3,}/i.test(String(o).replace(/\[\[.*?\]\]/g, '').replace(/<[^>]+>/g, ''));
   function optHTML(o) { return isArOpt(o) && !String(o).includes('[[') ? `${kgSpan(o)}${KG.roOf(o) ? ' ' + tl(o) : ''}` : rich(o); }
 
@@ -266,7 +266,7 @@
       } else if (q.t === 'order') {
         const words = plain(q.a).replace(/[.,!?؟،]/g, '').split(/\s+/).filter(Boolean);
         const tiles = shuffle(words.concat(q.extra || []));
-        body = `<div class="tiles answer" dir="rtl" aria-label="Сиздин сүйлөм"></div><div class="tiles pool" dir="rtl">${tiles.map((w, k) => `<button class="tile" lang="ar" data-tile="${k}">${esc(w)}</button>`).join('')}</div>
+        body = `<div class="tiles answer" dir="rtl" aria-label="Сиздин сүйлөм"></div><div class="tiles pool" dir="rtl">${tiles.map((w, k) => `<button class="tile" lang="ar" translate="no" data-tile="${k}">${esc(w)}</button>`).join('')}</div>
           <div class="quiz-actions"><button class="btn btn-ink" data-check>Текшерүү</button><button class="btn btn-line" data-clear>Тазалоо</button></div>`;
       }
       el.innerHTML = `<div class="quiz-top"><span class="count">${i + 1}-суроо, жалпы ${qs.length}</span><div class="bar" style="flex:1;max-width:240px"><i style="width:${(i / qs.length) * 100}%"></i></div></div>
@@ -394,7 +394,7 @@
       <div class="builder" aria-live="polite">
         <div class="builder-top"><strong style="font-family:var(--f-display);font-size:.9rem">Арабча сөз кантип курулат</strong>
           <div class="tabs seg">${CHAINS.map((c, i) => `<button data-chain="${i}" aria-pressed="${i === 0}">${c.name}</button>`).join('')}</div></div>
-        <div class="builder-word" dir="rtl" lang="ar"></div>
+        <div class="builder-word" dir="rtl" lang="ar" translate="no"></div>
         <div class="builder-en"></div>
         <div class="builder-note"></div>
         <div class="builder-ctrl"><button class="btn btn-ink btn-sm" data-add>Кийинки кадам</button><button class="btn btn-line btn-sm" data-reset>Башынан</button><button class="btn btn-line btn-sm" data-sayword>${ICON_SAY.replace('<svg', '<svg width="16" height="16"')} Угуу</button></div>
@@ -421,22 +421,22 @@
     <section class="section" style="padding-top:0"><div class="wrap">
       <div class="section-head"><h2>Күн сайын колдоночу куралдар</h2></div>
       <div class="tools">
-        <a class="tool big" href="#machine"><span class="glyph" lang="ar">كتاب<span style="color:#fff">ي</span></span><h3>Сөз машинасы</h3><p>Сөздү тандаңыз — машина «менин китебим», «биз жаздык», «алар жазышпайт» сыяктуу формаларды курат жана ар бир тамганын себебин кыргызча түшүндүрөт.</p></a>
-        <a class="tool" href="#alphabet"><span class="glyph" lang="ar">أ ب ت</span><h3>Арип</h3><p>28 тамга, тыбыштары, формалары жана окуу машыгуусу.</p></a>
+        <a class="tool big" href="#machine"><span class="glyph" lang="ar" translate="no">كتاب<span style="color:#fff">ي</span></span><h3>Сөз машинасы</h3><p>Сөздү тандаңыз — машина «менин китебим», «биз жаздык», «алар жазышпайт» сыяктуу формаларды курат жана ар бир тамганын себебин кыргызча түшүндүрөт.</p></a>
+        <a class="tool" href="#alphabet"><span class="glyph" lang="ar" translate="no">أ ب ت</span><h3>Арип</h3><p>28 тамга, тыбыштары, формалары жана окуу машыгуусу.</p></a>
         <a class="tool" href="#review"><span class="glyph">↻</span><h3>Кайталоо</h3><p>Акылдуу кайталоо, карточкалар жана сүйлөө машыгуусу. Сөздөр унутаар алдында кайра келет.</p></a>
-        <a class="tool" href="#library"><span class="glyph" lang="ar">حكاية</span><h3>Китепкана</h3><p>A1ден B2ге чейинки аңгемелер жана өз тексттериңиз. Каалаган сөздү басыңыз.</p></a>
+        <a class="tool" href="#library"><span class="glyph" lang="ar" translate="no">حكاية</span><h3>Китепкана</h3><p>A1ден B2ге чейинки аңгемелер жана өз тексттериңиз. Каалаган сөздү басыңыз.</p></a>
         <a class="tool" href="#cheatsheet"><span class="glyph">±</span><h3>Шпаргалка</h3><p>Бардык мүчөлөр жана формалар бир бетте.</p></a>
       </div>
-      <a class="ar-band" href="#tektesh"><div><h3 style="margin:0 0 4px">Кыргызча билесизби? Анда жүздөгөн арабча сөздү билесиз.</h3><span>Тизмени, тыбыш өзгөрүү эрежелерин жана «жалган досторду» көрүңүз.</span></div><span class="ar-big" lang="ar" dir="rtl">كتاب ← китеп</span></a>
+      <a class="ar-band" href="#tektesh"><div><h3 style="margin:0 0 4px">Кыргызча билесизби? Анда жүздөгөн арабча сөздү билесиз.</h3><span>Тизмени, тыбыш өзгөрүү эрежелерин жана «жалган досторду» көрүңүз.</span></div><span class="ar-big" lang="ar" translate="no" dir="rtl">كتاب ← китеп</span></a>
     </div></section>`;
     const dash = HOOKS.dashboard && HOOKS.dashboard();
     if (dash) { $('.hero', main).outerHTML = dash.html; if (dash.mount) dash.mount(main); } else builder();
   }
 
   function idea(n, title, text, ky, ar, chainAr) {
-    const row = (arr, cls) => `<div class="row ${cls}" ${cls === 'kgrow' ? 'dir="rtl"' : ''}>${arr.map((w) => `<span class="w c${w[1]}" ${cls === 'kgrow' ? 'lang="ar"' : ''}>${cls === 'kgrow' ? chips(w[0]) : esc(w[0])}</span>`).join('')}</div>`;
+    const row = (arr, cls) => `<div class="row ${cls}" ${cls === 'kgrow' ? 'dir="rtl"' : ''}>${arr.map((w) => `<span class="w c${w[1]}" ${cls === 'kgrow' ? 'lang="ar" translate="no"' : ''}>${cls === 'kgrow' ? chips(w[0]) : esc(w[0])}</span>`).join('')}</div>`;
     return `<article class="idea"><h3><span class="n">${n}</span>${esc(title)}</h3><p>${rich(text)}</p>
-      <div class="mirror"><span class="lab">Кыргызча</span>${row(ky, '')}<span class="lab">Египет арабчасы</span>${chainAr ? `<div class="row kgrow" dir="rtl"><span class="w c0" lang="ar" style="font-family:var(--f-kg)">${chips(ar[0][0])}</span></div>` : row(ar, 'kgrow')}<div class="tl" style="margin-top:4px">${esc(ar.map((w) => KG.pron(w[0], store.d.tls)).join(' '))}</div></div></article>`;
+      <div class="mirror"><span class="lab">Кыргызча</span>${row(ky, '')}<span class="lab">Египет арабчасы</span>${chainAr ? `<div class="row kgrow" dir="rtl"><span class="w c0" lang="ar" translate="no" style="font-family:var(--f-kg)">${chips(ar[0][0])}</span></div>` : row(ar, 'kgrow')}<div class="tl" translate="no" style="margin-top:4px">${esc(ar.map((w) => KG.pron(w[0], store.d.tls)).join(' '))}</div></div></article>`;
   }
 
   function builder() {
@@ -475,17 +475,17 @@
     return `<div class="road">${COURSE.stages.map((st, si) => {
       const p = stageProgress(st);
       return `<div class="stage">${stageMark(st.n, STAGE_COLORS[si % STAGE_COLORS.length])}<div class="stage-body">
-        <header><h3>${esc(st.title)} <span class="kg" lang="ar" style="font-weight:500;color:var(--muted);font-size:.85em">· ${esc(plain(st.ar))}</span></h3><span class="lvl">${esc(st.level)}</span></header>
+        <header><h3>${esc(st.title)} <span class="kg" lang="ar" translate="no" style="font-weight:500;color:var(--muted);font-size:.85em">· ${esc(plain(st.ar))}</span></h3><span class="lvl">${esc(st.level)}</span></header>
         <p class="blurb">${rich(st.blurb)}</p>
         <div class="bar" aria-label="${p.t} сабактын ${p.d} бүттү"><i style="width:${p.pct * 100}%"></i></div>
-        <ol class="lesson-list">${st.lessons.map((l) => `<li class="${isDone(l.id) ? 'done' : ''}"><a href="#lesson-${esc(l.id)}"><span class="num">${esc(l.num)}</span><span class="t">${esc(l.title)}${l.ar && !compact ? `<small lang="ar">${esc(plain(l.ar))}</small>` : ''}</span></a></li>`).join('')}</ol>
+        <ol class="lesson-list">${st.lessons.map((l) => `<li class="${isDone(l.id) ? 'done' : ''}"><a href="#lesson-${esc(l.id)}"><span class="num">${esc(l.num)}</span><span class="t">${esc(l.title)}${l.ar && !compact ? `<small lang="ar" translate="no">${esc(plain(l.ar))}</small>` : ''}</span></a></li>`).join('')}</ol>
       </div></div>`;
     }).join('')}</div>`;
   }
 
   function course() {
     const done = LESSONS.filter((l) => isDone(l.id)).length;
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Курс</h1><div class="kgt" lang="ar">الكورس</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Курс</h1><div class="kgt" lang="ar" translate="no">الكورس</div>
       <p>${COURSE.stages.length} баскычта ${LESSONS.length} сабак. Сиз ${done} сабакты бүтүрдүңүз. Ырааты менен окуңуз — ар бир сабак мурункуларга таянат. Арабча окуй аласызбы? 1-баскычтын тесттерин тез өтүп, андан ары жылыңыз.</p></div></header>
       <div class="wrap" style="padding:40px 0 80px">${HOOKS.courseTop ? HOOKS.courseTop() : ''}${roadmap(false)}
       <div class="tip" style="margin-top:20px"><div class="tag">Жетишкендиктерди тазалоо</div><p>Кирбесеңиз, жетишкендиктер ушул браузерде гана сакталат. <button class="btn btn-line btn-sm" data-act="reset">Жетишкендиктеримди өчүрүү</button></p></div></div>`;
@@ -504,13 +504,13 @@
     const score = store.d.done[id];
     main.innerHTML = `<header class="page-head"><div class="wrap">
       <div class="crumbs"><a href="#course">Курс</a> › ${L.stage.n}-баскыч: ${esc(L.stage.title)}</div>
-      <h1>${esc(L.num)} ${esc(L.title)}</h1>${L.ar ? `<div class="kgt" lang="ar" dir="rtl">${esc(plain(L.ar))}</div>` : ''}
+      <h1>${esc(L.num)} ${esc(L.title)}</h1>${L.ar ? `<div class="kgt" lang="ar" translate="no" dir="rtl">${esc(plain(L.ar))}</div>` : ''}
       ${L.goals ? `<ul class="goals">${L.goals.map((g) => `<li>${esc(g)}</li>`).join('')}</ul>` : ''}
       <div class="meta-row"><span class="lvl" style="background:var(--gold);color:var(--indigo-ink)">${esc(L.stage.level)}</span><span style="color:#cfd6ee;font-size:.9rem">${L.minutes || 25} мүнөт</span>${L.book ? `<a class="pill" href="#plan" style="text-decoration:none" title="Бул сабак Kallimni ʿArabi Bishweesh китебинин ${L.book}-модулунун темасын камтыйт">Kallimni ʿArabi Bishweesh · ${L.book}-модуль</a>` : ''}${score != null ? `<span class="pill ${score >= .8 ? 'ok' : ''}">${score >= .8 ? 'Бүттү' : 'Эң жакшы жыйынтык'} · ${Math.round(score * 100)}%</span>` : ''}</div>
     </div></header>
     <div class="wrap lesson-grid">
       <aside class="toc"><h4>Бул сабакта</h4><ol>${sections.map((s) => `<li><a href="#lesson-${esc(id)}" data-jump="${s.id}">${esc(cleanKy(s.title))}</a></li>`).join('')}<li><a href="#lesson-${esc(id)}" data-jump="practice">Тест</a></li></ol>
-      <p class="voice-note">Угуу үчүн каалаган <span class="kg" lang="ar" style="border-bottom:1.5px dotted">арабча сөздү</span> басыңыз.</p></aside>
+      <p class="voice-note">Угуу үчүн каалаган <span class="kg" lang="ar" translate="no" style="border-bottom:1.5px dotted">арабча сөздү</span> басыңыз.</p></aside>
       <article class="lesson-body">
         ${FL[id] ? `<aside class="ar-logic"><div class="tag"><span class="badge" aria-hidden="true">ف</span>Египетче жана фусха</div><p>${arWrap(rich(FL[id]))}</p></aside>` : ''}
         ${sections.map((s) => `<section id="${s.id}"><h2>${rich(esc(s.title))}</h2>${s.blocks.map((b) => (BLOCK[b.t] ? BLOCK[b.t](b) : '')).join('')}</section>`).join('')}
@@ -535,7 +535,7 @@
       ['special', 'Оор (калың) тамгалар', 'ص ض ط ظ — с, д, т, з тыбыштарынын «оор», калың варианттары. Тил артка тартылып, жанындагы үндүүлөр да калыңдайт.'],
       ['loan', 'Үндүүлөр жана кошумча белгилер', 'Узун үндүүлөр ا و ي менен жазылат, кыскалары көбүнчө жазылбайт. ة, ى, ء сыяктуу белгилерди да ушул жерден таанышыңыз.']
     ];
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Арип</h1><div class="kgt" lang="ar">الحروف العربية · ٢٨ حرف</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Арип</h1><div class="kgt" lang="ar" translate="no">الحروف العربية · ٢٨ حرف</div>
       <p>Араб арибинде 28 тамга бар, алар оңдон солго жазылат. Тамгалар бири-бирине жабышат, ошондуктан ар биринин сөздүн башында, ортосунда жана аягында башкача формасы бар. Кыска үндүүлөр көбүнчө жазылбайт — ошондуктан бул курста ар бир арабча сөздүн астында кыргызча окулушу турат. Угуу үчүн тамганы басыңыз.</p></div></header>
       <div class="wrap" style="padding:40px 0 80px">
       ${groups.map((g) => `<section style="margin-bottom:36px"><h2>${esc(g[1])}</h2><p style="color:var(--muted)">${esc(g[2])}</p><div class="letters">${A.filter((x) => x.g === g[0]).map((x) => letterCard(x.l)).join('')}</div></section>`).join('')}
@@ -548,7 +548,7 @@
 
   /* ----------------------------- Machine ------------------------------- */
   function machine() {
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөз машинасы</h1><div class="kgt" lang="ar">ماكينة الكلام</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Сөз машинасы</h1><div class="kgt" lang="ar" translate="no">ماكينة الكلام</div>
       <p>Сөздү жана формасын тандаңыз — машина египетче форманы курат жана ар бир тамга эмне үчүн ушундай экенин кадам-кадам түшүндүрөт.</p></div></header>
       <div class="wrap"><div class="seg" role="tablist" style="padding-top:28px">${[['nouns', 'Зат атооч'], ['verbs', 'Этиш'], ['tobe', 'Сын атооч жана «бол»'], ['numbers', 'Сандар']].map((t, i) => `<button role="tab" data-tab="${t[0]}" aria-pressed="${i === 0}">${t[1]}</button>`).join('')}</div><div id="mach"></div></div>`;
     const mach = $('#mach');
@@ -558,7 +558,7 @@
   }
 
   function segBtns(name, list, cur) { return `<div class="seg" data-seg="${name}">${list.map((x) => `<button data-v="${x[0]}" aria-pressed="${String(x[0] === cur)}">${esc(x[1])}</button>`).join('')}</div>`; }
-  const pickList = (list, cur, label) => `<div class="field"><label class="lbl">${label}</label><div class="seg pick-list" dir="rtl">${list.map((x, i) => `<button data-pick="${i}" lang="ar" aria-pressed="${i === cur}" title="${esc(x.ky)}">${esc(x.ar || x.m[0])}</button>`).join('')}</div></div>`;
+  const pickList = (list, cur, label) => `<div class="field"><label class="lbl">${label}</label><div class="seg pick-list" dir="rtl">${list.map((x, i) => `<button data-pick="${i}" lang="ar" translate="no" aria-pressed="${i === cur}" title="${esc(x.ky)}">${esc(x.ar || x.m[0])}</button>`).join('')}</div></div>`;
 
   function machNouns(el) {
     const st = { i: 0, poss: '', art: '', num: '' };
@@ -676,7 +676,7 @@
       queue = shuffle(old).concat(fresh);
     };
     const boxes = () => { const b = [0, 0, 0, 0, 0, 0, 0]; pool().forEach((c) => { const s = store.d.srs[c.k]; if (s) b[Math.min(s.box, 6)]++; }); return b; };
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Карточкалар</h1><div class="kgt" lang="ar">كروت</div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Карточкалар</h1><div class="kgt" lang="ar" translate="no">كروت</div>
       <p>Ар бир сөз унутаар алдында кайра келет: 1 күндөн, анан 3, 7, 16, 35 жана 90 күндөн кийин. Карточканы бурардан мурун жоопту үн чыгарып айтыңыз — эсте сактоону таанып билүү эмес, эстеп чыгаруу бекемдейт.</p></div></header>
       <div class="wrap"><div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding-top:26px">
         <div class="seg" data-scope>${[['done', 'Бүткөн сабактар + менин сөздөрүм'], ['all', 'Бардык сөздөр'], ['mine', 'Менин сөздөрүм']].concat(COURSE.stages.map((s) => [String(s.n), s.n + '-баскыч'])).map((x) => `<button data-v="${x[0]}" aria-pressed="${x[0] === scope}">${esc(x[1])}</button>`).join('')}</div>
@@ -692,8 +692,8 @@
         return;
       }
       const F = full(cur);
-      const front = reverse ? `<div class="front en">${esc(cur.en)}</div>` : `<div class="front" lang="ar" dir="rtl">${esc(cur.k)}</div>${tl(F)}`;
-      const back = (reverse ? `<div class="front" lang="ar" dir="rtl" style="font-size:2.4rem">${esc(cur.k)}</div>${tl(F)}` : `<div class="back">${esc(cur.en)}</div>`) + arHint(cur.k);
+      const front = reverse ? `<div class="front en">${esc(cur.en)}</div>` : `<div class="front" lang="ar" translate="no" dir="rtl">${esc(cur.k)}</div>${tl(F)}`;
+      const back = (reverse ? `<div class="front" lang="ar" translate="no" dir="rtl" style="font-size:2.4rem">${esc(cur.k)}</div>${tl(F)}` : `<div class="back">${esc(cur.en)}</div>`) + arHint(cur.k);
       deck.innerHTML = `<div class="card">${front}${flipped ? `<hr style="width:60%;border:0;border-top:1px dashed var(--line)">${back}` : ''}
         <div>${sayBtn(cur.k)}</div><p class="from">${esc(cur.lesson.num)} ${esc(cur.lesson.title)} сабагынан · бул сеанста дагы ${queue.length}</p></div>
         <div class="grade">${flipped ? `<button class="btn btn-line" data-g="0">Кайра</button><button class="btn btn-line" data-g="1">Кыйын</button><button class="btn btn-ink" data-g="2">Жакшы</button><button class="btn btn-gold" data-g="3">Оңой</button>` : '<button class="btn btn-ink" data-flip>Жоопту көрсөтүү</button>'}</div>
@@ -730,16 +730,16 @@
   function cheatsheet() {
     const T = (o) => BLOCK.table(o);
     const N = [NOUNS[0], NOUNS[1], NOUNS[2], NOUNS[3]];
-    const possRows = KG.PERSONS.map((p) => [esc(KG.POSS[p].ky), `<span lang="ar">-${esc(KG.POSS[p].ar)}</span> <span class="voice-note">-${esc(KG.POSS[p].c)}</span>`].concat(N.map((n) => { const r = KG.possess(n, p).word; return r.ar + '~' + r.ro; })));
+    const possRows = KG.PERSONS.map((p) => [esc(KG.POSS[p].ky), `<span lang="ar" translate="no">-${esc(KG.POSS[p].ar)}</span> <span class="voice-note">-${esc(KG.POSS[p].c)}</span>`].concat(N.map((n) => { const r = KG.possess(n, p).word; return r.ar + '~' + r.ro; })));
     const verbs = ['katab', 'shirib', 'shaaf', 'mishi'];
     const tenseTable = (t) => ({ cols: [''].concat(verbs.map((v) => `[[${KG.verbById(v).pa[0]}~${KG.verbById(v).pa[1]}]]`)), kg: [1, 2, 3, 4], rows: KG.PERSONS.map((p, i) => [`${kgSpan(KG.PRONOUN[p])} <span class="voice-note">${esc(KG.PERSON_KY[p])}</span>`].concat(verbs.map((v) => { const r = KG.conjugate(v, t).rows[i]; return r.ar + '~' + r.ro; }))) });
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Шпаргалка</h1><div class="kgt" lang="ar">ملخص</div><p>Бардык мүчөлөр жана формалар бир бетте. Таблицалардын көбүн сөз машинасындагы эле кыймылдаткыч түзөт. Басып чыгарыңыз же өзүнчө өтмөктө ачык кармаңыз.</p></div></header>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Шпаргалка</h1><div class="kgt" lang="ar" translate="no">ملخص</div><p>Бардык мүчөлөр жана формалар бир бетте. Таблицалардын көбүн сөз машинасындагы эле кыймылдаткыч түзөт. Басып чыгарыңыз же өзүнчө өтмөктө ачык кармаңыз.</p></div></header>
     <div class="wrap cheat" style="padding:30px 0 80px">
       <h2>1. Ат атоочтор</h2>
       ${T({ cols: ['Кыргызча', 'Египетче', 'Кыргызча', 'Египетче'], kg: [1, 3], rows: [['мен', KG.PRONOUN.ana, 'биз', KG.PRONOUN.i7na], ['сен (эркекке)', KG.PRONOUN.inta, 'силер / сиз', KG.PRONOUN.intu], ['сен (аялга)', KG.PRONOUN.inti, 'алар', KG.PRONOUN.humma], ['ал (эркек)', KG.PRONOUN.huwwa, 'ал (аял)', KG.PRONOUN.hiyya]], caption: 'Сыпайы «Сиз»: [[حضرتك~7aDritak]] (эркекке), [[حضرتك~7aDritik]] (аялга) — «урматтуу сиз».' })}
       <h2>2. Ээлик мүчөлөр — «менин, сенин…»</h2>${T({ cols: ['Кимдики', 'Мүчө'].concat(N.map((n) => `[[${n.ar}~${n.ro}]] <span class="voice-note">${esc(n.ky)}</span>`)), kg: [2, 3, 4, 5], rows: possRows, caption: 'ة менен бүткөн сөздөрдө ة → ت: [[عربية~3arabiyya]] → [[عربيتي~3arabiyyiti]]. Үнсүздөн башталган мүчө алдында узун үндүү кыскарат: [[كتاب~kitaab]] → [[كتابنا~kitabna]].' })}
       <h2>3. «il-» (ال) жана күн тамгалары</h2>
-      ${T({ cols: ['Түрү', 'Тамгалар', 'Мисал'], rows: [['☀ Күн тамгалары: л айтылбайт, кийинки тамга эки эсе', '<span lang="ar" style="font-size:1.2rem">ت ث د ذ ر ز س ش ص ض ط ظ ل ن</span>', '[[الشمس~ish-shams]] күн, [[النيل~in-niil]] Нил, [[الصبح~iS-SubH]] эртең менен'], ['☾ Ай тамгалары: «il-» толук айтылат', '<span lang="ar" style="font-size:1.2rem">ا ب ج ح خ ع غ ف ق ك م ه و ي</span>', '[[القمر~il-2amar]] ай, [[البيت~il-beet]] үй, [[الولد~il-walad]] бала']], caption: 'Каирде ج жана ك да көп учурда күн тамгасындай айтылат: [[الجو~ig-gaww]] «аба ырайы», [[الكلب~ik-kalb]] «ит».' })}
+      ${T({ cols: ['Түрү', 'Тамгалар', 'Мисал'], rows: [['☀ Күн тамгалары: л айтылбайт, кийинки тамга эки эсе', '<span lang="ar" translate="no" style="font-size:1.2rem">ت ث د ذ ر ز س ش ص ض ط ظ ل ن</span>', '[[الشمس~ish-shams]] күн, [[النيل~in-niil]] Нил, [[الصبح~iS-SubH]] эртең менен'], ['☾ Ай тамгалары: «il-» толук айтылат', '<span lang="ar" translate="no" style="font-size:1.2rem">ا ب ج ح خ ع غ ف ق ك م ه و ي</span>', '[[القمر~il-2amar]] ай, [[البيت~il-beet]] үй, [[الولد~il-walad]] бала']], caption: 'Каирде ج жана ك да көп учурда күн тамгасындай айтылат: [[الجو~ig-gaww]] «аба ырайы», [[الكلب~ik-kalb]] «ит».' })}
       <h2>4. Этиштин чактары</h2>
       <h3>Өткөн чак: ал жазды</h3>${T(tenseTable('past'))}
       <h3>Учур чак (bi-): жазат / жазып жатат</h3>${T(tenseTable('present'))}
@@ -784,7 +784,7 @@
     ['Такси жана поезд; ресторанда буйрутма', ['cairo-taxi-train-food', 'real-life']]
   ];
   function plan() {
-    main.innerHTML = rich(`<header class="page-head"><div class="wrap"><h1>Кантип үйрөнөбүз</h1><div class="kgt" lang="ar">إزاي نتعلم</div><p>Нөлдөн B2ге чейинки чынчыл план: канча саат кетет, күн сайын эмне кылуу керек, сүйлөөнү жана угууну кантип машыктыруу керек — сайт өзү жасай албаган бөлүктөр.</p></div></header>
+    main.innerHTML = rich(`<header class="page-head"><div class="wrap"><h1>Кантип үйрөнөбүз</h1><div class="kgt" lang="ar" translate="no">إزاي نتعلم</div><p>Нөлдөн B2ге чейинки чынчыл план: канча саат кетет, күн сайын эмне кылуу керек, сүйлөөнү жана угууну кантип машыктыруу керек — сайт өзү жасай албаган бөлүктөр.</p></div></header>
     <div class="wrap" style="padding:40px 0 80px"><div class="prose">
       <h2>B2ге канча убакыт керек?</h2>
       <p>Араб тили дүйнөдөгү эң кыйын тилдердин катарына кирет — негизинен арибинен жана тамак тыбыштарынан улам. Бирок кыргыз тилдүүлөрдүн бир артыкчылыгы бар: жүздөгөн арабча сөз кыргызчада мурунтан эле бар, ал эми «менде бар», ээлик мүчө сыяктуу логика тааныш. Чынчыл эсеп (сабак, карточка, окуу жана угуу менен):</p>
@@ -843,7 +843,7 @@
       const w = k + (e.ro ? '~' + e.ro : '');
       return [`<b class="ky" style="font-size:1.1rem">${esc(e.ky)}</b>`, `${kgSpan(w)} ${sayBtn(w)}<br>${tl(w)}`, `${esc(e.mean)}${e.hint ? `<br><span class="voice-note">${esc(e.hint)}</span>` : ''}`, L && L.lesson.num !== '★' && L.lesson.num !== '💧' ? `<a href="#lesson-${esc(L.lesson.id)}">${esc(L.lesson.num)}</a>` : '<span class="voice-note">кошумча</span>'];
     });
-    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Тектеш сөздөр</h1><div class="kgt">Кыргызчадагы араб сөздөрү · <span lang="ar" dir="rtl" style="font-family:var(--f-ar)">كلمات عربية في القرغيزية</span></div>
+    main.innerHTML = `<header class="page-head"><div class="wrap"><h1>Тектеш сөздөр</h1><div class="kgt">Кыргызчадагы араб сөздөрү · <span lang="ar" translate="no" dir="rtl" style="font-family:var(--f-ar)">كلمات عربية في القرغيزية</span></div>
       <p>Кылымдар бою арабча сөздөр кыргыз тилине ислам, фарсы тили жана соода аркылуу келген. Ошондуктан сиз жүздөгөн арабча сөздү мурунтан эле жарым-жартылай билесиз — алардын жолдо кантип өзгөргөнүн гана үйрөнүү керек.</p>
       <div class="meta-row"><button class="chip-btn" data-act="toggle-ar" aria-pressed="${!!store.d.ar}">Сабактарда тектештерди жана фусханы көрсөтүү</button></div></div></header>
     <div class="wrap" style="padding:36px 0 80px">
@@ -869,7 +869,7 @@
     </div>`;
   }
 
-  const transTable = () => BLOCK.table({ cols: ['Белги', 'Тамга', 'Кантип айтылат'], rows: [['ʼ', '<span lang="ar">ء ق</span>', 'Тамак тыгылуусу: «аʼа» дегенде ортодогу кыска тыным. Египетте ق да ушинтип айтылат.'], ['ʻ', '<span lang="ar">ع</span>', 'Тамактын терең жеринен кысылып чыккан үн — кыргызчада жок. «а» дегенде тамакты кысып айтыңыз.'], ['ҳ', '<span lang="ar">ح</span>', 'Терең, күчтүү «х» — бирок кырылдабайт. Айнекке «ххх» деп дем чыгаргандай.'], ['һ', '<span lang="ar">ه</span>', 'Жеңил «h», англисче hello сыяктуу.'], ['х', '<span lang="ar">خ</span>', 'Кыргызча «х» — кырылдаган.'], ['ғ', '<span lang="ar">غ</span>', 'Кырылдаган «г», француз «r» тамгасына окшош.'], ['с̣ д̣ т̣ з̣', '<span lang="ar">ص ض ط ظ</span>', 'Оор, калың с, д, т, з. Тил артка тартылат.'], ['ў', '<span lang="ar">و</span>', 'Англисче «w».'], ['аа, ии, уу, ээ, оо', '<span lang="ar">ا ي و</span>', 'Узун үндүүлөр — кыргызчадагыдай эки тамга менен жазылат.']] });
+  const transTable = () => BLOCK.table({ cols: ['Белги', 'Тамга', 'Кантип айтылат'], rows: [['ʼ', '<span lang="ar" translate="no">ء ق</span>', 'Тамак тыгылуусу: «аʼа» дегенде ортодогу кыска тыным. Египетте ق да ушинтип айтылат.'], ['ʻ', '<span lang="ar" translate="no">ع</span>', 'Тамактын терең жеринен кысылып чыккан үн — кыргызчада жок. «а» дегенде тамакты кысып айтыңыз.'], ['ҳ', '<span lang="ar" translate="no">ح</span>', 'Терең, күчтүү «х» — бирок кырылдабайт. Айнекке «ххх» деп дем чыгаргандай.'], ['һ', '<span lang="ar" translate="no">ه</span>', 'Жеңил «h», англисче hello сыяктуу.'], ['х', '<span lang="ar" translate="no">خ</span>', 'Кыргызча «х» — кырылдаган.'], ['ғ', '<span lang="ar" translate="no">غ</span>', 'Кырылдаган «г», француз «r» тамгасына окшош.'], ['с̣ д̣ т̣ з̣', '<span lang="ar" translate="no">ص ض ط ظ</span>', 'Оор, калың с, д, т, з. Тил артка тартылат.'], ['ў', '<span lang="ar" translate="no">و</span>', 'Англисче «w».'], ['аа, ии, уу, ээ, оо', '<span lang="ar" translate="no">ا ي و</span>', 'Узун үндүүлөр — кыргызчадагыдай эки тамга менен жазылат.']] });
   // Recordings-only mode (the default, see js/config.js)
   function aboutRecordings() {
     const sp = KG.speech, n = sp.recorded();
@@ -1014,8 +1014,10 @@
     b.classList.toggle('is-missing', missing);
     if (missing) { b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; } else { b.removeAttribute('aria-hidden'); b.removeAttribute('tabindex'); }
   });
+  // Browser auto-translation (e.g. Chrome Kyrgyz → English) corrupts Arabic and transcriptions: opt them out.
+  const noTranslate = () => document.querySelectorAll('[lang="ar"]:not([translate]), [dir="rtl"]:not([translate]), .tl:not([translate])').forEach((el) => el.setAttribute('translate', 'no'));
   let markQueued = false;
-  new MutationObserver(() => { if (markQueued) return; markQueued = true; requestAnimationFrame(() => { markQueued = false; markSay(document); }); })
+  new MutationObserver(() => { noTranslate(); if (markQueued) return; markQueued = true; requestAnimationFrame(() => { markQueued = false; markSay(document); }); })
     .observe(document.body, { childList: true, subtree: true });
   document.addEventListener('kg-voice', () => markSay(document));
   API.markSay = markSay;
